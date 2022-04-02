@@ -1,0 +1,9 @@
+br\com\edg\project\application\Application.class
+br\com\edg\project\application\views\FrmCadastroProduto.class
+br\com\edg\project\application\views\FrmCadastroCliente$1.class
+br\com\edg\project\application\views\FrmTelaInicial.class
+br\com\edg\project\application\views\FrmLogin$1.class
+br\com\edg\project\application\views\FrmLogin.class
+br\com\edg\project\application\views\FrmCadastroCliente.class
+br\com\edg\project\application\views\FrmCadastroProduto$1.class
+br\com\edg\project\application\views\FrmTelaInicial$1.class
