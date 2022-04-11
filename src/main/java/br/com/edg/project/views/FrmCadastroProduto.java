@@ -37,7 +37,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblPrice = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        chbUnidadeMedida = new javax.swing.JCheckBox();
         btnAddProd = new javax.swing.JButton();
         btnDeleteItem = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
@@ -87,16 +87,15 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         lblPrice.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblPrice.setText("Valor (R$):");
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCheckBox1.setText("Unidade de medida KG?");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        chbUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        chbUnidadeMedida.setText("Unidade de medida KG?");
+        chbUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                chbUnidadeMedidaActionPerformed(evt);
             }
         });
 
         btnAddProd.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnAddProd.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Desktop\\SENAC\\2 SEMESTRE\\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\\PROJETO\\EDG-Market\\EDG-Market\\src\\main\\resources\\img\\plus.png")); // NOI18N
         btnAddProd.setText("ADICIONAR ITEM A LISTA");
         btnAddProd.setActionCommand("    ADD ITEM TO LIST");
         btnAddProd.setMaximumSize(new java.awt.Dimension(150, 420));
@@ -108,7 +107,6 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         });
 
         btnDeleteItem.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnDeleteItem.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Desktop\\SENAC\\2 SEMESTRE\\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\\PROJETO\\EDG-Market\\EDG-Market\\src\\main\\resources\\img\\delete.png")); // NOI18N
         btnDeleteItem.setText("DELETAR ITEM DA LISTA");
         btnDeleteItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +148,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jCheckBox1))))
+                                        .addComponent(chbUnidadeMedida))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addComponent(lblTitle))
@@ -185,7 +183,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1))
+                            .addComponent(chbUnidadeMedida))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -201,9 +199,9 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPriceActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void chbUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbUnidadeMedidaActionPerformed
 
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_chbUnidadeMedidaActionPerformed
 
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdActionPerformed
        
@@ -251,7 +249,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProd;
     private javax.swing.JButton btnDeleteItem;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox chbUnidadeMedida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

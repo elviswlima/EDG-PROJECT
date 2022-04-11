@@ -26,6 +26,7 @@ public class FrmCaixa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupFormaPagamento = new javax.swing.ButtonGroup();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -46,20 +47,20 @@ public class FrmCaixa extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblListaProduto = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCodProduto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        btnDeleteProduct1 = new javax.swing.JButton();
-        btnAddProduct1 = new javax.swing.JButton();
+        txtValorCompra = new javax.swing.JFormattedTextField();
+        btnRemoveProduto = new javax.swing.JButton();
+        btnAddProd = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        btnFinishBuy1 = new javax.swing.JButton();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
+        radioBtnDinheiro = new javax.swing.JRadioButton();
+        radioBtnCartaoCredito = new javax.swing.JRadioButton();
+        radioBtnCartaoDebito = new javax.swing.JRadioButton();
+        btnFinalizarCompra = new javax.swing.JButton();
+        txtCpfCliente = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,7 +72,7 @@ public class FrmCaixa extends javax.swing.JFrame {
         jInternalFrame1.setTitle("Caixa");
         jInternalFrame1.setPreferredSize(new java.awt.Dimension(1140, 600));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, null, null, new java.awt.Font("Arial", 0, 14))); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,7 +98,7 @@ public class FrmCaixa extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações de Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, null, null, new java.awt.Font("Arial", 0, 14))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Código do Produto: ");
@@ -123,7 +124,7 @@ public class FrmCaixa extends javax.swing.JFrame {
         btnAddProduct.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnAddProduct.setText("ADICIONAR PRODUTO");
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Forma de Pagamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 10))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, null, null, new java.awt.Font("Arial", 0, 10))); // NOI18N
 
         jRadioButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jRadioButton3.setText("Dinheiro");
@@ -255,9 +256,9 @@ public class FrmCaixa extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 24))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, null, null, new java.awt.Font("Bahnschrift", 0, 24))); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblListaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -265,7 +266,7 @@ public class FrmCaixa extends javax.swing.JFrame {
                 "Cód. Produto", "Nome", "Validade", "Valor"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblListaProduto);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -284,47 +285,45 @@ public class FrmCaixa extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações de Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 18))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, null, null, new java.awt.Font("Bahnschrift", 0, 18))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel4.setText("Código do Produto: ");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setText("Total da Compra");
 
         try {
-            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ #####,##")));
+            txtValorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ #####,##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtValorCompra.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
 
-        btnDeleteProduct1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnDeleteProduct1.setText("REMOVER PRODUTO ");
-        btnDeleteProduct1.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoveProduto.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        btnRemoveProduto.setText("REMOVER PRODUTO ");
+        btnRemoveProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteProduct1ActionPerformed(evt);
+                btnRemoveProdutoActionPerformed(evt);
             }
         });
 
-        btnAddProduct1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnAddProduct1.setText("ADICIONAR PRODUTO");
+        btnAddProd.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        btnAddProd.setText("ADICIONAR PRODUTO");
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Forma de Pagamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 10))); // NOI18N
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, null, null, new java.awt.Font("Bahnschrift", 0, 13))); // NOI18N
 
-        jRadioButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton4.setText("Dinheiro");
+        btnGroupFormaPagamento.add(radioBtnDinheiro);
+        radioBtnDinheiro.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        radioBtnDinheiro.setText("Dinheiro");
 
-        jRadioButton5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton5.setText("Crédito");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
-            }
-        });
+        btnGroupFormaPagamento.add(radioBtnCartaoCredito);
+        radioBtnCartaoCredito.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        radioBtnCartaoCredito.setText("Cartão de Crédito");
 
-        jRadioButton6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton6.setText("Débito");
+        btnGroupFormaPagamento.add(radioBtnCartaoDebito);
+        radioBtnCartaoDebito.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        radioBtnCartaoDebito.setText("Cartão de Débito");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -333,42 +332,43 @@ public class FrmCaixa extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
-                .addContainerGap(112, Short.MAX_VALUE))
+                    .addComponent(radioBtnDinheiro)
+                    .addComponent(radioBtnCartaoCredito)
+                    .addComponent(radioBtnCartaoDebito))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jRadioButton4)
+                .addContainerGap()
+                .addComponent(radioBtnDinheiro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton5)
+                .addComponent(radioBtnCartaoCredito)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton6)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(radioBtnCartaoDebito)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        btnFinishBuy1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnFinishBuy1.setText("Finalizar Compra");
-        btnFinishBuy1.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizarCompra.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        btnFinalizarCompra.setText("Finalizar Compra");
+        btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFinishBuy1ActionPerformed(evt);
+                btnFinalizarCompraActionPerformed(evt);
             }
         });
 
         try {
-            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtCpfCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtCpfCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField4ActionPerformed(evt);
+                txtCpfClienteActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel6.setText("CPF Cliente:");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -378,23 +378,23 @@ public class FrmCaixa extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCodProduto, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel5))
-                    .addComponent(jFormattedTextField3)
-                    .addComponent(btnFinishBuy1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextField4)
+                    .addComponent(txtValorCompra)
+                    .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCpfCliente)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel6)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAddProduct1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnDeleteProduct1, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(0, 41, Short.MAX_VALUE)))
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAddProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnRemoveProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -407,23 +407,23 @@ public class FrmCaixa extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAddProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDeleteProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRemoveProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFinishBuy1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
 
@@ -439,9 +439,9 @@ public class FrmCaixa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 516, Short.MAX_VALUE)
+                    .addGap(0, 526, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 517, Short.MAX_VALUE)))
+                    .addGap(0, 527, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,21 +478,17 @@ public class FrmCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField2ActionPerformed
 
-    private void btnDeleteProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProduct1ActionPerformed
+    private void btnRemoveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteProduct1ActionPerformed
+    }//GEN-LAST:event_btnRemoveProdutoActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+    }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    private void btnFinishBuy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishBuy1ActionPerformed
+    private void txtCpfClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFinishBuy1ActionPerformed
-
-    private void jFormattedTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField4ActionPerformed
+    }//GEN-LAST:event_txtCpfClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,16 +526,15 @@ public class FrmCaixa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddProd;
     private javax.swing.JButton btnAddProduct;
-    private javax.swing.JButton btnAddProduct1;
     private javax.swing.JButton btnDeleteProduct;
-    private javax.swing.JButton btnDeleteProduct1;
+    private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnFinishBuy;
-    private javax.swing.JButton btnFinishBuy1;
+    private javax.swing.ButtonGroup btnGroupFormaPagamento;
+    private javax.swing.JButton btnRemoveProduto;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -556,14 +551,16 @@ public class FrmCaixa extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JRadioButton radioBtnCartaoCredito;
+    private javax.swing.JRadioButton radioBtnCartaoDebito;
+    private javax.swing.JRadioButton radioBtnDinheiro;
+    private javax.swing.JTable tblListaProduto;
+    private javax.swing.JTextField txtCodProduto;
+    private javax.swing.JFormattedTextField txtCpfCliente;
+    private javax.swing.JFormattedTextField txtValorCompra;
     // End of variables declaration//GEN-END:variables
 }
