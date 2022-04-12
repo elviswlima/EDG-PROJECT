@@ -12,6 +12,7 @@ package br.com.edg.project.application;
 public class Clientes {
     String nome;
     String cpf;
+    String telefone;
     String dataNascimento;
     int sexo = 0;
     String rg;
@@ -37,7 +38,15 @@ public class Clientes {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+    
+    public String getTelefone() {
+        return telefone;
+    }
 
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    
     public String getDataNascimento() {
         return dataNascimento;
     }
