@@ -76,7 +76,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         scrollTabela = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         lblLogoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgCliente.png"))); // NOI18N

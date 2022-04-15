@@ -42,7 +42,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         btnDeleteItem = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         tblListProd.setBorder(javax.swing.BorderFactory.createEtchedBorder());
