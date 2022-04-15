@@ -6,7 +6,7 @@ package br.com.edg.project.views;
 
 /**
  *
- * @author Dell
+ * @author Guilherme
  */
 public class FrmEstoque extends javax.swing.JFrame {
 
