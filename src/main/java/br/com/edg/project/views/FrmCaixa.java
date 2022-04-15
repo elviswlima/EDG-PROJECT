@@ -63,7 +63,7 @@ public class FrmCaixa extends javax.swing.JFrame {
         txtCpfCliente = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jInternalFrame1.setClosable(true);
         jInternalFrame1.setIconifiable(true);

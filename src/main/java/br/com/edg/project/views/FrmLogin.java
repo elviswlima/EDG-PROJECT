@@ -4,6 +4,8 @@
  */
 package br.com.edg.project.views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Elvis - PC
@@ -137,10 +139,23 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
+        String usuario = txtUsuario.getText();
+        String senha = String.valueOf(txtSenha.getText());
 
-        FrmTelaInicial telaPrincipal = new FrmTelaInicial();
-        telaPrincipal.setVisible(true);
-        dispose();
+        if(usuario.equals("") && senha.equals("")) {
+            JOptionPane.showMessageDialog(this, "Nenhum dos campos preenchidos.");
+        }else if(usuario.equals("")) {
+            JOptionPane.showMessageDialog(this, "Campo \"usuário\" não preenchido.");
+        } else if (senha.equals("")){
+            JOptionPane.showMessageDialog(this, "Campo \"senha\" não preenchido.");
+        }else if(!usuario.equals("admin") || !senha.equals("admin")) {
+            JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos, tente novamente.");
+        }else {
+            JOptionPane.showMessageDialog(this, "Bem-vindo " + usuario + "!!!");
+            FrmTelaInicial telaPrincipal = new FrmTelaInicial();
+            telaPrincipal.setVisible(true);
+            dispose();
+        }      
     }//GEN-LAST:event_btnAcessarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
