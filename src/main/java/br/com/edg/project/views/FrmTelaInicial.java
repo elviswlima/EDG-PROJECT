@@ -134,7 +134,7 @@ public class FrmTelaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +144,7 @@ public class FrmTelaInicial extends javax.swing.JFrame {
                 .addGap(156, 156, 156))
         );
 
-        setSize(new java.awt.Dimension(561, 336));
+        setSize(new java.awt.Dimension(540, 272));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
