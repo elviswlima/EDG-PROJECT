@@ -3,30 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.edg.project.application;
+package br.com.edg.project.model;
 
 /**
  *
  * @author elvis.wlima
  */
-public class Clientes {
-    String nome;
-    String cpf;
-    String telefone;
-    String dataNascimento;
-    int sexo = 0;
-    String rg;
-    String cep;
-    String cidade;
-    String bairro;
-    String numEndereco;
-    String complemento;
-    char estado = 2;
+public class Cliente {
+    private String nome;
+    private String cpf;
+    private String telefone;
+    private String dataNascimento;
+    private String sexo;
+    private String rg;
+    private String cep;
+    private String cidade;
+    private String bairro;
+    private String numEndereco;
+    private String complemento;
+    private String estado;
+    private String rua;
+
+    public Cliente() {
+    }
 
     public String getNome() {
         return nome;
     }
 
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -38,7 +50,7 @@ public class Clientes {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
+
     public String getTelefone() {
         return telefone;
     }
@@ -46,7 +58,7 @@ public class Clientes {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
+
     public String getDataNascimento() {
         return dataNascimento;
     }
@@ -55,11 +67,11 @@ public class Clientes {
         this.dataNascimento = dataNascimento;
     }
 
-    public int getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(int sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -111,12 +123,11 @@ public class Clientes {
         this.complemento = complemento;
     }
 
-    public char getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(char estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
-    }
-      
+    }      
 }
