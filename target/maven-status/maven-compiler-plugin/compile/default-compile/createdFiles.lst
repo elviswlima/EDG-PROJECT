@@ -28,10 +28,8 @@ br\com\edg\project\views\FrmLogin$3.class
 br\com\edg\project\views\FrmCadastroProduto$5.class
 br\com\edg\project\views\FrmEstoque$1.class
 br\com\edg\project\views\FrmTelaInicial$3.class
-br\com\edg\project\application\Application.class
 br\com\edg\project\views\FrmCadastroCliente$8.class
 br\com\edg\project\views\FrmCaixa.class
-br\com\edg\project\application\Clientes.class
 br\com\edg\project\views\FrmCaixa$2.class
 br\com\edg\project\views\FrmTelaInicial$1.class
 br\com\edg\project\views\FrmCadastroProduto$4.class

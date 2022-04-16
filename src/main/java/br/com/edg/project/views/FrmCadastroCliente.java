@@ -8,6 +8,9 @@ import br.com.edg.project.model.Cliente;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import br.com.edg.project.service.Validador;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTextField;
 /**
  *
  * @author Elvis - PC
@@ -564,20 +567,45 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         Cliente cliente = new Cliente();
-               
-       cliente.setNome(txtNome.getText());
-       cliente.setRg(txtRg.getText());
-       cliente.setCpf(txtCpf.getText());
-       cliente.setDataNascimento(txtDataNasc.getText());
-       cliente.setSexo(cboSexo.getSelectedItem().toString());
-       cliente.setTelefone(txtTelefone.getText());
-       
-       cliente.setCep(txtCepCliente.getText());
-       cliente.setBairro(txtBairro.getText());
-       cliente.setEstado(cboxEstado.getSelectedItem().toString());
-       cliente.setComplemento(txtComplementoCliente.getText());
-       cliente.setNumEndereco(txtNumeroCasaCliente.getText());
-       cliente.setRua(txtLogradouro.getText());
+        
+        try {
+             List<JTextField>fields = new ArrayList<>();
+            fields.add(txtRg);
+            fields.add(txtNome);
+            fields.add(txtCpf);
+            fields.add(txtDataNasc);
+            fields.add(txtTelefone);
+            fields.add(txtCepCliente);
+            fields.add(txtBairro);
+            fields.add(txtNumeroCasaCliente);
+            fields.add(txtLogradouro);
+            
+            if (Validador.validaMultCampos(fields) 
+                    && cboSexo.getSelectedItem().toString() != null 
+                    && cboxEstado.getSelectedItem().toString() != null) {
+                
+                cliente.setNome(txtNome.getText());
+                cliente.setRg(txtRg.getText());
+                cliente.setCpf(txtCpf.getText());
+                cliente.setDataNascimento(txtDataNasc.getText());
+                cliente.setSexo(cboSexo.getSelectedItem().toString());
+                cliente.setTelefone(txtTelefone.getText());
+
+                cliente.setCep(txtCepCliente.getText());
+                cliente.setBairro(txtBairro.getText());
+                cliente.setEstado(cboxEstado.getSelectedItem().toString());
+                cliente.setComplemento(txtComplementoCliente.getText());
+                cliente.setNumEndereco(txtNumeroCasaCliente.getText());
+                cliente.setRua(txtLogradouro.getText());
+                
+              /* Code: Inserir no banco de dados */
+              
+           }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Existem campos nulos, favor ajustar", "Campos nulos", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void txtNomePesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomePesquisaKeyTyped
