@@ -10,11 +10,13 @@ br\com\edg\project\views\FrmCadastroProduto$3.class
 br\com\edg\project\views\FrmCaixa$9.class
 br\com\edg\project\service\Validador.class
 br\com\edg\project\views\FrmCadastroCliente$1.class
+br\com\edg\project\views\FrmCadastroCliente$12.class
 br\com\edg\project\views\FrmCaixa$7.class
 br\com\edg\project\model\Caixa.class
 br\com\edg\project\views\FrmCadastroProduto$2.class
 br\com\edg\project\views\FrmEstoque$4.class
 br\com\edg\project\Application.class
+br\com\edg\project\views\FrmCaixa$11.class
 br\com\edg\project\views\FrmCadastroCliente$3.class
 br\com\edg\project\views\FrmEstoque.class
 br\com\edg\project\views\FrmTelaInicial$2.class
@@ -23,6 +25,7 @@ br\com\edg\project\model\Estoque.class
 br\com\edg\project\views\FrmLogin$2.class
 br\com\edg\project\views\FrmCadastroCliente.class
 br\com\edg\project\views\FrmCadastroProduto.class
+br\com\edg\project\views\FrmCadastroCliente$13.class
 br\com\edg\project\views\FrmCaixa$1.class
 br\com\edg\project\views\FrmCadastroCliente$2.class
 br\com\edg\project\views\FrmCadastroProduto$1.class
@@ -40,6 +43,7 @@ br\com\edg\project\views\FrmCaixa.class
 br\com\edg\project\views\FrmCaixa$2.class
 br\com\edg\project\views\FrmTelaInicial$1.class
 br\com\edg\project\views\FrmCadastroProduto$4.class
+br\com\edg\project\views\FrmCaixa$10.class
 br\com\edg\project\views\FrmCaixa$5.class
 br\com\edg\project\views\FrmCadastroCliente$11.class
 br\com\edg\project\views\FrmTelaInicial$4.class
