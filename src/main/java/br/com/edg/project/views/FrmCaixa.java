@@ -4,6 +4,9 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.service.Validador;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell
@@ -60,8 +63,11 @@ public class FrmCaixa extends javax.swing.JFrame {
         radioBtnCartaoCredito = new javax.swing.JRadioButton();
         radioBtnCartaoDebito = new javax.swing.JRadioButton();
         btnFinalizarCompra = new javax.swing.JButton();
-        txtCpfCliente = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
+        txtCpfPesquisa = new javax.swing.JTextField();
+        btnPesquisarCpf = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtQuantidadeProduto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -263,7 +269,7 @@ public class FrmCaixa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cód. Produto", "Nome", "Validade", "Valor"
+                "Cód. Produto", "Nome", "Validade", "Valor", "Quantidade"
             }
         ));
         jScrollPane2.setViewportView(tblListaProduto);
@@ -287,12 +293,16 @@ public class FrmCaixa extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações de Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 18))); // NOI18N
 
+        txtCodProduto.setEnabled(false);
+        txtCodProduto.setName("Código do Produto"); // NOI18N
+
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel4.setText("Código do Produto: ");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setText("Total da Compra");
 
+        txtValorCompra.setEditable(false);
         try {
             txtValorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ #####,##")));
         } catch (java.text.ParseException ex) {
@@ -302,6 +312,7 @@ public class FrmCaixa extends javax.swing.JFrame {
 
         btnRemoveProduto.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnRemoveProduto.setText("REMOVER PRODUTO ");
+        btnRemoveProduto.setEnabled(false);
         btnRemoveProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveProdutoActionPerformed(evt);
@@ -310,20 +321,29 @@ public class FrmCaixa extends javax.swing.JFrame {
 
         btnAddProd.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnAddProd.setText("ADICIONAR PRODUTO");
+        btnAddProd.setEnabled(false);
+        btnAddProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddProdActionPerformed(evt);
+            }
+        });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Forma de Pagamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 13))); // NOI18N
 
         btnGroupFormaPagamento.add(radioBtnDinheiro);
         radioBtnDinheiro.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         radioBtnDinheiro.setText("Dinheiro");
+        radioBtnDinheiro.setEnabled(false);
 
         btnGroupFormaPagamento.add(radioBtnCartaoCredito);
         radioBtnCartaoCredito.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         radioBtnCartaoCredito.setText("Cartão de Crédito");
+        radioBtnCartaoCredito.setEnabled(false);
 
         btnGroupFormaPagamento.add(radioBtnCartaoDebito);
         radioBtnCartaoDebito.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         radioBtnCartaoDebito.setText("Cartão de Débito");
+        radioBtnCartaoDebito.setEnabled(false);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -351,80 +371,119 @@ public class FrmCaixa extends javax.swing.JFrame {
 
         btnFinalizarCompra.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnFinalizarCompra.setText("Finalizar Compra");
+        btnFinalizarCompra.setEnabled(false);
         btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFinalizarCompraActionPerformed(evt);
             }
         });
 
-        try {
-            txtCpfCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCpfCliente.addActionListener(new java.awt.event.ActionListener() {
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
+        jLabel6.setText("CPF Cliente:");
+
+        txtCpfPesquisa.setName("CPF "); // NOI18N
+        txtCpfPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfClienteActionPerformed(evt);
+                txtCpfPesquisaActionPerformed(evt);
+            }
+        });
+        txtCpfPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfPesquisaKeyTyped(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
-        jLabel6.setText("CPF Cliente:");
+        btnPesquisarCpf.setText("Pesquisar");
+        btnPesquisarCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarCpfActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
+        jLabel7.setText("Quantidade:");
+
+        txtQuantidadeProduto.setEnabled(false);
+        txtQuantidadeProduto.setName("Quantidade"); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
-                    .addComponent(txtValorCompra)
-                    .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCpfCliente)
+                        .addContainerGap()
+                        .addComponent(txtQuantidadeProduto))
                     .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtCodProduto))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
+                            .addComponent(txtValorCompra)
+                            .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 17, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnAddProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnRemoveProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel5))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCpfPesquisa, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnPesquisarCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnRemoveProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAddProd)))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel4)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCpfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPesquisarCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(btnAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRemoveProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -434,14 +493,14 @@ public class FrmCaixa extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(42, 42, 42)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 526, Short.MAX_VALUE)
+                    .addGap(0, 557, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 527, Short.MAX_VALUE)))
+                    .addGap(0, 557, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,9 +512,9 @@ public class FrmCaixa extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 388, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 388, Short.MAX_VALUE)))
         );
 
         pack();
@@ -486,9 +545,44 @@ public class FrmCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    private void txtCpfClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfClienteActionPerformed
+    private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarCpfActionPerformed
+        try {
+            if(Validador.validaString(txtCpfPesquisa)){
+                txtCpfPesquisa.setEditable(false);
+                txtCodProduto.setEnabled(true); 
+                txtCodProduto.setEnabled(true);
+                txtQuantidadeProduto.setEnabled(true);
+                txtValorCompra.setEnabled(true);
+                radioBtnCartaoCredito.setEnabled(true);
+                radioBtnCartaoDebito.setEnabled(true);
+                radioBtnDinheiro.setEnabled(true);
+                btnAddProd.setEnabled(true);
+                btnRemoveProduto.setEnabled(true);
+            }
+           
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),"Campo obrigatório",JOptionPane.WARNING_MESSAGE);
+        }
+            
+        
+    }//GEN-LAST:event_btnPesquisarCpfActionPerformed
+
+    private void txtCpfPesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfPesquisaKeyTyped
+        if (txtCpfPesquisa.getText().length() >= 11){  
+               evt.consume();
+        }
+    }//GEN-LAST:event_txtCpfPesquisaKeyTyped
+
+    private void txtCpfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCpfClienteActionPerformed
+    }//GEN-LAST:event_txtCpfPesquisaActionPerformed
+
+    private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdActionPerformed
+        try {
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnAddProdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -532,6 +626,7 @@ public class FrmCaixa extends javax.swing.JFrame {
     private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnFinishBuy;
     private javax.swing.ButtonGroup btnGroupFormaPagamento;
+    private javax.swing.JButton btnPesquisarCpf;
     private javax.swing.JButton btnRemoveProduto;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
@@ -542,6 +637,7 @@ public class FrmCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -560,7 +656,8 @@ public class FrmCaixa extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioBtnDinheiro;
     private javax.swing.JTable tblListaProduto;
     private javax.swing.JTextField txtCodProduto;
-    private javax.swing.JFormattedTextField txtCpfCliente;
+    private javax.swing.JTextField txtCpfPesquisa;
+    private javax.swing.JTextField txtQuantidadeProduto;
     private javax.swing.JFormattedTextField txtValorCompra;
     // End of variables declaration//GEN-END:variables
 }
