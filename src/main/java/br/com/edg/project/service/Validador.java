@@ -1,6 +1,7 @@
 package br.com.edg.project.service;
 
 import java.util.List;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 /**
@@ -56,4 +57,11 @@ public class Validador {
         return true;
     }
     
+    public static boolean validaFormatedText(JFormattedTextField campo, int tamanho) {
+        if (campo.getText().trim().length() < tamanho || campo.getText() == null) {
+            throw new IllegalArgumentException("Favor preencher campo obrigatório: " + campo.getName());
+        }
+        
+        return true;
+    }
 }

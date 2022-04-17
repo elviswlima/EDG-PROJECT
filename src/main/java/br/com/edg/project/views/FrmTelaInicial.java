@@ -154,28 +154,33 @@ public class FrmTelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaixaActionPerformed
-         FrmCaixa caixa = new FrmCaixa();
-         caixa.setVisible(true);
+        FrmCaixa caixa = new FrmCaixa();
+        caixa.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCaixaActionPerformed
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
         FrmEstoque estoque = new FrmEstoque();
         estoque.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroClienteActionPerformed
         FrmCadastroCliente registroCliente = new FrmCadastroCliente();
         registroCliente.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCadastroClienteActionPerformed
 
     private void btnCadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroProdutosActionPerformed
         FrmCadastroProduto registroProduto = new FrmCadastroProduto();
         registroProduto.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCadastroProdutosActionPerformed
 
     private void btnRelatorioVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioVendasActionPerformed
         FrmRelatorioDeVendas relatorioVendas = new FrmRelatorioDeVendas();
         relatorioVendas.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnRelatorioVendasActionPerformed
 
     /**

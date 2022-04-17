@@ -56,9 +56,9 @@
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="409" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="416" max="32767" attributes="0"/>
                   <Component id="jInternalFrame1" min="-2" pref="0" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="410" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="415" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -259,9 +259,17 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtQuantidadeProduto" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtCodProduto" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtValorCompra" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnFinalizarCompra" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtPesoProduto" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="btnPesquisarCpf" alignment="1" max="32767" attributes="0"/>
+                      <Component id="txtValorCompra" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnFinalizarCompra" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="17" pref="23" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblTotalCompra" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel7" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -294,16 +302,9 @@
                                   <Component id="chkKg" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="btnPesquisarCpf" alignment="1" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblTotalCompra" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jPanel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
+                      <Component id="btnMenu" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -336,7 +337,7 @@
                   <Component id="btnAddProd" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnRemoveProduto" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace pref="48" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblTotalCompra" min="-2" max="-2" attributes="0"/>
@@ -344,7 +345,8 @@
                   <Component id="txtValorCompra" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnFinalizarCompra" min="-2" pref="59" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnMenu" pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -378,7 +380,6 @@
         <Component class="javax.swing.JFormattedTextField" name="txtValorCompra">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="formatterFactory" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="24" style="0"/>
             </Property>
@@ -570,6 +571,17 @@
           </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPesoProdutoKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnMenu">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Voltar para tela inicial"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
