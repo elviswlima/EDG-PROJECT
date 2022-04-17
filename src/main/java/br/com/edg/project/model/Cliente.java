@@ -10,14 +10,12 @@ package br.com.edg.project.model;
  * @author elvis.wlima
  */
 public class Cliente {
-    
     private String nome;
     private String cpf;
     private String telefone;
     private String dataNascimento;
     private String sexo;
     private String rg;
-    private String email;
     private String cep;
     private String cidade;
     private String bairro;
@@ -85,14 +83,6 @@ public class Cliente {
         this.rg = rg;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
     public String getCep() {
         return cep;
     }
