@@ -241,7 +241,6 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
                 }
                 
                 if (rdnSintetico.isSelected()) {
-                    JOptionPane.showMessageDialog(this, model.getColumnCount());
                     if (model.getColumnCount() > 3) {
                         TableColumnModel columnModel = tblRelatorio.getColumnModel();
                         columnModel.removeColumn(columnModel.getColumn(3));
