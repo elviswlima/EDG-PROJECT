@@ -135,6 +135,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtUsuario">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="Usuario" noResource="true"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUsuarioActionPerformed"/>
           </Events>
@@ -147,6 +150,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtSenha">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="Senha" noResource="true"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblLogoSenha">
           <Properties>
