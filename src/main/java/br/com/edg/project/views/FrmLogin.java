@@ -4,6 +4,7 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.service.Validador;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,6 +49,7 @@ public class FrmLogin extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 36)); // NOI18N
         lblTitulo.setText("Member Login");
 
+        txtUsuario.setName("Usuario"); // NOI18N
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
@@ -55,6 +57,8 @@ public class FrmLogin extends javax.swing.JFrame {
         });
 
         lblLogoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
+
+        txtSenha.setName("Senha"); // NOI18N
 
         lblLogoSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/password.png"))); // NOI18N
 
@@ -72,14 +76,13 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(lblLogoSenha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(lblLogoUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -139,24 +142,17 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-
-        String usuario = txtUsuario.getText();
-        String senha = String.valueOf(txtSenha.getText());
-
-        if(usuario.equals("") && senha.equals("")) {
-            JOptionPane.showMessageDialog(this, "Nenhum dos campos preenchidos.");
-        }else if(usuario.equals("")) {
-            JOptionPane.showMessageDialog(this, "Campo \"usuário\" não preenchido.");
-        } else if (senha.equals("")){
-            JOptionPane.showMessageDialog(this, "Campo \"senha\" não preenchido.");
-        }else if(!usuario.equals("admin") || !senha.equals("admin")) {
-            JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos, tente novamente.");
-        }else {
-            JOptionPane.showMessageDialog(this, "Bem-vindo " + usuario + "!!!");
-            FrmTelaInicial telaPrincipal = new FrmTelaInicial();
-            telaPrincipal.setVisible(true);
-            dispose();
-        }      
+         try {
+             if(Validador.validaString(txtUsuario) && Validador.validaString(txtSenha)){
+                JOptionPane.showMessageDialog(this,"Bem-Vindo!!");
+                FrmTelaInicial telaPrincipal = new FrmTelaInicial();
+                telaPrincipal.setVisible(true);
+                dispose();
+             }
+             
+        }catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),"Campo obrigatório",JOptionPane.WARNING_MESSAGE);
+        }          
     }//GEN-LAST:event_btnAcessarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed

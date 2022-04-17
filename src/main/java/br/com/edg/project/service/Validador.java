@@ -21,22 +21,25 @@ public class Validador {
         try {
             if (field.toString() != null && !field.toString().trim().isEmpty()) {
                 Integer.parseInt(field.getText());
+            } else {
+                throw new IllegalArgumentException(
+                    "Favor preencher campo obrigatório: " + field.getName());
             }
-            
-            throw new IllegalArgumentException("Favor preencher campo obrigatório: " + field.getName());
         } catch (NumberFormatException ex) {
             throw new NumberFormatException(
                     "Erro ao converter valor do campo " + field.getName() + ", valor esperado: Inteiro.");
         }
+                    
     }
     
     public static void validaDouble(JTextField field) {
         try {
             if (field.toString() != null && !field.toString().trim().isEmpty()) {
                 Double.parseDouble(field.getText());
+            } else {
+                throw new IllegalArgumentException(
+                    "Favor preencher campo obrigatório: " + field.getName());
             }
-            
-            throw new IllegalArgumentException("Favor preencher campo obrigatório: " + field.getName());
         } catch (NumberFormatException ex) {
             throw new NumberFormatException(
                     "Erro ao converter valor do campo " + field.getName() + ", valor esperado: Decimal.");
