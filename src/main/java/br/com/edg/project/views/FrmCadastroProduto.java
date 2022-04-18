@@ -34,13 +34,13 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         tblListProd = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lblQuantity = new javax.swing.JLabel();
-        txtPrice = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
         txtCodProduto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtNameProd = new javax.swing.JTextField();
+        txtNomeProduto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         lblPrice = new javax.swing.JLabel();
-        txtQuantity = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
         chkUnidadeMedida = new javax.swing.JCheckBox();
         btnAddProd = new javax.swing.JButton();
         btnDeleteItem = new javax.swing.JButton();
@@ -59,7 +59,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome do produto", "Quantidade (Un. ou Kg))", "Preço", "Validade"
+                "Nome do produto", "Código do Produto", "Valor", "Quantidade (Un. ou Kg)"
             }
         ) {
             Class[] types = new Class [] {
@@ -78,17 +78,19 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         lblQuantity.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblQuantity.setText("Quantidade");
 
-        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+        txtValor.setName("Valor do produto"); // NOI18N
+        txtValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPriceActionPerformed(evt);
+                txtValorActionPerformed(evt);
             }
         });
-        txtPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPriceKeyTyped(evt);
+                txtValorKeyTyped(evt);
             }
         });
 
+        txtCodProduto.setName("Código do produto"); // NOI18N
         txtCodProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodProdutoKeyTyped(evt);
@@ -98,9 +100,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Código do produto:");
 
-        txtNameProd.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNomeProduto.setName("Nome do Produto"); // NOI18N
+        txtNomeProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNameProdKeyTyped(evt);
+                txtNomeProdutoKeyTyped(evt);
             }
         });
 
@@ -110,9 +113,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         lblPrice.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblPrice.setText("Valor (R$):");
 
-        txtQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtQuantidade.setName("Quantidade"); // NOI18N
+        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtQuantityKeyTyped(evt);
+                txtQuantidadeKeyTyped(evt);
             }
         });
 
@@ -177,7 +181,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNameProd, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -187,12 +191,12 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(chkUnidadeMedida))))
                             .addGroup(layout.createSequentialGroup()
@@ -230,10 +234,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
                             .addComponent(lblQuantity))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNameProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(chkUnidadeMedida))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -250,9 +254,9 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+    private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriceActionPerformed
+    }//GEN-LAST:event_txtValorActionPerformed
 
     private void chkUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkUnidadeMedidaActionPerformed
 
@@ -262,10 +266,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         DefaultTableModel novoProduto = (DefaultTableModel) tblListProd.getModel(); 
         
         try {
-            Validador.validaString(txtNameProd);
+            Validador.validaString(txtNomeProduto);
             Validador.validaString(txtCodProduto);
-            Validador.validaDouble(txtPrice);
-            Validador.validaInteger(txtQuantity);
+            Validador.validaDouble(txtValor);
+            Validador.validaInteger(txtQuantidade);
             
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Falha na conversão", JOptionPane.WARNING_MESSAGE);
@@ -274,8 +278,8 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
         }
         
-        novoProduto.addRow(new Object[] {txtNameProd.getText(), txtCodProduto.getText(),
-            Double.parseDouble(txtPrice.getText()), Integer.parseInt(txtQuantity.getText())});
+        novoProduto.addRow(new Object[] {txtNomeProduto.getText(), txtCodProduto.getText(),
+            Double.parseDouble(txtValor.getText()), Integer.parseInt(txtQuantidade.getText())});
         
         btnRegistrar.setEnabled(true);
     }//GEN-LAST:event_btnAddProdActionPerformed
@@ -303,11 +307,11 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void txtNameProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameProdKeyTyped
-        if (txtNameProd.getText().length() >= 120) {
+    private void txtNomeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeProdutoKeyTyped
+        if (txtNomeProduto.getText().length() >= 120) {
             evt.consume();
         }
-    }//GEN-LAST:event_txtNameProdKeyTyped
+    }//GEN-LAST:event_txtNomeProdutoKeyTyped
 
     private void txtCodProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdutoKeyTyped
         if (txtCodProduto.getText().length() >= 10) {
@@ -315,17 +319,17 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCodProdutoKeyTyped
 
-    private void txtPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPriceKeyTyped
-        if (txtPrice.getText().length() >= 16) {
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        if (txtValor.getText().length() >= 16) {
             evt.consume();
         }
-    }//GEN-LAST:event_txtPriceKeyTyped
+    }//GEN-LAST:event_txtValorKeyTyped
 
-    private void txtQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantityKeyTyped
-        if (txtQuantity.getText().length() >= 10) {
+    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        if (txtQuantidade.getText().length() >= 10) {
             evt.consume();
         }
-    }//GEN-LAST:event_txtQuantityKeyTyped
+    }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     /**
      * @param args the command line arguments
@@ -377,8 +381,8 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblListProd;
     private javax.swing.JTextField txtCodProduto;
-    private javax.swing.JTextField txtNameProd;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtQuantity;
+    private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

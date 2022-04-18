@@ -84,6 +84,7 @@ public class FrmEstoque extends javax.swing.JFrame {
         lblCod.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         lblCod.setText("Código do produto:");
 
+        txtCodProduto.setName("Código do Produto"); // NOI18N
         txtCodProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodProdutoKeyTyped(evt);
@@ -93,6 +94,7 @@ public class FrmEstoque extends javax.swing.JFrame {
         lblNome.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         lblNome.setText("Nome do produto:");
 
+        txtNomeProduto.setName("Nome do Produto"); // NOI18N
         txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeProdutoActionPerformed(evt);
@@ -107,6 +109,7 @@ public class FrmEstoque extends javax.swing.JFrame {
         lblQuant.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         lblQuant.setText("Quantidade:");
 
+        txtQuantidade.setName("Quantidade"); // NOI18N
         txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantidadeActionPerformed(evt);
@@ -126,6 +129,7 @@ public class FrmEstoque extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtValidade.setName("Validade"); // NOI18N
         txtValidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtValidadeKeyTyped(evt);
@@ -148,6 +152,11 @@ public class FrmEstoque extends javax.swing.JFrame {
         btnEditar.setEnabled(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnConsultar.setText("CONSULTAR");
@@ -308,6 +317,17 @@ public class FrmEstoque extends javax.swing.JFrame {
     private void txtValidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValidadeKeyTyped
 
     }//GEN-LAST:event_txtValidadeKeyTyped
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int indiceLinha = tblEstoque.getSelectedRow();
+        DefaultTableModel produto = (DefaultTableModel) tblEstoque.getModel();
+        
+        if(indiceLinha >= 0) {
+            //
+        } else{
+            JOptionPane.showMessageDialog(this, "Selecione uma linha", "Linha não selecionada", 3);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

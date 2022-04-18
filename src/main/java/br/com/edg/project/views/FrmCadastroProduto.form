@@ -37,7 +37,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtNameProd" min="-2" pref="178" max="-2" attributes="0"/>
+                              <Component id="txtNomeProduto" min="-2" pref="178" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -48,14 +48,14 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="txtCodProduto" min="-2" pref="142" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txtPrice" min="-2" pref="93" max="-2" attributes="0"/>
+                                      <Component id="txtValor" min="-2" pref="93" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblQuantity" min="-2" pref="83" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtQuantity" min="-2" pref="106" max="-2" attributes="0"/>
+                                      <Component id="txtQuantidade" min="-2" pref="106" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="chkUnidadeMedida" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -106,10 +106,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNameProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCodProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="chkUnidadeMedida" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -152,9 +152,9 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="0">
                 <Column editable="true" title="Nome do produto" type="java.lang.String"/>
-                <Column editable="true" title="Quantidade (Un. ou Kg))" type="java.lang.Integer"/>
-                <Column editable="true" title="Pre&#xe7;o" type="java.lang.Double"/>
-                <Column editable="true" title="Validade" type="java.lang.Integer"/>
+                <Column editable="true" title="C&#xf3;digo do Produto" type="java.lang.Integer"/>
+                <Column editable="true" title="Valor" type="java.lang.Double"/>
+                <Column editable="true" title="Quantidade (Un. ou Kg)" type="java.lang.Integer"/>
               </Table>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -180,13 +180,19 @@
         <Property name="text" type="java.lang.String" value="Quantidade"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPrice">
+    <Component class="javax.swing.JTextField" name="txtValor">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="Valor do produto" noResource="true"/>
+      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPriceActionPerformed"/>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPriceKeyTyped"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtValorActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCodProduto">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="C&#xf3;digo do produto" noResource="true"/>
+      </Properties>
       <Events>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodProdutoKeyTyped"/>
       </Events>
@@ -199,9 +205,12 @@
         <Property name="text" type="java.lang.String" value="C&#xf3;digo do produto:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNameProd">
+    <Component class="javax.swing.JTextField" name="txtNomeProduto">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="Nome do Produto" noResource="true"/>
+      </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNameProdKeyTyped"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeProdutoKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -220,9 +229,12 @@
         <Property name="text" type="java.lang.String" value="Valor (R$):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtQuantity">
+    <Component class="javax.swing.JTextField" name="txtQuantidade">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="Quantidade" noResource="true"/>
+      </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQuantityKeyTyped"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQuantidadeKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkUnidadeMedida">
