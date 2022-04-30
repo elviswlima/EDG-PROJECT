@@ -4,7 +4,10 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.controller.ProdutoController;
+import br.com.edg.project.model.Produto;
 import br.com.edg.project.service.Validador;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -59,11 +62,11 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome do produto", "Código do Produto", "Valor", "Quantidade (Un. ou Kg)"
+                "Nome do produto", "Código do Produto", "Valor", "Quantidade (Unidade)", "Quantidade (kg)"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -71,6 +74,13 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblListProd);
+        if (tblListProd.getColumnModel().getColumnCount() > 0) {
+            tblListProd.getColumnModel().getColumn(0).setResizable(false);
+            tblListProd.getColumnModel().getColumn(1).setResizable(false);
+            tblListProd.getColumnModel().getColumn(2).setResizable(false);
+            tblListProd.getColumnModel().getColumn(3).setResizable(false);
+            tblListProd.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel1.setText("PRODUTOS REGISTRADOS");
@@ -263,45 +273,88 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_chkUnidadeMedidaActionPerformed
 
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdActionPerformed
-        DefaultTableModel novoProduto = (DefaultTableModel) tblListProd.getModel(); 
-        
+        DefaultTableModel novoProduto = (DefaultTableModel) tblListProd.getModel();
+
         try {
             Validador.validaString(txtNomeProduto);
             Validador.validaString(txtCodProduto);
             Validador.validaDouble(txtValor);
             Validador.validaInteger(txtQuantidade);
-            
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Falha na conversão", JOptionPane.WARNING_MESSAGE);
 
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
         }
-        
-        novoProduto.addRow(new Object[] {txtNomeProduto.getText(), txtCodProduto.getText(),
-            Double.parseDouble(txtValor.getText()), Integer.parseInt(txtQuantidade.getText())});
-        
+
+        if (chkUnidadeMedida.isSelected()) {
+            novoProduto.addRow(new Object[]{
+                txtNomeProduto.getText(),
+                txtCodProduto.getText(),
+                Double.parseDouble(txtValor.getText()),
+                0,
+                Double.parseDouble(txtQuantidade.getText())
+            });
+        } else {
+            novoProduto.addRow(new Object[]{
+                txtNomeProduto.getText(),
+                txtCodProduto.getText(),
+                Double.parseDouble(txtValor.getText()),
+                Integer.parseInt(txtQuantidade.getText()),
+                0
+            });
+        }
+
+        txtCodProduto.setText(null);
+        txtNomeProduto.setText(null);
+        txtValor.setText(null);
+        txtQuantidade.setText(null);
+
         btnRegistrar.setEnabled(true);
     }//GEN-LAST:event_btnAddProdActionPerformed
 
     private void btnDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteItemActionPerformed
         int indiceLinha = tblListProd.getSelectedRow();
         DefaultTableModel produto = (DefaultTableModel) tblListProd.getModel();
-        
-        if(indiceLinha >= 0) {
+
+        if (indiceLinha >= 0) {
             produto.removeRow(indiceLinha);
-        } else{
+        } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "Linha não selecionada", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteItemActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-       
+
+        ArrayList<Produto> produtos = new ArrayList<>();
+
+        for (int i = 0; i < tblListProd.getRowCount(); i++) {
+            produtos.add(
+                    new Produto(
+                            "" + tblListProd.getValueAt(i, 0),
+                            Double.parseDouble("" + tblListProd.getValueAt(i, 2)),
+                            Integer.parseInt("" + tblListProd.getValueAt(i, 3)),
+                            Double.parseDouble("" + tblListProd.getValueAt(i, 4))
+                    )
+            );
+        }
+
+        DefaultTableModel dtm = (DefaultTableModel) tblListProd.getModel();
+
+        while (tblListProd.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+
+        if (ProdutoController.registrarProdutos(produtos)) {
+            JOptionPane.showMessageDialog(this, "Cadastro de produtos realizados com sucesso", "Produto cadastrado", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERROR: Erro ao cadastrar produto", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         FrmTelaInicial menu = new FrmTelaInicial();
-        
+
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);
         dispose();

@@ -9,10 +9,17 @@ public class Produto {
     private String nomeProduto;
     private int codProduto;
     private double valorProduto;
-    private double qtdeProduto;
+    private int qtdeProduto;
     private double qtdePorKg;
     
     public Produto() {
+    }
+    
+    public Produto(String nomeProduto, double valor, int qtdeProduto, double qtdePorKg) {
+        this.nomeProduto = nomeProduto;
+        this.valorProduto =  valor;
+        this.qtdeProduto = qtdeProduto;
+        this.qtdePorKg = qtdePorKg;
     }
 
     public String getNomeProduto() {
@@ -43,10 +50,15 @@ public class Produto {
         return qtdeProduto;
     }
 
-    public void setQtdeProduto(double qtdeProduto) {
+    public void setQtdeProduto(int qtdeProduto) {
         this.qtdeProduto = qtdeProduto;
     }
-    
-    
-    
+
+    public double getQtdePorKg() {
+        return qtdePorKg;
+    }
+
+    public void setQtdePorKg(double qtdePorKg) {
+        this.qtdePorKg = qtdePorKg;
+    }
 }
