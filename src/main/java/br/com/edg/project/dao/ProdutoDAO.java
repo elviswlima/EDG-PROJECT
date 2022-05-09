@@ -4,6 +4,7 @@
  */
 package br.com.edg.project.dao;
 
+import br.com.edg.project.dao.config.ConfigDB;
 import br.com.edg.project.model.Produto;
 import java.sql.Connection;
 
@@ -19,21 +20,23 @@ import java.util.logging.Logger;
  */
 public class ProdutoDAO {
 
-    private static final String Driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWD = "";
     private static Connection connection;
 
     public static boolean registrar(Produto produto) {
         try {
-            Class.forName(Driver);
-            connection = DriverManager.getConnection(url, "root", "");
+            Class.forName(DRIVER);
+            connection = DriverManager.getConnection(URL, USER, PASSWD);
             PreparedStatement stmt = connection
                     .prepareStatement("INSERT INTO PRODUTOS (NOME_PRODUTO, VALOR, KG, QUANTIDADE) VALUES (?,?,?,?);");
             stmt.setString(1, produto.getNomeProduto());
             stmt.setDouble(2, produto.getValorProduto());
             stmt.setDouble(3, produto.getQtdePorKg());
             stmt.setDouble(4, produto.getQtdeProduto());
-            
+
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected > 0) {

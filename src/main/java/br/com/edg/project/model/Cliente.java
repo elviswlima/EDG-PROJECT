@@ -5,6 +5,8 @@
  */
 package br.com.edg.project.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author elvis.wlima
@@ -14,7 +16,7 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String telefone;
-    private String dataNascimento;
+    private Date dataNascimento;
     private String sexo;
     private String rg;
     private String email;
@@ -61,11 +63,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

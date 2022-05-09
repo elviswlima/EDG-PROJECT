@@ -4,13 +4,16 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.controller.ClienteController;
 import br.com.edg.project.model.Cliente;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import br.com.edg.project.service.Validador;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTextField;
+
 /**
  *
  * @author Elvis - PC
@@ -95,20 +98,13 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         pnlCodCliente.setText("* Nome do Cliente:");
 
         txtNomePesquisa.setName("Nome"); // NOI18N
-        txtNomePesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNomePesquisaKeyTyped(evt);
-            }
-        });
 
-        
+        try {
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCpfPesquisa.setEnabled(false);
         txtCpfPesquisa.setName("CPF"); // NOI18N
-        txtCpfPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCpfPesquisaKeyTyped(evt);
-            }
-        });
 
         lblDataCadaCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataCadaCliente.setText("* CPF do Cliente:");
@@ -341,20 +337,21 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", "Não Binário", " " }));
         cboSexo.setEnabled(false);
         cboSexo.setName("Sexo"); // NOI18N
-        cboSexo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboSexoActionPerformed(evt);
-            }
-        });
 
-        
+        try {
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCpf.setEnabled(false);
         txtCpf.setName("CPF"); // NOI18N
 
         lblDataNascCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataNascCliente.setText("* Data de Nascimento:");
 
-        
+        try {
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtDataNasc.setEnabled(false);
         txtDataNasc.setName("Data de nascimento"); // NOI18N
 
@@ -368,7 +365,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("* Telefone:");
 
-        
+        try {
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtTelefone.setToolTipText("");
         txtTelefone.setEnabled(false);
         txtTelefone.setName("Telefone"); // NOI18N
@@ -494,6 +494,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         });
         tabelaCliente.setName(""); // NOI18N
         tabelaCliente.setPreferredSize(new java.awt.Dimension(1100, 80));
+        tabelaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaClienteMouseClicked(evt);
+            }
+        });
         scrollTabela.setViewportView(tabelaCliente);
 
         javax.swing.GroupLayout pnlListaClientesLayout = new javax.swing.GroupLayout(pnlListaClientes);
@@ -584,15 +589,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnVoltarAoMenuActionPerformed
 
-    private void cboSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSexoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboSexoActionPerformed
-
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         Cliente cliente = new Cliente();
-        
+
         try {
-             List<JTextField>fields = new ArrayList<>();
+            List<JTextField> fields = new ArrayList<>();
             fields.add(txtRg);
             fields.add(txtNome);
             fields.add(txtCpf);
@@ -603,15 +604,15 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             fields.add(txtNumeroCasaCliente);
             fields.add(txtLogradouro);
             fields.add(txtEmail);
-            
-            if (Validador.validaMultCampos(fields) 
-                    && cboSexo.getSelectedItem().toString() != null 
+
+            if (Validador.validaMultCampos(fields)
+                    && cboSexo.getSelectedItem().toString() != null
                     && cboxEstado.getSelectedItem().toString() != null) {
-                
+
                 cliente.setNome(txtNome.getText());
                 cliente.setRg(txtRg.getText());
                 cliente.setCpf(txtCpf.getText());
-                cliente.setDataNascimento(txtDataNasc.getText());
+                cliente.setDataNascimento(Date.valueOf(txtDataNasc.getText()));
                 cliente.setSexo(cboSexo.getSelectedItem().toString());
                 cliente.setTelefone(txtTelefone.getText());
 
@@ -621,10 +622,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 cliente.setComplemento(txtComplementoCliente.getText());
                 cliente.setNumEndereco(txtNumeroCasaCliente.getText());
                 cliente.setRua(txtLogradouro.getText());
-                
-                /* Code: Inserir no banco de dados */
-              
-           }
+
+                /* Insere no banco de dados */
+                ClienteController.inserirCliente(cliente);
+            }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Existem campos nulos, favor ajustar", "Campos nulos", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
@@ -632,19 +633,15 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInserirActionPerformed
 
-    private void txtNomePesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomePesquisaKeyTyped
-        
-    }//GEN-LAST:event_txtNomePesquisaKeyTyped
-
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
-        
+
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int indiceLinha = tabelaCliente.getSelectedRow();
         DefaultTableModel usuario = (DefaultTableModel) tabelaCliente.getModel();
-        
-        if(indiceLinha >= 0){
+
+        if (indiceLinha >= 0) {
             usuario.removeRow(indiceLinha);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "Linha não selecionada", 3);
@@ -656,10 +653,14 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLogradouroActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        try {         
-           if (chkCpf.isSelected() && Validador.validaString(txtCpfPesquisa)) {
-               txtCpf.setText(txtCpfPesquisa.getText());
+        try {
+            if (chkCpf.isSelected() && Validador.validaString(txtCpfPesquisa)) {
+                txtCpf.setText(txtCpfPesquisa.getText());
                 txtCpfPesquisa.setText(null);
+
+                Cliente cliente = new Cliente();
+                cliente.setNome(txtNomePesquisa.getText());
+                cliente.setCpf(txtCpfPesquisa.getText());
                 
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
@@ -668,12 +669,12 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 cboSexo.setEnabled(true);
                 txtTelefone.setEnabled(true);
                 txtEmail.setEnabled(true);
-           }
-           
-           if (!chkCpf.isSelected() && Validador.validaString(txtNomePesquisa)) {
+            }
+
+            if (!chkCpf.isSelected() && Validador.validaString(txtNomePesquisa)) {
                 txtNome.setText(txtNomePesquisa.getText());
                 txtNomePesquisa.setText(null);
-                
+
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
                 txtRg.setEnabled(true);
@@ -681,16 +682,16 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 cboSexo.setEnabled(true);
                 txtTelefone.setEnabled(true);
                 txtEmail.setEnabled(true);
-           }
-           
+            }
+
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", 3);
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnPesquisaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaCepActionPerformed
-         try {            
-            if (Validador.validaString(txtCepCliente)){
+        try {
+            if (Validador.validaString(txtCepCliente)) {
                 /* Code: Buscar na API de CEP*/
                 txtBairro.setEnabled(true);
                 txtLogradouro.setEnabled(true);
@@ -704,12 +705,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisaCepActionPerformed
 
-    private void txtCpfPesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfPesquisaKeyTyped
-        if (txtCpfPesquisa.getText().length() >11) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtCpfPesquisaKeyTyped
-
     private void chkCpfItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkCpfItemStateChanged
         if (chkCpf.isSelected()) {
             txtNomePesquisa.setEnabled(false);
@@ -719,6 +714,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             txtCpfPesquisa.setEnabled(false);
         }
     }//GEN-LAST:event_chkCpfItemStateChanged
+
+    private void tabelaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClienteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaClienteMouseClicked
 
     /**
      * @param args the command line arguments
