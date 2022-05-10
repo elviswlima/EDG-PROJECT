@@ -465,18 +465,22 @@ public class FrmCaixa extends javax.swing.JFrame {
     private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPesquisarCpfActionPerformed
         try {
             if (Validador.validaString(txtCpfPesquisa)) {
-                txtCpfPesquisa.setEditable(false);
-                txtCodProduto.setEnabled(true);
-                txtCodProduto.setEnabled(true);
-                txtQuantidadeProduto.setEnabled(true);
-                txtPesoProduto.setEnabled(false);
-                txtValorCompra.setEnabled(true);
-                radioBtnCartaoCredito.setEnabled(true);
-                radioBtnCartaoDebito.setEnabled(true);
-                radioBtnDinheiro.setEnabled(true);
-                btnAddProd.setEnabled(true);
-                btnRemoveProduto.setEnabled(true);
-                btnFinalizarCompra.setEnabled(true);
+                if (CaixaController.consultaCliente != null) {
+                    cliente.setId(caixaController.consultaCliente);
+
+                    txtCpfPesquisa.setEditable(false);
+                    txtCodProduto.setEnabled(true);
+                    txtCodProduto.setEnabled(true);
+                    txtQuantidadeProduto.setEnabled(true);
+                    txtPesoProduto.setEnabled(false);
+                    txtValorCompra.setEnabled(true);
+                    radioBtnCartaoCredito.setEnabled(true);
+                    radioBtnCartaoDebito.setEnabled(true);
+                    radioBtnDinheiro.setEnabled(true);
+                    btnAddProd.setEnabled(true);
+                    btnRemoveProduto.setEnabled(true);
+                    btnFinalizarCompra.setEnabled(true);
+                }
             }
 
         } catch (IllegalArgumentException ex) {
@@ -498,11 +502,17 @@ public class FrmCaixa extends javax.swing.JFrame {
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddProdActionPerformed
         try {
             if (chkKg.isSelected()) {
+//                Produto produto = new Produto();                
+//                produto = CaixaController.consultaProduto(idProduto, chkKg.isSelected());
+//                  Inserir na Tabela (JTable)
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaDouble(txtPesoProduto);
             }
 
             if (!chkKg.isSelected()) {
+//                Produto produto = new Produto();                
+//                produto = CaixaController.consultaProduto(idProduto, chkKg.isSelected());
+//                  Inserir na Tabela (JTable)
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaInteger(txtQuantidadeProduto);
             }
@@ -568,6 +578,8 @@ public class FrmCaixa extends javax.swing.JFrame {
             }
         });
     }
+
+    private Cliente cliente; 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProd;
