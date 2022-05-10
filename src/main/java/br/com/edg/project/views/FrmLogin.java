@@ -4,6 +4,7 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.controller.LoginController;
 import br.com.edg.project.service.Validador;
 import javax.swing.JOptionPane;
 
@@ -144,10 +145,15 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
          try {
              if(Validador.validaString(txtUsuario) && Validador.validaString(txtSenha)){
-                JOptionPane.showMessageDialog(this,"Bem-Vindo!!");
-                FrmTelaInicial telaPrincipal = new FrmTelaInicial();
-                telaPrincipal.setVisible(true);
-                dispose();
+                
+                 if(LoginController.acessarLogin(txtUsuario.getText(), txtSenha.getText())) {
+                     JOptionPane.showMessageDialog(this,"Bem-Vindo!!");
+                     FrmTelaInicial telaPrincipal = new FrmTelaInicial();
+                     telaPrincipal.setVisible(true);
+                     dispose();
+                 } else {
+                     JOptionPane.showMessageDialog(this, "Login ou senha incorretos.");
+                 }
              }
              
         }catch (IllegalArgumentException ex) {
