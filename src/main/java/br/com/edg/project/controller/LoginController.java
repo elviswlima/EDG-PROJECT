@@ -13,12 +13,12 @@ public class LoginController {
         
         boolean retorno = false;
         
-        Login user = new Login();
+        Login usuario = new Login();
         
-        user.setUsuario(login);
-        user.setSenha(senha);
+        usuario.setUsuario(login);
+        usuario.setSenha(senha);
 
-        if(!LoginDAO.login(user)) {
+        if(!LoginDAO.login(usuario)) {
             retorno = false;
         }
         
