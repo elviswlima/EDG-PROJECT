@@ -1,6 +1,7 @@
 package br.com.edg.project.controller;
 
-import br.com.edg.project.model.Estoque;
+import br.com.edg.project.dao.EstoqueDAO;
+import br.com.edg.project.model.Produto;
 import java.util.ArrayList;
 
 /**
@@ -9,13 +10,29 @@ import java.util.ArrayList;
  */
 public class EstoqueController {
     
-    public static consultarEstoque(String codProduto) {
+    public static ArrayList<Produto> consultarEstoque(int codProduto) {
                 
-        Estoque produto = new Estoque();
+        Produto obj = new Produto();
+        obj.setCodProduto(codProduto);
+
+        return EstoqueDAO.consultar(obj);
+    }
+    
+    public static boolean excluirProduto(int codProduto) {
         
+        boolean retorno = false;
+
+        try {
+            Produto prod = new Produto();
         
+            prod.setCodProduto(codProduto);
         
-        return ArrayList<Estoque>;
+            retorno = EstoqueDAO.excluir(prod);
+            
+        } catch (Exception e) {
+        }
+        
+        return retorno;
     }
     
 }

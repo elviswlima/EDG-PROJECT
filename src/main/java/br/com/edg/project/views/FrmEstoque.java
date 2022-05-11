@@ -4,7 +4,11 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.controller.EstoqueController;
+import br.com.edg.project.dao.EstoqueDAO;
+import br.com.edg.project.model.Produto;
 import br.com.edg.project.service.Validador;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -262,18 +266,25 @@ public class FrmEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantidadeActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        
+        DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
+        ArrayList<Produto> prod = new ArrayList<>();
+
         try {
-            if(Validador.validaString(txtCodProduto)) {
+            Validador.validaInteger(txtCodProduto);
+            prod = EstoqueController.consultarEstoque(Integer.parseInt(txtCodProduto.getText()));
+            
+            if(prod.size() > 0) {
                 btnDeletar.setEnabled(true);
                 btnEditar.setEnabled(true);
-            }           
-            
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Falha na conversão", JOptionPane.WARNING_MESSAGE);
+                
+                for(Produto p : prod) {
+                Object[] at = {p.getCodProduto(), p.getNomeProduto(), p.getQtdeProduto()};
+                modelo.addRow(at);
+            }
+            }
 
-        } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -290,10 +301,16 @@ public class FrmEstoque extends javax.swing.JFrame {
         DefaultTableModel produto = (DefaultTableModel) tblEstoque.getModel();
         
         if(indiceLinha >= 0) {
-            produto.removeRow(indiceLinha);
+            boolean resultado = EstoqueController.excluirProduto(Integer.parseInt(txtCodProduto.getText()));
+            
+            if(resultado == true) {
+                produto.removeRow(indiceLinha);
+            }
+            
         } else{
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "Linha não selecionada", 3);
         }
+        
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     private void txtCodProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdutoKeyTyped
