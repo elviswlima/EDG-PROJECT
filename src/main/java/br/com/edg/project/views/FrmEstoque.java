@@ -63,7 +63,15 @@ public class FrmEstoque extends javax.swing.JFrame {
             new String [] {
                 "Código do Produto", "Nome ", "Quantidade", "Validade"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblEstoque);
 
         javax.swing.GroupLayout pblEstoqueLayout = new javax.swing.GroupLayout(pblEstoque);
@@ -336,14 +344,7 @@ public class FrmEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValidadeKeyTyped
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int indiceLinha = tblEstoque.getSelectedRow();
-        DefaultTableModel produto = (DefaultTableModel) tblEstoque.getModel();
-        
-        if(indiceLinha >= 0) {
-            //
-        } else{
-            JOptionPane.showMessageDialog(this, "Selecione uma linha", "Linha não selecionada", 3);
-        }
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     /**

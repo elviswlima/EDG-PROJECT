@@ -75,9 +75,7 @@ public class EstoqueDAO {
     }
     
     public static boolean excluir(Produto prod) {
-        
-        boolean retorno = false;
-        
+       
         String query = "DELETE FROM ESTOQUE WHERE ID_PRODUTO = ?";
         
         PreparedStatement stmt = null;
@@ -91,9 +89,11 @@ public class EstoqueDAO {
             
             int linhasAfetadas = stmt.executeUpdate();
             
-            if(linhasAfetadas > 0)
-                retorno = true;
-            
+            if(linhasAfetadas > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -107,7 +107,48 @@ public class EstoqueDAO {
             } catch (SQLException ex) {
             }
         }
-        return retorno;
+        return false;
+    }
+    
+    public static boolean alterar(Produto prod){
+        
+        String query = "UPDATE PRODUTO SET NOME_PRODUTO = ?, VALOR = ?, KG = ?, QUANTIDADE = ? WHERE ID_PRODUTO = ?";
+        
+        PreparedStatement stmt = null;
+        
+        try {
+            Class.forName(Driver);
+            conexao = DriverManager.getConnection(url, user, senha);
+            stmt = conexao.prepareStatement(query);
+            
+            stmt.setString(1, prod.getNomeProduto());
+            stmt.setDouble(2, prod.getValorProduto());
+            stmt.setDouble(3, prod.getQtdePorKg());
+            stmt.setInt(4, prod.getQtdeProduto());
+            stmt.setInt(5, prod.getCodProduto());
+            
+            int linhasAfetadas = stmt.executeUpdate();
+            
+            if(linhasAfetadas > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+                Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if(stmt != null)
+                    stmt.close();
+                if(conexao != null)
+                    conexao.close();
+            } catch (SQLException ex) {
+            }
+        
+        return false;
+        }
     }
     
 }

@@ -35,4 +35,14 @@ public class EstoqueController {
         return retorno;
     }
     
+    public static boolean alterarProduto(ArrayList<Produto> prod) {
+            for(Produto p : prod) {
+            if(!EstoqueDAO.alterar(p)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
 }
