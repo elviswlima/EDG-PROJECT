@@ -53,7 +53,7 @@ public class ClienteDAO {
                 rCliente.setEstado(rs.getString("ESTADO"));
                 rCliente.setCidade(rs.getString("CIDADE"));
             }
-            
+
             return rCliente;
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +61,40 @@ public class ClienteDAO {
 
         return null;
     }
-    
+
+    public static Cliente consultarBy(Cliente cliente, boolean isName) {
+        try {
+            Cliente rCliente = new Cliente();
+            Class.forName(DRIVER);
+            connection = DriverManager.getConnection(URL, USER, PASSWD);
+            
+            PreparedStatement stmt;
+            
+            if (isName) {
+                stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE NOME LIKE ?");
+                stmt.setString(1, "%" + cliente.getNome() + "%");
+            } else {
+                stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE CPF LIKE ?");
+                stmt.setString(1, "%" + cliente.getCpf() + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                rCliente.setNome(rs.getString("NOME"));
+                rCliente.setCpf(rs.getString("CPF"));
+                rCliente.setTelefone(rs.getString("TELEFONE"));
+                rCliente.setCidade(rs.getString("CIDADE"));
+            }
+
+            return rCliente;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
     public static boolean inserirCliente(Cliente cliente) {
         try {
             Cliente rCliente = new Cliente();
@@ -83,7 +116,6 @@ public class ClienteDAO {
             stmt.setString(12, cliente.getBairro());
             stmt.setString(13, cliente.getNumEndereco());
             stmt.setString(14, cliente.getComplemento());
-            
 
             int rowsAffected = stmt.executeUpdate();
 

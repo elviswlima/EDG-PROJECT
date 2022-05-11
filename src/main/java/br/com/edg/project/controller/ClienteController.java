@@ -5,7 +5,10 @@
 package br.com.edg.project.controller;
 
 import br.com.edg.project.dao.ClienteDAO;
+import br.com.edg.project.model.Cep;
 import br.com.edg.project.model.Cliente;
+import br.com.edg.project.service.CepService;
+import java.io.IOException;
 
 /**
  *
@@ -20,6 +23,12 @@ public class ClienteController {
     
     public static Cliente consultaClientes(Cliente cliente) {
         return ClienteDAO.consultarClientes(cliente);
+    }
+    
+    public static Cep consultarCep(String cep) throws IOException {
+        CepService cepService = new CepService();
+        
+        return cepService.consultaCep(cep);
     }
     
 }

@@ -5,13 +5,18 @@
 package br.com.edg.project.views;
 
 import br.com.edg.project.controller.ClienteController;
+import br.com.edg.project.dao.ClienteDAO;
+import br.com.edg.project.model.Cep;
 import br.com.edg.project.model.Cliente;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import br.com.edg.project.service.Validador;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -99,10 +104,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
         txtNomePesquisa.setName("Nome"); // NOI18N
 
-        try {
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
         txtCpfPesquisa.setEnabled(false);
         txtCpfPesquisa.setName("CPF"); // NOI18N
 
@@ -338,20 +340,14 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         cboSexo.setEnabled(false);
         cboSexo.setName("Sexo"); // NOI18N
 
-        try {
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
         txtCpf.setEnabled(false);
         txtCpf.setName("CPF"); // NOI18N
 
         lblDataNascCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataNascCliente.setText("* Data de Nascimento:");
 
-        try {
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
         txtDataNasc.setEnabled(false);
         txtDataNasc.setName("Data de nascimento"); // NOI18N
 
@@ -365,10 +361,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("* Telefone:");
 
-        try {
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
         txtTelefone.setToolTipText("");
         txtTelefone.setEnabled(false);
         txtTelefone.setName("Telefone"); // NOI18N
@@ -658,10 +651,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 txtCpf.setText(txtCpfPesquisa.getText());
                 txtCpfPesquisa.setText(null);
 
-                Cliente cliente = new Cliente();
-                cliente.setNome(txtNomePesquisa.getText());
                 cliente.setCpf(txtCpfPesquisa.getText());
-                
+
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
                 txtRg.setEnabled(true);
@@ -692,14 +683,35 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     private void btnPesquisaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaCepActionPerformed
         try {
             if (Validador.validaString(txtCepCliente)) {
-                /* Code: Buscar na API de CEP*/
+                Cep cep = ClienteController.consultarCep(txtCepCliente.getText());
+
                 txtBairro.setEnabled(true);
                 txtLogradouro.setEnabled(true);
                 txtNumeroCasaCliente.setEnabled(true);
                 cboxEstado.setEnabled(true);
                 txtCidadeCliente.setEnabled(true);
-                txtComplementoCliente.setEditable(true);
+                txtComplementoCliente.setEnabled(true);
+
+                if (cep.getLogradouro() != null) {
+                    txtBairro.setText(cep.getBairro());
+                    txtCidadeCliente.setText(cep.getLocalidade());
+                    txtLogradouro.setText(cep.getLogradouro());
+
+                    int indexUf = -1;
+                    for (int i = 0; i < cboxEstado.getItemCount(); i++) {
+                        if (cboxEstado.getItemAt(i).equals(cep.getUf())) {
+                            indexUf = i;
+                        }
+                    }
+
+                    cboxEstado.setSelectedIndex(indexUf);
+                } else {
+                    JOptionPane.showMessageDialog(this, "CEP não encontrado, favor informar um correto!", "Cep não encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
+        } catch (IOException ex) {
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", 3);
         }
@@ -753,6 +765,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             }
         });
     }
+
+    private static Cliente cliente;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
