@@ -4,6 +4,8 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.controller.CaixaController;
+import br.com.edg.project.model.Cliente;
 import br.com.edg.project.service.Validador;
 import javax.swing.JOptionPane;
 
@@ -464,10 +466,9 @@ public class FrmCaixa extends javax.swing.JFrame {
 
     private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPesquisarCpfActionPerformed
         try {
-            if (Validador.validaString(txtCpfPesquisa)) {
-                if (CaixaController.consultaCliente != null) {
-                    cliente.setId(caixaController.consultaCliente);
-
+            //if (Validador.validaString(txtCpfPesquisa)) {
+                if (CaixaController.consultaCliente(txtCpfPesquisa.getText()) > 0) {
+                    
                     txtCpfPesquisa.setEditable(false);
                     txtCodProduto.setEnabled(true);
                     txtCodProduto.setEnabled(true);
@@ -480,8 +481,10 @@ public class FrmCaixa extends javax.swing.JFrame {
                     btnAddProd.setEnabled(true);
                     btnRemoveProduto.setEnabled(true);
                     btnFinalizarCompra.setEnabled(true);
+                }else{
+                    JOptionPane.showMessageDialog(this,"CPF não encontrado","Erro ao consultar", JOptionPane.ERROR_MESSAGE);
                 }
-            }
+//            }
 
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
