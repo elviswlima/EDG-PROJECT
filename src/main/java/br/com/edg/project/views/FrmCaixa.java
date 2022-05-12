@@ -8,6 +8,7 @@ import br.com.edg.project.controller.CaixaController;
 import br.com.edg.project.model.Cliente;
 import br.com.edg.project.service.Validador;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -466,27 +467,25 @@ public class FrmCaixa extends javax.swing.JFrame {
 
     private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPesquisarCpfActionPerformed
         try {
-            //if (Validador.validaString(txtCpfPesquisa)) {
-                if (CaixaController.consultaCliente(txtCpfPesquisa.getText()) > 0) {
-                    
-                    txtCpfPesquisa.setEditable(false);
-                    txtCodProduto.setEnabled(true);
-                    txtCodProduto.setEnabled(true);
-                    txtQuantidadeProduto.setEnabled(true);
-                    txtPesoProduto.setEnabled(false);
-                    txtValorCompra.setEnabled(true);
-                    radioBtnCartaoCredito.setEnabled(true);
-                    radioBtnCartaoDebito.setEnabled(true);
-                    radioBtnDinheiro.setEnabled(true);
-                    btnAddProd.setEnabled(true);
-                    btnRemoveProduto.setEnabled(true);
-                    btnFinalizarCompra.setEnabled(true);
-                }else{
-                    JOptionPane.showMessageDialog(this,"CPF não encontrado","Erro ao consultar", JOptionPane.ERROR_MESSAGE);
-                }
-//            }
 
-        } catch (IllegalArgumentException ex) {
+            if (CaixaController.consultaCliente(txtCpfPesquisa.getText()) > 0) {
+
+                txtCpfPesquisa.setEditable(false);
+                txtCodProduto.setEnabled(true);
+                txtCodProduto.setEnabled(true);
+                txtQuantidadeProduto.setEnabled(true);
+                txtPesoProduto.setEnabled(false);
+                txtValorCompra.setEnabled(true);
+                radioBtnCartaoCredito.setEnabled(true);
+                radioBtnCartaoDebito.setEnabled(true);
+                radioBtnDinheiro.setEnabled(true);
+                btnAddProd.setEnabled(true);
+                btnRemoveProduto.setEnabled(true);
+                btnFinalizarCompra.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "CPF não encontrado", "Erro ao consultar", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
         }
 
@@ -503,21 +502,33 @@ public class FrmCaixa extends javax.swing.JFrame {
     }// GEN-LAST:event_txtCpfPesquisaActionPerformed
 
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddProdActionPerformed
+       DefaultTableModel novoProduto = (DefaultTableModel) tblListaProduto.getModel();
         try {
             if (chkKg.isSelected()) {
-//                Produto produto = new Produto();                
-//                produto = CaixaController.consultaProduto(idProduto, chkKg.isSelected());
-//                  Inserir na Tabela (JTable)
+
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaDouble(txtPesoProduto);
+                novoProduto.addRow(new Object[]{
+                    txtCodProduto.getText(),
+                    txtPesoProduto.getText(),
+                    Double.parseDouble(txtPesoProduto.getText()),
+                    0,
+                    Double.parseDouble(txtCodProduto.getText())
+                });
+
             }
 
             if (!chkKg.isSelected()) {
-//                Produto produto = new Produto();                
-//                produto = CaixaController.consultaProduto(idProduto, chkKg.isSelected());
-//                  Inserir na Tabela (JTable)
+
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaInteger(txtQuantidadeProduto);
+                novoProduto.addRow(new Object[]{
+                    txtCodProduto.getText(),
+                    txtPesoProduto.getText(),
+                    Double.parseDouble(txtQuantidadeProduto.getText()),
+                    0,
+                    Double.parseDouble(txtCodProduto.getText())
+                });                
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Falha na conversão", JOptionPane.WARNING_MESSAGE);
@@ -526,6 +537,9 @@ public class FrmCaixa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
 
         }
+        txtCodProduto.setText(null);
+        txtPesoProduto.setText(null);
+        txtQuantidadeProduto.setText(null);
     }// GEN-LAST:event_btnAddProdActionPerformed
 
     private void chkKgActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_chkKgActionPerformed
