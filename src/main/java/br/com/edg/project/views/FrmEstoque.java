@@ -5,7 +5,6 @@
 package br.com.edg.project.views;
 
 import br.com.edg.project.controller.EstoqueController;
-import br.com.edg.project.dao.EstoqueDAO;
 import br.com.edg.project.model.Produto;
 import br.com.edg.project.service.Validador;
 import java.util.ArrayList;
@@ -306,17 +305,20 @@ public class FrmEstoque extends javax.swing.JFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         int indiceLinha = tblEstoque.getSelectedRow();
-        DefaultTableModel produto = (DefaultTableModel) tblEstoque.getModel();
+        DefaultTableModel linha = (DefaultTableModel) tblEstoque.getModel();
         
         if(indiceLinha >= 0) {
-            boolean resultado = EstoqueController.excluirProduto(Integer.parseInt(txtCodProduto.getText()));
+            boolean resultado = EstoqueController.excluirProduto(Integer.parseInt(linha.getValueAt(indiceLinha, 0).toString()));
             
-            if(resultado == true) {
-                produto.removeRow(indiceLinha);
+            if(resultado) {
+                linha.removeRow(indiceLinha);
+                JOptionPane.showMessageDialog(this, "Linha deletada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Falha ao deletar", "Erro ao deletar", 3);
             }
             
-        } else{
-            JOptionPane.showMessageDialog(this, "Selecione uma linha", "Linha não selecionada", 3);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para deletar", "Erro ao deletar", 3);
         }
         
     }//GEN-LAST:event_btnDeletarActionPerformed
@@ -340,11 +342,31 @@ public class FrmEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void txtValidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValidadeKeyTyped
-
+        if(txtValidade.getText().length() >= 8) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtValidadeKeyTyped
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int indiceLinha = tblEstoque.getSelectedRow();
+        DefaultTableModel dtm = (DefaultTableModel) tblEstoque.getModel();
+        
+        Produto produto = new Produto();
+        
+        produto.setCodProduto(Integer.parseInt(dtm.getValueAt(indiceLinha, 0).toString()));
+        produto.setNomeProduto(dtm.getValueAt(indiceLinha, 2).toString());
+        produto.setQtdeProduto(Integer.parseInt(dtm.getValueAt(indiceLinha, 3).toString()));
+        if (indiceLinha >= 0) {
+            boolean validate = EstoqueController.alterarProduto(produto);
 
+            if (validate) {
+                JOptionPane.showMessageDialog(this, "Linha alterado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Falha ao alterar", "Erro ao alterar", 3);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para alterar", "Erro ao alterar", 3);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
