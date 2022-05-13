@@ -21,6 +21,11 @@ public class LoginDAO {
     private static final String password = "";
     private static Connection connection;
     
+    /**
+     * Método retorna uma variável booleana para informar que os dados inseridos existem ou não
+     * @param login - objeto a ser recebido para verificação
+     * @return true se os dados existirem no registro / false se os dados não existirem no registro
+     */
     public static boolean login (Login login) {
         boolean retorno = false;
         

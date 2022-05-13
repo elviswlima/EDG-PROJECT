@@ -12,19 +12,26 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Classe para abrir conexão com a base de dados 'edg'
  * @author Elvis - PC
  */
 public class EstoqueDAO {
-    
+
     private static final String base = "edg";
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
     private static final String user = "root";
     private static final String senha = "";
     private static final String url = "jdbc:mysql://localhost:3306/" + base + "?useTimezone=true&serverTimezone=UTC";
-    
+
     private static Connection conexao;
     
+    /**
+     * Método para consultar um produto através do Id do produto
+     * @param prod - objeto a ser recebido como referência para consulta (prod.getCodProduto();)
+     * @return - ArrayList (Caso exista) dos dados obtidos no banco (id, nome, qtde...)
+     * @throws ClassNotFoundException - Não achou o driver
+     * @throws SQLException - Erro ao tentar conectar-se à base de dados
+     */ 
     public static ArrayList<Produto> consultar(Produto prod) {
         ArrayList<Produto> listaRetorno = new ArrayList<>();
         
@@ -74,6 +81,13 @@ public class EstoqueDAO {
     
     }
     
+    /**
+     * Método para deletar um produto através do Id do produto
+     * @param prod - objeto a ser recebido como referência para exclusão (prod.getCodProduto();)
+     * @return - true se os dados forem excluídos / false se não forem excluídos
+     * @throws ClassNotFoundException - Não achou o driver
+     * @throws SQLException - Erro ao tentar conectar-se à base de dados
+     */
     public static boolean excluir(Produto prod) {
        
         String query = "DELETE FROM ESTOQUE WHERE ID_PRODUTO = ?";
@@ -110,6 +124,13 @@ public class EstoqueDAO {
         return false;
     }
     
+    /**
+     * Método para alterar um produto, recebe objeto Id como referência e os demais objetos para alteração
+     * @param prod - objeto para referenciar produtos que serão alterados
+     * @return - true para alterado e false para não alterado
+     * @throws ClassNotFoundException - Não achou o driver
+     * @throws SQLException - Erro ao tentar conectar-se à base de dados
+     */
     public static boolean alterar(Produto prod){
         
         String query = "UPDATE PRODUTO SET NOME_PRODUTO = ?, VALOR = ?, KG = ?, QUANTIDADE = ? WHERE ID_PRODUTO = ?";
