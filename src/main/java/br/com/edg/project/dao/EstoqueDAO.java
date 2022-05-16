@@ -40,6 +40,7 @@ public class EstoqueDAO {
         String query = "SELECT * FROM PRODUTO WHERE ID_PRODUTO = ?";
         
         try {
+            
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
             stmt = conexao.prepareStatement(query);
@@ -65,6 +66,8 @@ public class EstoqueDAO {
             listaRetorno = null;
         } catch (ClassNotFoundException ex) {
             listaRetorno = null;
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("Falha na execução ou resultado da query.");
         } finally {
             try {
                 if(rs != null)
@@ -73,7 +76,8 @@ public class EstoqueDAO {
                     stmt.close();
                 if(conexao != null)
                     conexao.close();
-            } catch (SQLException ex) {
+            } catch (SQLException e) {
+                throw new IllegalArgumentException("Erro ao fechar conexão");
             }
         }
         
@@ -119,6 +123,7 @@ public class EstoqueDAO {
                 if(conexao != null)
                     conexao.close();
             } catch (SQLException ex) {
+                throw new IllegalArgumentException("Erro ao fechar conexão");
             }
         }
         return false;
@@ -166,6 +171,7 @@ public class EstoqueDAO {
                 if(conexao != null)
                     conexao.close();
             } catch (SQLException ex) {
+                throw new IllegalArgumentException("Erro ao fechar conexão");
             }
         
         return false;
