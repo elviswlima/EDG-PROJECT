@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,20 +64,21 @@ public class ClienteDAO {
         return null;
     }
 
-    public static Cliente consultarBy(Cliente cliente, boolean isName) {
+    public static ArrayList<Cliente> consultarBy(Cliente cliente, boolean isCpf) {
         try {
+            ArrayList<Cliente> clientes = new ArrayList<>();
             Cliente rCliente = new Cliente();
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL, USER, PASSWD);
             
             PreparedStatement stmt;
             
-            if (isName) {
-                stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE NOME LIKE ?");
-                stmt.setString(1, "%" + cliente.getNome() + "%");
-            } else {
+            if (isCpf) {
                 stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE CPF LIKE ?");
                 stmt.setString(1, "%" + cliente.getCpf() + "%");
+            } else {
+                stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE NOME LIKE ?");
+                stmt.setString(1, "%" + cliente.getNome() + "%");
             }
 
             ResultSet rs = stmt.executeQuery();
@@ -85,9 +88,11 @@ public class ClienteDAO {
                 rCliente.setCpf(rs.getString("CPF"));
                 rCliente.setTelefone(rs.getString("TELEFONE"));
                 rCliente.setCidade(rs.getString("CIDADE"));
+                
+                clientes.add(rCliente);
             }
 
-            return rCliente;
+            return clientes;
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,7 +102,6 @@ public class ClienteDAO {
 
     public static boolean inserirCliente(Cliente cliente) {
         try {
-            Cliente rCliente = new Cliente();
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL, USER, PASSWD);
             PreparedStatement stmt

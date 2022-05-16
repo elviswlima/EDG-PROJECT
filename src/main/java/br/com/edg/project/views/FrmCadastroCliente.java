@@ -622,7 +622,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Existem campos nulos, favor ajustar", "Campos nulos", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao inserir no banco de dados" + ex.getMessage(), "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnInserirActionPerformed
 
@@ -647,11 +648,13 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         try {
+            ArrayList<Cliente> clientes = new ArrayList<>();
+
             if (chkCpf.isSelected() && Validador.validaString(txtCpfPesquisa)) {
                 txtCpf.setText(txtCpfPesquisa.getText());
                 txtCpfPesquisa.setText(null);
 
-                cliente.setCpf(txtCpfPesquisa.getText());
+                this.cliente.setCpf(txtCpfPesquisa.getText());
 
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
@@ -660,12 +663,32 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 cboSexo.setEnabled(true);
                 txtTelefone.setEnabled(true);
                 txtEmail.setEnabled(true);
+
+                try {
+                    clientes = ClienteController.consultarBy(this.cliente, chkCpf.isSelected());
+                    DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
+
+                    for (Cliente c : clientes) {
+                        dtm.addRow(new Object[]{
+                            c.getId(),
+                            c.getNome(),
+                            c.getCpf(),
+                            c.getTelefone(),
+                            c.getCidade()
+                        });
+                    }
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Cliente não encontrado", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             }
 
             if (!chkCpf.isSelected() && Validador.validaString(txtNomePesquisa)) {
                 txtNome.setText(txtNomePesquisa.getText());
                 txtNomePesquisa.setText(null);
 
+                this.cliente.setNome(txtNomePesquisa.getText());
+                
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
                 txtRg.setEnabled(true);
@@ -673,6 +696,23 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 cboSexo.setEnabled(true);
                 txtTelefone.setEnabled(true);
                 txtEmail.setEnabled(true);
+                
+                try {
+                    clientes = ClienteController.consultarBy(this.cliente, chkCpf.isSelected());
+                    DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
+                    
+                    for (Cliente c : clientes) {
+                        dtm.addRow(new Object[]{
+                            c.getId(),
+                            c.getNome(),
+                            c.getCpf(),
+                            c.getTelefone(),
+                            c.getCidade()
+                        });
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Cliente não encontrado", "Cliente não encontrado", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
 
         } catch (IllegalArgumentException ex) {
@@ -766,7 +806,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         });
     }
 
-    private static Cliente cliente;
+    private static Cliente cliente = new Cliente();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

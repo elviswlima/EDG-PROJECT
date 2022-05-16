@@ -9,6 +9,8 @@ import br.com.edg.project.model.Cep;
 import br.com.edg.project.model.Cliente;
 import br.com.edg.project.service.CepService;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,6 +31,16 @@ public class ClienteController {
         CepService cepService = new CepService();
         
         return cepService.consultaCep(cep);
+    }
+    
+    public static ArrayList<Cliente> consultarBy(Cliente cliente, boolean isCpf) {
+        ArrayList<Cliente> clientes = ClienteDAO.consultarBy(cliente, isCpf);
+        
+        if (clientes.isEmpty()) {
+            throw new IllegalArgumentException("Nenhum cliente cadastrado com este nome ou cpf na nossa base!");
+        }
+        
+        return clientes;
     }
     
 }
