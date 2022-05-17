@@ -182,6 +182,11 @@ public class FrmCaixa extends javax.swing.JFrame {
         btnRemoveProduto.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnRemoveProduto.setText("REMOVER PRODUTO ");
         btnRemoveProduto.setEnabled(false);
+        btnRemoveProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveProdutoActionPerformed(evt);
+            }
+        });
 
         btnAddProd.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnAddProd.setText("ADICIONAR PRODUTO");
@@ -430,6 +435,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    private void btnRemoveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoveProdutoActionPerformed
+
     private void txtPesoProdutoKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtPesoProdutoKeyTyped
         if (txtPesoProduto.getText().length() >= 16) {
             evt.consume();
@@ -467,9 +476,7 @@ public class FrmCaixa extends javax.swing.JFrame {
 
     private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPesquisarCpfActionPerformed
         try {
-
             if (CaixaController.consultaCliente(txtCpfPesquisa.getText()) > 0) {
-
                 txtCpfPesquisa.setEditable(false);
                 txtCodProduto.setEnabled(true);
                 txtCodProduto.setEnabled(true);
@@ -505,7 +512,6 @@ public class FrmCaixa extends javax.swing.JFrame {
        DefaultTableModel novoProduto = (DefaultTableModel) tblListaProduto.getModel();
         try {
             if (chkKg.isSelected()) {
-
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaDouble(txtPesoProduto);
                 novoProduto.addRow(new Object[]{
@@ -515,11 +521,9 @@ public class FrmCaixa extends javax.swing.JFrame {
                     0,
                     Double.parseDouble(txtCodProduto.getText())
                 });
-
             }
 
             if (!chkKg.isSelected()) {
-
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaInteger(txtQuantidadeProduto);
                 novoProduto.addRow(new Object[]{
