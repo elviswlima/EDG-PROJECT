@@ -66,8 +66,6 @@ public class EstoqueDAO {
             listaRetorno = null;
         } catch (ClassNotFoundException ex) {
             listaRetorno = null;
-        } catch (NullPointerException ex) {
-            throw new IllegalArgumentException("Falha na execução ou resultado da query.");
         } finally {
             try {
                 if(rs != null)
