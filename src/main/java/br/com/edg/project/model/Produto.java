@@ -46,7 +46,7 @@ public class Produto {
         this.valorProduto = valorProduto;
     }
 
-    public double getQtdeProduto() {
+    public int getQtdeProduto() {
         return qtdeProduto;
     }
 
