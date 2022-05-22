@@ -190,7 +190,6 @@
             <Property name="name" type="java.lang.String" value="C&#xf3;digo do Produto" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodProdutoActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodProdutoKeyTyped"/>
           </Events>
         </Component>

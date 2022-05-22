@@ -361,36 +361,27 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void txtNomeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeProdutoKeyTyped
-        Validador.validaString(txtNomeProduto);
-        /* Validação de quantidade de caracteres */
         if (txtNomeProduto.getText().length() >= 120) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNomeProdutoKeyTyped
 
     private void txtCodProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdutoKeyTyped
-        Validador.validaInteger(txtCodProduto);
-        /* Validação de quantidade de caracteres */
         if (txtCodProduto.getText().length() >= 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCodProdutoKeyTyped
 
     private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
-        Validador.validaDouble(txtValor);
-        /* Validação de quantidade de caracteres */
         if (txtValor.getText().length() >= 16) {
             evt.consume();
         }
     }//GEN-LAST:event_txtValorKeyTyped
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
-        /* Validação de quantidade de caracteres */
         if (txtQuantidade.getText().length() >= 10) {
             evt.consume();
         }
-        
-        /* Validação de quantidade de caracteres */
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     /**
