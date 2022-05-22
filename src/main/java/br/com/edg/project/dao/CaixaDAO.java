@@ -69,36 +69,54 @@ public class CaixaDAO {
         return null;
     }
 
-    public static ResultSet registrarVenda(Caixa caixa) {
+    public static boolean registrarVenda(Caixa caixa, Produto produto, boolean isKg) {
         try {
             PreparedStatement stmt;
             Class.forName(Driver);
             connection = DriverManager.getConnection(url, "root", "");
 
-            stmt =
-               connection.prepareStatement("INSERT INTO CAIXA (ID_CLIENTE, QTDE, KG, FORMA_PAGAMENTO, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);",
-               Statement.RETURN_GENERATED_KEYS);
+            stmt = connection.prepareStatement(
+                    "INSERT INTO CAIXA (ID_CLIENTE, QTDE, KG, FORMA_PAGAMENTO, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);",
+                    Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, caixa.getIdCliente());
             stmt.setInt(2, caixa.getQtde());
             stmt.setDouble(3, caixa.getKg());
             stmt.setString(4, caixa.getFormaPagamento());
             stmt.setDouble(5, caixa.getValorTotal());
 
-            ResultSet rs = stmt.getGeneratedKeys();
+            if (stmt.executeUpdate() > 0) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                
+                VendaProduto vp = new VendaProduto(
+                        rs.getInt(1),
+                        produto.getCodProduto(),
+                        produto.getQtdeProduto(),
+                        produto.getQtdePorKg(),
+                        produto.getValorProduto()
+                );
+                
+                if (rs.next()) {
+                    stmt = 
+                            connection.prepareStatement(
+                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);");
+                    stmt.setInt(1, vp.getIdCaixa());
+                    stmt.setInt(2, vp.getIdProduto());
+                    stmt.setInt(3, vp.getQtde());
+                    stmt.setDouble(4, vp.getKg());
+                    stmt.setDouble(5, vp.getValorUni());
+                    
+                    return stmt.executeUpdate() > 0;
+                }
+            }
 
-            // ForEach
-            stmt = connection.prepareStatement("INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);");
-            stmt.setInt(1, rs.getInt(1));
-            // Falta colocar outros setters
-
-            return stmt.getGeneratedKeys();
+            return false;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return null;
+        return false;
     }
 
     public static boolean atualizarEstoque(VendaProduto caixaFinalizar) {

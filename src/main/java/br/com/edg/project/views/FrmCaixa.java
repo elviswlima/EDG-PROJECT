@@ -5,8 +5,14 @@
 package br.com.edg.project.views;
 
 import br.com.edg.project.controller.CaixaController;
+import br.com.edg.project.controller.EstoqueController;
+import br.com.edg.project.controller.ProdutoController;
+import br.com.edg.project.model.Caixa;
 import br.com.edg.project.model.Cliente;
+import br.com.edg.project.model.Produto;
 import br.com.edg.project.service.Validador;
+import br.com.edg.project.utils.SomaTotalUtils;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -132,10 +138,18 @@ public class FrmCaixa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cód. Produto", "Nome", "Validade", "Valor", "Quantidade"
+                "Cód. Produto", "Nome", "Validade", "Valor", "Quantidade", "Cliente"
             }
         ));
         jScrollPane2.setViewportView(tblListaProduto);
+        if (tblListaProduto.getColumnModel().getColumnCount() > 0) {
+            tblListaProduto.getColumnModel().getColumn(0).setResizable(false);
+            tblListaProduto.getColumnModel().getColumn(1).setResizable(false);
+            tblListaProduto.getColumnModel().getColumn(2).setResizable(false);
+            tblListaProduto.getColumnModel().getColumn(3).setResizable(false);
+            tblListaProduto.getColumnModel().getColumn(4).setResizable(false);
+            tblListaProduto.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -465,7 +479,22 @@ public class FrmCaixa extends javax.swing.JFrame {
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFinalizarCompraActionPerformed
         try {
-            Validador.validaDouble(txtValorCompra);
+            DefaultTableModel dtm = (DefaultTableModel) tblListaProduto.getModel();
+
+            for (int i = 0; i < dtm.getRowCount(); i++) {
+
+                ArrayList<Caixa> vendas = new ArrayList<>();
+
+                Caixa caixa = new Caixa();
+                caixa.setIdCliente((int) dtm.getValueAt(i, cliente.getId()));
+
+                vendas.add(caixa);
+
+//                for () {
+//                    
+//                }
+            }
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
@@ -474,9 +503,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPesquisarCpfActionPerformed
+    private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            if (CaixaController.consultaCliente(txtCpfPesquisa.getText()) > 0) {
+            cliente.setId(CaixaController.consultaCliente(txtCpfPesquisa.getText()));
+            if (cliente.getId() > 0) {
                 txtCpfPesquisa.setEditable(false);
                 txtCodProduto.setEnabled(true);
                 txtCodProduto.setEnabled(true);
@@ -492,11 +522,11 @@ public class FrmCaixa extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "CPF não encontrado", "Erro ao consultar", JOptionPane.ERROR_MESSAGE);
             }
-        }catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
         }
 
-    }// GEN-LAST:event_btnPesquisarCpfActionPerformed
+    }
 
     private void txtCpfPesquisaKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtCpfPesquisaKeyTyped
         if (txtCpfPesquisa.getText().length() >= 11) {
@@ -509,30 +539,48 @@ public class FrmCaixa extends javax.swing.JFrame {
     }// GEN-LAST:event_txtCpfPesquisaActionPerformed
 
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddProdActionPerformed
-       DefaultTableModel novoProduto = (DefaultTableModel) tblListaProduto.getModel();
+        DefaultTableModel novoProduto = (DefaultTableModel) tblListaProduto.getModel();
         try {
-            if (chkKg.isSelected()) {
-                Validador.validaInteger(txtCodProduto);
-                Validador.validaDouble(txtPesoProduto);
-                novoProduto.addRow(new Object[]{
-                    txtCodProduto.getText(),
-                    txtPesoProduto.getText(),
-                    Double.parseDouble(txtPesoProduto.getText()),
-                    0,
-                    Double.parseDouble(txtCodProduto.getText())
-                });
-            }
+//                Validador.validaInteger(txtCodProduto);
+//                Validador.validaDouble(txtPesoProduto);
 
-            if (!chkKg.isSelected()) {
-                Validador.validaInteger(txtCodProduto);
-                Validador.validaInteger(txtQuantidadeProduto);
+            // Valida se produto existe na base, e retorna o produto pesquisado
+            Produto produto = ProdutoController.findById(Integer.parseInt(txtCodProduto.getText()));
+
+            if (produto != null && chkKg.isSelected()) { // Valida se foi retornado o produto e se é quilo
                 novoProduto.addRow(new Object[]{
-                    txtCodProduto.getText(),
-                    txtPesoProduto.getText(),
-                    Double.parseDouble(txtQuantidadeProduto.getText()),
-                    0,
-                    Double.parseDouble(txtCodProduto.getText())
-                });                
+                    produto.getCodProduto(),
+                    produto.getNomeProduto(),
+                    produto.getValidade(),
+                    produto.somaValorProduto(chkKg.isSelected(), txtPesoProduto.getText()), // Se for quilo múltiplica o valor do produto * quantidade por quilo
+                    Double.parseDouble(txtPesoProduto.getText()),
+                    cliente.getId()
+                });
+                
+                txtValorCompra.setText(
+                       ""+ SomaTotalUtils.somaValorTotal(
+                               txtValorCompra.getText(), 
+                                produto.somaValorProduto(chkKg.isSelected(), txtPesoProduto.getText())
+                       ));
+            } else if (produto != null && !chkKg.isSelected()) {
+                novoProduto.addRow(new Object[]{
+                    produto.getCodProduto(),
+                    produto.getNomeProduto(),
+                    produto.getValidade(),
+                    produto.somaValorProduto(chkKg.isSelected(), txtQuantidadeProduto.getText()), // Se for quilo múltiplica o valor do produto * por quantidade
+                    Integer.parseInt(txtQuantidadeProduto.getText()),
+                    cliente.getId()
+                });
+                StringBuilder sb = new StringBuilder();
+                
+                txtValorCompra.setText(
+                       ""+ SomaTotalUtils.somaValorTotal(
+                               txtValorCompra.getText(), 
+                                produto.somaValorProduto(chkKg.isSelected(), txtQuantidadeProduto.getText())
+                       ));
+            } else {
+                JOptionPane
+                        .showMessageDialog(this, "Erro ao adicionar produto a lista, verifique o código utilizado", "Erro ao adicionar produto", JOptionPane.ERROR_MESSAGE);
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Falha na conversão", JOptionPane.WARNING_MESSAGE);
@@ -541,6 +589,7 @@ public class FrmCaixa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
 
         }
+        
         txtCodProduto.setText(null);
         txtPesoProduto.setText(null);
         txtQuantidadeProduto.setText(null);
@@ -600,7 +649,7 @@ public class FrmCaixa extends javax.swing.JFrame {
         });
     }
 
-    private Cliente cliente; 
+    private Cliente cliente = new Cliente();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProd;
