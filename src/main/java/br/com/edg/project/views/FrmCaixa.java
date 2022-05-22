@@ -4,8 +4,11 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.controller.CaixaController;
+import br.com.edg.project.model.Cliente;
 import br.com.edg.project.service.Validador;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -179,6 +182,11 @@ public class FrmCaixa extends javax.swing.JFrame {
         btnRemoveProduto.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnRemoveProduto.setText("REMOVER PRODUTO ");
         btnRemoveProduto.setEnabled(false);
+        btnRemoveProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveProdutoActionPerformed(evt);
+            }
+        });
 
         btnAddProd.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnAddProd.setText("ADICIONAR PRODUTO");
@@ -427,6 +435,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    private void btnRemoveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoveProdutoActionPerformed
+
     private void txtPesoProdutoKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtPesoProdutoKeyTyped
         if (txtPesoProduto.getText().length() >= 16) {
             evt.consume();
@@ -464,7 +476,7 @@ public class FrmCaixa extends javax.swing.JFrame {
 
     private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPesquisarCpfActionPerformed
         try {
-            if (Validador.validaString(txtCpfPesquisa)) {
+            if (CaixaController.consultaCliente(txtCpfPesquisa.getText()) > 0) {
                 txtCpfPesquisa.setEditable(false);
                 txtCodProduto.setEnabled(true);
                 txtCodProduto.setEnabled(true);
@@ -477,9 +489,10 @@ public class FrmCaixa extends javax.swing.JFrame {
                 btnAddProd.setEnabled(true);
                 btnRemoveProduto.setEnabled(true);
                 btnFinalizarCompra.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "CPF não encontrado", "Erro ao consultar", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (IllegalArgumentException ex) {
+        }catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
         }
 
@@ -496,15 +509,30 @@ public class FrmCaixa extends javax.swing.JFrame {
     }// GEN-LAST:event_txtCpfPesquisaActionPerformed
 
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddProdActionPerformed
+       DefaultTableModel novoProduto = (DefaultTableModel) tblListaProduto.getModel();
         try {
             if (chkKg.isSelected()) {
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaDouble(txtPesoProduto);
+                novoProduto.addRow(new Object[]{
+                    txtCodProduto.getText(),
+                    txtPesoProduto.getText(),
+                    Double.parseDouble(txtPesoProduto.getText()),
+                    0,
+                    Double.parseDouble(txtCodProduto.getText())
+                });
             }
 
             if (!chkKg.isSelected()) {
                 Validador.validaInteger(txtCodProduto);
                 Validador.validaInteger(txtQuantidadeProduto);
+                novoProduto.addRow(new Object[]{
+                    txtCodProduto.getText(),
+                    txtPesoProduto.getText(),
+                    Double.parseDouble(txtQuantidadeProduto.getText()),
+                    0,
+                    Double.parseDouble(txtCodProduto.getText())
+                });                
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Falha na conversão", JOptionPane.WARNING_MESSAGE);
@@ -513,6 +541,9 @@ public class FrmCaixa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
 
         }
+        txtCodProduto.setText(null);
+        txtPesoProduto.setText(null);
+        txtQuantidadeProduto.setText(null);
     }// GEN-LAST:event_btnAddProdActionPerformed
 
     private void chkKgActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_chkKgActionPerformed
@@ -568,6 +599,8 @@ public class FrmCaixa extends javax.swing.JFrame {
             }
         });
     }
+
+    private Cliente cliente; 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProd;

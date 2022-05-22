@@ -11,6 +11,7 @@ package br.com.edg.project.model;
  */
 public class Cliente {
     
+    private int id;
     private String nome;
     private String cpf;
     private String telefone;
@@ -27,6 +28,14 @@ public class Cliente {
     private String rua;
 
     public Cliente() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id  = id;
     }
 
     public String getNome() {
