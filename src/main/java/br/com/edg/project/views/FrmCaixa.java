@@ -138,9 +138,24 @@ public class FrmCaixa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cód. Produto", "Nome", "Validade", "Valor", "Quantidade", "Cliente"
+                "Cód. Produto", "Nome", "Validade", "Valor", "Quantidade", "Cliente", "Kg ?"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblListaProduto);
         if (tblListaProduto.getColumnModel().getColumnCount() > 0) {
             tblListaProduto.getColumnModel().getColumn(0).setResizable(false);
@@ -149,6 +164,7 @@ public class FrmCaixa extends javax.swing.JFrame {
             tblListaProduto.getColumnModel().getColumn(3).setResizable(false);
             tblListaProduto.getColumnModel().getColumn(4).setResizable(false);
             tblListaProduto.getColumnModel().getColumn(5).setResizable(false);
+            tblListaProduto.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -481,14 +497,21 @@ public class FrmCaixa extends javax.swing.JFrame {
         try {
             DefaultTableModel dtm = (DefaultTableModel) tblListaProduto.getModel();
 
+            Caixa caixa = new Caixa();
+            caixa.setIdCliente(cliente.getId());
+
             for (int i = 0; i < dtm.getRowCount(); i++) {
 
                 ArrayList<Caixa> vendas = new ArrayList<>();
 
-                Caixa caixa = new Caixa();
-                caixa.setIdCliente((int) dtm.getValueAt(i, cliente.getId()));
+                if (dtm.getValueAt(i, 6).equals("SIM")) {
 
-                vendas.add(caixa);
+                } else {
+                    
+                }
+
+                caixa.set vendas
+                .add(caixa);
 
 //                for () {
 //                    
@@ -541,9 +564,6 @@ public class FrmCaixa extends javax.swing.JFrame {
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddProdActionPerformed
         DefaultTableModel novoProduto = (DefaultTableModel) tblListaProduto.getModel();
         try {
-//                Validador.validaInteger(txtCodProduto);
-//                Validador.validaDouble(txtPesoProduto);
-
             // Valida se produto existe na base, e retorna o produto pesquisado
             Produto produto = ProdutoController.findById(Integer.parseInt(txtCodProduto.getText()));
 
@@ -554,14 +574,15 @@ public class FrmCaixa extends javax.swing.JFrame {
                     produto.getValidade(),
                     produto.somaValorProduto(chkKg.isSelected(), txtPesoProduto.getText()), // Se for quilo múltiplica o valor do produto * quantidade por quilo
                     Double.parseDouble(txtPesoProduto.getText()),
-                    cliente.getId()
+                    cliente.getId(),
+                    "SIM"
                 });
-                
+
                 txtValorCompra.setText(
-                       ""+ SomaTotalUtils.somaValorTotal(
-                               txtValorCompra.getText(), 
+                        "" + SomaTotalUtils.somaValorTotal(
+                                txtValorCompra.getText(),
                                 produto.somaValorProduto(chkKg.isSelected(), txtPesoProduto.getText())
-                       ));
+                        ));
             } else if (produto != null && !chkKg.isSelected()) {
                 novoProduto.addRow(new Object[]{
                     produto.getCodProduto(),
@@ -569,15 +590,16 @@ public class FrmCaixa extends javax.swing.JFrame {
                     produto.getValidade(),
                     produto.somaValorProduto(chkKg.isSelected(), txtQuantidadeProduto.getText()), // Se for quilo múltiplica o valor do produto * por quantidade
                     Integer.parseInt(txtQuantidadeProduto.getText()),
-                    cliente.getId()
+                    cliente.getId(),
+                    "NÃO"
                 });
                 StringBuilder sb = new StringBuilder();
-                
+
                 txtValorCompra.setText(
-                       ""+ SomaTotalUtils.somaValorTotal(
-                               txtValorCompra.getText(), 
+                        "" + SomaTotalUtils.somaValorTotal(
+                                txtValorCompra.getText(),
                                 produto.somaValorProduto(chkKg.isSelected(), txtQuantidadeProduto.getText())
-                       ));
+                        ));
             } else {
                 JOptionPane
                         .showMessageDialog(this, "Erro ao adicionar produto a lista, verifique o código utilizado", "Erro ao adicionar produto", JOptionPane.ERROR_MESSAGE);
@@ -589,7 +611,7 @@ public class FrmCaixa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
 
         }
-        
+
         txtCodProduto.setText(null);
         txtPesoProduto.setText(null);
         txtQuantidadeProduto.setText(null);
