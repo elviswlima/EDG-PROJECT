@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class ProdutoDAO {
 
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
     private static Connection connection;
 
     public static boolean registrar(Produto produto) {

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class CaixaDAO {
 
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
     private static Connection connection;
 
     public static int consultaCliente(String cpf) {
@@ -76,35 +76,33 @@ public class CaixaDAO {
             connection = DriverManager.getConnection(url, "root", "");
 
             stmt = connection.prepareStatement(
-                    "INSERT INTO CAIXA (ID_CLIENTE, QTDE, KG, FORMA_PAGAMENTO, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);",
+                    "INSERT INTO CAIXA (ID_CLIENTE, QUANTIDADE, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?);",
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, caixa.getIdCliente());
             stmt.setInt(2, caixa.getQtde());
-            stmt.setDouble(3, caixa.getKg());
-            stmt.setString(4, caixa.getFormaPagamento());
-            stmt.setDouble(5, caixa.getValorTotal());
+            stmt.setDouble(3, 0);
+            stmt.setDouble(4, caixa.getValorTotal());
 
             if (stmt.executeUpdate() > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
-                
-                VendaProduto vp = new VendaProduto(
-                        rs.getInt(1),
-                        produto.getCodProduto(),
-                        produto.getQtdeProduto(),
-                        produto.getQtdePorKg(),
-                        produto.getValorProduto()
-                );
-                
+
                 if (rs.next()) {
-                    stmt = 
-                            connection.prepareStatement(
+                    VendaProduto vp = new VendaProduto(
+                            rs.getInt(1),
+                            produto.getCodProduto(),
+                            produto.getQtdeProduto(),
+                            produto.getQtdePorKg(),
+                            produto.getValorProduto()
+                    );
+
+                    stmt = connection.prepareStatement(
                                     "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);");
                     stmt.setInt(1, vp.getIdCaixa());
                     stmt.setInt(2, vp.getIdProduto());
                     stmt.setInt(3, vp.getQtde());
                     stmt.setDouble(4, vp.getKg());
                     stmt.setDouble(5, vp.getValorUni());
-                    
+
                     return stmt.executeUpdate() > 0;
                 }
             }

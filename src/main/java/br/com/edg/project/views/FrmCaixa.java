@@ -12,6 +12,7 @@ import br.com.edg.project.model.Cliente;
 import br.com.edg.project.model.Produto;
 import br.com.edg.project.service.Validador;
 import br.com.edg.project.utils.SomaTotalUtils;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -496,26 +497,27 @@ public class FrmCaixa extends javax.swing.JFrame {
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFinalizarCompraActionPerformed
         try {
             DefaultTableModel dtm = (DefaultTableModel) tblListaProduto.getModel();
-
-            Caixa caixa = new Caixa();
-            caixa.setIdCliente(cliente.getId());
-
             for (int i = 0; i < dtm.getRowCount(); i++) {
-
-                ArrayList<Caixa> vendas = new ArrayList<>();
-
-                if (dtm.getValueAt(i, 6).equals("SIM")) {
-
+                Caixa caixa = new Caixa();
+                caixa.setIdCliente(cliente.getId());
+                
+                if (dtm.getValueAt(i, 6).toString().equalsIgnoreCase("SIM")) {
+                    caixa.setKg(Double.parseDouble(dtm.getValueAt(i, 4).toString()));
+                    caixa.setValorTotal(Double.parseDouble(txtValorCompra.getText()));
                 } else {
-                    
+                    caixa.setQtde(Integer.parseInt(dtm.getValueAt(i, 4).toString()));
+                    caixa.setValorTotal(Double.parseDouble(txtValorCompra.getText()));
                 }
 
-                caixa.set vendas
-                .add(caixa);
+                Produto produto = new Produto();
+                produto.setCodProduto(Integer.parseInt(dtm.getValueAt(i, 0).toString()));
+                produto.setNomeProduto(dtm.getValueAt(i, 1).toString());
+                produto.setQtdePorKg(caixa.getKg() == null ? 0 : caixa.getKg());
+                produto.setQtdeProduto(caixa.getQtde());
+                produto.setValidade(Date.valueOf(dtm.getValueAt(i, 2).toString()));
+                produto.setValorProduto(Double.parseDouble(dtm.getValueAt(i, 3).toString()));
 
-//                for () {
-//                    
-//                }
+                CaixaController.registrarVenda(caixa, produto);
             }
 
         } catch (NumberFormatException ex) {
