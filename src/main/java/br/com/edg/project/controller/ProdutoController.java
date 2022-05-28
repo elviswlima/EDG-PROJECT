@@ -6,7 +6,10 @@ package br.com.edg.project.controller;
 
 import br.com.edg.project.dao.ProdutoDAO;
 import br.com.edg.project.model.Produto;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,5 +26,9 @@ public class ProdutoController {
         
         return true;
     }
+    
+   public static Produto findById(int id) {
+       return ProdutoDAO.findById(id);
+   }
     
 }

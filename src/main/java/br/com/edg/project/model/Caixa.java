@@ -9,8 +9,9 @@ import java.util.ArrayList;
  */
 public class Caixa {
 
-    private int codProduto;
+    private int id;
     private int idCliente;
+    private int idFunc;
     private int qtde;
     private Double kg;
     private String formaPagamento;
@@ -19,6 +20,30 @@ public class Caixa {
     private ArrayList<VendaProduto> vendaProduto;
 
     public Caixa() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public int getIdFunc() {
+        return idFunc;
+    }
+
+    public void setIdFunc(int idFunc) {
+        this.idFunc = idFunc;
     }
 
     public int getQtde() {
@@ -37,38 +62,6 @@ public class Caixa {
         this.kg = kg;
     }
 
-    public Date getData_venda() {
-        return data_venda;
-    }
-
-    public void setData_venda(Date data_venda) {
-        this.data_venda = data_venda;
-    }
-
-    public int getCodProduto() {
-        return codProduto;
-    }
-
-    public void setCodProduto(int codProduto) {
-        this.codProduto = codProduto;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public ArrayList<VendaProduto> getVendaProduto() {
-        return vendaProduto;
-    }
-
-    public void setVendaProduto(ArrayList<VendaProduto> vendaProduto) {
-        this.vendaProduto = vendaProduto;
-    }
-
     public String getFormaPagamento() {
         return formaPagamento;
     }
@@ -85,4 +78,20 @@ public class Caixa {
         this.valorTotal = valorTotal;
     }
 
+    public Date getData_venda() {
+        return data_venda;
+    }
+
+    public void setData_venda(Date data_venda) {
+        this.data_venda = data_venda;
+    }
+
+    public ArrayList<VendaProduto> getVendaProduto() {
+        return vendaProduto;
+    }
+
+    public void setVendaProduto(ArrayList<VendaProduto> vendaProduto) {
+        this.vendaProduto = vendaProduto;
+    }
+    
 }
