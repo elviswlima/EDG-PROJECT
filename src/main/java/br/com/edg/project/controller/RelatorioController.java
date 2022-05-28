@@ -1,6 +1,7 @@
 package br.com.edg.project.controller;
 
 import br.com.edg.project.dao.RelatorioDAO;
+import br.com.edg.project.model.Produto;
 
 /**
  * Classe para conexão de informações com a DAO
@@ -14,11 +15,11 @@ public class RelatorioController {
      * @param dataFim - Nome da variável como referência para consulta
      * @return - ArrayList das informações consultadas no banco
      */
-    public static ArrayList<VendaProduto> consultaSintetica(String dataInicio, String dataFim) {
+    public static ArrayList<Produto> consultaSintetica(String dataInicio, String dataFim) {
         
-        VendaProduto obj = new VendaProduto();
-        obj.setDataInicio(dataInicio);
-        obj.setDataFim(dataFim);
+        Produto obj = new Produto();
+        obj./*setDataInicio*/(dataInicio);
+        obj./*setDataFim*/(dataFim);
         
         return RelatorioDAO.consultaSintetica(obj);
     }
@@ -29,11 +30,11 @@ public class RelatorioController {
      * @param dataFim - Nome da variável como referência para consulta
      * @return - ArrayList das informações consultadas no banco
      */
-    public static ArrayList<VendaProduto> consultaAnalitica(String dataInicio, String dataFim) {
+    public static ArrayList<Produto> consultaAnalitica(String dataInicio, String dataFim) {
         
-        VendaProduto obj = new VendaProduto();
-        obj.setDataInicio(dataInicio);
-        obj.setDataFim(dataFim);
+        Produto obj = new Produto();
+        obj./*setDataInicio*/(dataInicio);
+        obj./*setDataFim*/(dataFim);
         
         return RelatorioDAO.consultaAnalitica(obj);
     }

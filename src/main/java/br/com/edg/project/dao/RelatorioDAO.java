@@ -1,5 +1,6 @@
 package br.com.edg.project.dao;
 
+import br.com.edg.project.model.Produto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,28 +31,28 @@ public class RelatorioDAO {
      * @throws ClassNotFoundException - Não achou driver
      * @throws SQLException - Erro ao tentar conectar-se à base de dados
      */
-    public static ArrayList<VendaProduto> consultaSintetica(VendaProduto venda) {
-            ArrayList<VendaProduto> listaRetorno = new ArrayList<>();
+    public static ArrayList<Produto> consultaSintetica(Produto venda) {
+            ArrayList<Produto> listaRetorno = new ArrayList<>();
             
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            String query = "SELECT * FROM tabela WHERE Data_Venda BETWEEN ? and ?";
+            String query = "SELECT * FROM CAIXA WHERE Data_Venda BETWEEN ? and ?";
             
         try {
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
-            stmt.setDate(1, new java.sql.Date(venda.getDataInicio().getTime()));
-            stmt.setDate(2, venda.getDataFim());
+            stmt.setDate(1, new java.sql.Date(/*venda.getDataInicio().getTime()*/));
+            stmt.setDate(2, /*venda.getDataFim()*/);
             
             rs = stmt.executeQuery();
             
             if (rs != null) {
                 while (rs.next()) {
-                    VendaProduto relatorio = new VendaProduto();
-                    relatorio.setCliente(rs.getInt("ID_CLIENTE"));
-                    relatorio.setData(rs.getString("DATA_VENDA"));
-                    relatorio.setValorTotal(rs.getDouble("VALOR_VENDA"));
+                    Produto relatorio = new Produto();
+                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
+                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
+                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
                     
                     listaRetorno.add(relatorio);
                 }
@@ -86,8 +87,8 @@ public class RelatorioDAO {
      * @throws ClassNotFoundException - Não achou driver
      * @throws SQLException - Erro ao tentar conectar-se à base de dados
      */
-    public static ArrayList<VendaProduto> consultaAnalitica(VendaProduto venda) {
-        ArrayList<VendaProduto> listaRetorno = new ArrayList<>();
+    public static ArrayList<Produto> consultaAnalitica(Produto venda) {
+        ArrayList<Produto> listaRetorno = new ArrayList<>();
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -97,19 +98,19 @@ public class RelatorioDAO {
         try{
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
-            stmt.setDate(1, venda.getDataInicio());
-            stmt.setDate(2, venda.getDataFim());
+            stmt.setDate(1, venda./*getDataInicio()*/);
+            stmt.setDate(2, venda./*getDataFim()*/);
             
             rs = stmt.executeQuery();
             
             if(rs != null) {
                 while(rs.next()) {
-                    VendaProduto relatorio = new VendaProduto();
-                    relatorio.setCliente(rs.getInt("ID_CLIENTE"));
-                    relatorio.setData(rs.getString("DATA_VENDA"));
-                    relatorio.setValorTotal(rs.getDouble("VALOR_VENDA"));
-                    relatorio.setProduto(rs.getInt("PRODUTO_VENDA"));
-                    relatorio.setQuantidade(rs.getInt("QTDE_PRODUTO"));
+                    Produto relatorio = new Produto();
+                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
+                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
+                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
+                    relatorio./*setProduto*/(rs.getInt("PRODUTO_VENDA"));
+                    relatorio./*setQuantidade*/(rs.getInt("QTDE_PRODUTO"));
                     
                     listaRetorno.Add(relatorio);
                 }
