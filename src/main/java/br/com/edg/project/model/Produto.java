@@ -61,5 +61,4 @@ public class Produto {
     public void setQtdePorKg(double qtdePorKg) {
         this.qtdePorKg = qtdePorKg;
     }
-
 }

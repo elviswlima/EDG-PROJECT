@@ -103,6 +103,11 @@ public class FrmEstoque extends javax.swing.JFrame {
         lblCod.setText("Código do produto:");
 
         txtCodProduto.setName("Código do Produto"); // NOI18N
+        txtCodProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodProdutoActionPerformed(evt);
+            }
+        });
         txtCodProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodProdutoKeyTyped(evt);
@@ -332,6 +337,7 @@ public class FrmEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     private void txtCodProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdutoKeyTyped
+        Validador.validaInteger(txtCodProduto);
         /* Validação de quantidade de caracteres */
         if(txtCodProduto.getText().length() >= 10) {
             evt.consume();
@@ -339,6 +345,7 @@ public class FrmEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodProdutoKeyTyped
 
     private void txtNomeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeProdutoKeyTyped
+        Validador.validaString(txtNomeProduto);
         /* Validação de quantidade de caracteres */
         if (txtNomeProduto.getText().length() >= 120) {
             evt.consume();
@@ -346,6 +353,7 @@ public class FrmEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeProdutoKeyTyped
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        Validador.validaInteger(txtQuantidade);
         /* Validação de quantidade de caracteres */
         if(txtQuantidade.getText().length() >= 10) {
             evt.consume();
@@ -353,6 +361,7 @@ public class FrmEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void txtValidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValidadeKeyTyped
+        Validador.validaString(txtValidade);
         /* Validação de quantidade de caracteres */
         if(txtValidade.getText().length() >= 8) {
             evt.consume();
@@ -380,6 +389,10 @@ public class FrmEstoque extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione uma linha para alterar", "Erro ao alterar", 3);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void txtCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodProdutoActionPerformed
 
     /**
      * @param args the command line arguments
