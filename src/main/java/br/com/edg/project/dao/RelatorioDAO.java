@@ -42,26 +42,24 @@ public class RelatorioDAO {
         try {
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
-            stmt.setDate(1, new java.sql.Date(/*venda.getDataInicio().getTime()*/));
-            stmt.setDate(2, /*venda.getDataFim()*/);
+//            stmt.setDate(1, new java.sql.Date(/*venda.getDataInicio().getTime()*/));
+//            stmt.setDate(2, /*venda.getDataFim()*/);
             
             rs = stmt.executeQuery();
             
             if (rs != null) {
                 while (rs.next()) {
                     Produto relatorio = new Produto();
-                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
-                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
-                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
+//                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
+//                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
+//                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
                     
                     listaRetorno.add(relatorio);
                 }
             } else {
                 throw new SQLException("Data não existe ou banco de dados vazio.");
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RelatorioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -78,6 +76,7 @@ public class RelatorioDAO {
                 throw new IllegalArgumentException("Erro ao fechar conexão");
             }
         }
+        return null;
     }
     
     /**
@@ -98,28 +97,26 @@ public class RelatorioDAO {
         try{
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
-            stmt.setDate(1, venda./*getDataInicio()*/);
-            stmt.setDate(2, venda./*getDataFim()*/);
+//            stmt.setDate(1, venda./*getDataInicio()*/);
+//            stmt.setDate(2, venda./*getDataFim()*/);
             
             rs = stmt.executeQuery();
             
             if(rs != null) {
                 while(rs.next()) {
                     Produto relatorio = new Produto();
-                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
-                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
-                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
-                    relatorio./*setProduto*/(rs.getInt("PRODUTO_VENDA"));
-                    relatorio./*setQuantidade*/(rs.getInt("QTDE_PRODUTO"));
-                    
-                    listaRetorno.Add(relatorio);
+//                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
+//                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
+//                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
+//                    relatorio./*setProduto*/(rs.getInt("PRODUTO_VENDA"));
+//                    relatorio./*setQuantidade*/(rs.getInt("QTDE_PRODUTO"));
+//                    
+//                    listaRetorno.Add(relatorio);
                 }
             } else {
                 throw new IllegalArgumentException("Data não existe ou banco de dados vazio.");
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RelatorioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -136,6 +133,7 @@ public class RelatorioDAO {
                 throw new IllegalArgumentException("Erro ao fechar conexão.");
             }
         }
+        return null;
         
     }
     

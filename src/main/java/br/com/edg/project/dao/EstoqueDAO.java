@@ -62,9 +62,7 @@ public class EstoqueDAO {
             } else {
                 throw new SQLException("Código do produto não existe ou banco de dados vazio.");
             }
-        } catch (SQLException ex) {
-            listaRetorno = null;
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             listaRetorno = null;
         } finally {
             try {

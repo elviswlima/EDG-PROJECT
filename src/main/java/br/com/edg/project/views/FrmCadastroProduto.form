@@ -59,7 +59,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jDateValProduto" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="dteValidadeProduto" min="-2" pref="185" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -116,7 +116,7 @@
                               <Component id="txtNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtValor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jDateValProduto" min="-2" max="-2" attributes="0"/>
+                          <Component id="dteValidadeProduto" min="-2" max="-2" attributes="0"/>
                           <Component id="txtQuantidade" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -350,7 +350,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultaProdutoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateValProduto">
+    <Component class="com.toedter.calendar.JDateChooser" name="dteValidadeProduto">
     </Component>
   </SubComponents>
 </Form>

@@ -2,6 +2,7 @@ package br.com.edg.project.controller;
 
 import br.com.edg.project.dao.RelatorioDAO;
 import br.com.edg.project.model.Produto;
+import java.util.ArrayList;
 
 /**
  * Classe para conexão de informações com a DAO
@@ -18,8 +19,8 @@ public class RelatorioController {
     public static ArrayList<Produto> consultaSintetica(String dataInicio, String dataFim) {
         
         Produto obj = new Produto();
-        obj./*setDataInicio*/(dataInicio);
-        obj./*setDataFim*/(dataFim);
+//        obj./*setDataInicio*/(dataInicio);
+//        obj./*setDataFim*/(dataFim);
         
         return RelatorioDAO.consultaSintetica(obj);
     }
@@ -33,8 +34,8 @@ public class RelatorioController {
     public static ArrayList<Produto> consultaAnalitica(String dataInicio, String dataFim) {
         
         Produto obj = new Produto();
-        obj./*setDataInicio*/(dataInicio);
-        obj./*setDataFim*/(dataFim);
+//        obj./*setDataInicio*/(dataInicio);
+//        obj./*setDataFim*/(dataFim);
         
         return RelatorioDAO.consultaAnalitica(obj);
     }
