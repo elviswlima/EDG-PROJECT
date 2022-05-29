@@ -4,7 +4,6 @@
  */
 package br.com.edg.project.dao;
 
-import br.com.edg.project.controller.ProdutoController;
 import br.com.edg.project.model.Produto;
 import java.sql.Connection;
 
@@ -12,20 +11,26 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe de validação e registro de produtos
+ * 
  * @author Danilo
  */
 public class ProdutoDAO {
 
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
     private static Connection connection;
 
+    /** 
+     * Método de registro de produto
+     * 
+     * @param produto - Produto que será cadastrado
+     * @return - retorna verdadeiro ou falso se o produto foi cadastrado com sucesso
+     */
     public static boolean registrar(Produto produto) {
         try {
             Class.forName(Driver);
@@ -63,6 +68,12 @@ public class ProdutoDAO {
         return false;
     }
 
+    /**
+     * Busca um único produto pelo ID dele
+     * 
+     * @param id - Indentificação do produto
+     * @return - Retorna o produto caso encontrado, senão retorna nulos
+     */
     public static Produto findById(int id) {
         Produto produto = new Produto();
         PreparedStatement stmt = null;
@@ -80,18 +91,27 @@ public class ProdutoDAO {
 
             if (rs != null) {
                 while (rs.next()) {
-                    produto.setCodProduto(rs.getInt("ID_PRODUTO"));
-                    produto.setNomeProduto(rs.getString("NOME_PRODUTO"));
-                    produto.setValorProduto(rs.getDouble("VALOR"));
-                    produto.setQtdeProduto(rs.getInt("QUANTIDADE"));
-                    produto.setQtdePorKg(rs.getDouble("KG"));
-                    produto.setValidade(rs.getDate("VALIDADE"));
+                    double kg = rs.getDouble("KG");
+                    int qtde = rs.getInt("QUANTIDADE");
+                    
+                    if (kg > 0 || qtde > 0 )  {
+                        produto.setCodProduto(rs.getInt("ID_PRODUTO"));
+                        produto.setNomeProduto(rs.getString("NOME_PRODUTO"));
+                        produto.setValorProduto(rs.getDouble("VALOR"));
+                        produto.setQtdeProduto(rs.getInt("QUANTIDADE"));
+                        produto.setQtdePorKg(rs.getDouble("KG"));
+                        produto.setValidade(rs.getDate("VALIDADE"));
+                        
+                        return produto;
+                    } else {
+                        throw new RuntimeException("Produto esgotado!");
+                    }
                 }
+                
+                
             } else {
                 throw new SQLException("Código do produto não existe ou banco de dados vazio.");
             }
-
-            return produto;
         } catch (SQLException | ClassNotFoundException | NullPointerException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

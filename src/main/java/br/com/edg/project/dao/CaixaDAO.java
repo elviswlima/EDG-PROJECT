@@ -10,20 +10,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Classe para fazer consultas e cadastros de vendas
  *
+ * @author Danilo Almeida
  * @author guilherme.mlsilva1
  */
 public class CaixaDAO {
 
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
     private static Connection connection;
 
+    /**
+     * Consulta no banco de dados o cliente que fará a compra
+     *
+     * @param cpf - Cpf do cliente cadastrado no banco de dados
+     * @return
+     */
     public static int consultaCliente(String cpf) {
         try {
             Class.forName(Driver);
@@ -36,15 +43,27 @@ public class CaixaDAO {
                 return rs.getInt("ID_CLIENTE");
             }
 
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         return 0;
     }
 
+    /**
+     * Consulta no banco de dados produto que será adicionado a lista de compras
+     *
+     * @param idProduto - Indentificador do produto que será realizada consulta
+     * @return
+     */
     public static Produto consultaProduto(int idProduto) {
         try {
             Produto p = new Produto();
@@ -63,13 +82,30 @@ public class CaixaDAO {
             }
             return p;
 
-        } catch (Exception e) {
-
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+
         return null;
     }
 
-    public static boolean registrarVenda(Caixa caixa, Produto produto, boolean isKg) {
+    /**
+     * Registra venda no banco de dados
+     *
+     * @param caixa - Objeto caixa com as registrar a venda no banco de dados
+     * @param produto - Objeto com a indentificação do produto que será
+     * realizada a venda
+     * @return
+     */
+    public static boolean registrarVenda(Caixa caixa, Produto produto) {
         try {
             PreparedStatement stmt;
             Class.forName(Driver);
@@ -96,33 +132,37 @@ public class CaixaDAO {
                     );
 
                     stmt = connection.prepareStatement(
-                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);");
+                            "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);");
                     stmt.setInt(1, vp.getIdCaixa());
                     stmt.setInt(2, vp.getIdProduto());
                     stmt.setInt(3, vp.getQtde());
                     stmt.setDouble(4, vp.getKg());
                     stmt.setDouble(5, vp.getValorUni());
 
-                    return stmt.executeUpdate() > 0;
+                    if (stmt.executeUpdate() > 0) {
+                        stmt = connection.prepareStatement(
+                                "INSERT INTO NOTA_FISCAL(ID_CAIXA_NF, ID_CLIENTE_NF, VALOR_TOTAL) VALUES (?, ?, ?);");
+                        stmt.setInt(1, vp.getIdCaixa());
+                        stmt.setInt(2, vp.getIdProduto());
+                        stmt.setDouble(3, caixa.getValorTotal());
+
+                        return stmt.executeUpdate() > 0;
+                    }
+                    return false;
                 }
             }
 
             return false;
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return false;
-    }
-
-    public static boolean atualizarEstoque(VendaProduto caixaFinalizar) {
-        try {
-            Class.forName(Driver);
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         return false;

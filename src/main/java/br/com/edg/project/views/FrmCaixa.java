@@ -6,6 +6,7 @@ package br.com.edg.project.views;
 
 import br.com.edg.project.controller.CaixaController;
 import br.com.edg.project.controller.EstoqueController;
+import br.com.edg.project.controller.NotaFiscalController;
 import br.com.edg.project.controller.ProdutoController;
 import br.com.edg.project.model.Caixa;
 import br.com.edg.project.model.Cliente;
@@ -13,6 +14,7 @@ import br.com.edg.project.model.Produto;
 import br.com.edg.project.service.Validador;
 import br.com.edg.project.utils.SomaTotalUtils;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -64,10 +66,6 @@ public class FrmCaixa extends javax.swing.JFrame {
         txtValorCompra = new javax.swing.JFormattedTextField();
         btnRemoveProduto = new javax.swing.JButton();
         btnAddProd = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        radioBtnDinheiro = new javax.swing.JRadioButton();
-        radioBtnCartaoCredito = new javax.swing.JRadioButton();
-        radioBtnCartaoDebito = new javax.swing.JRadioButton();
         btnFinalizarCompra = new javax.swing.JButton();
         ldlCpfCliente = new javax.swing.JLabel();
         txtCpfPesquisa = new javax.swing.JTextField();
@@ -181,8 +179,8 @@ public class FrmCaixa extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações de Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 18))); // NOI18N
@@ -227,47 +225,6 @@ public class FrmCaixa extends javax.swing.JFrame {
                 btnAddProdActionPerformed(evt);
             }
         });
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Forma de Pagamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 13))); // NOI18N
-
-        btnGroupFormaPagamento.add(radioBtnDinheiro);
-        radioBtnDinheiro.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        radioBtnDinheiro.setText("Dinheiro");
-        radioBtnDinheiro.setEnabled(false);
-
-        btnGroupFormaPagamento.add(radioBtnCartaoCredito);
-        radioBtnCartaoCredito.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        radioBtnCartaoCredito.setText("Cartão de Crédito");
-        radioBtnCartaoCredito.setEnabled(false);
-
-        btnGroupFormaPagamento.add(radioBtnCartaoDebito);
-        radioBtnCartaoDebito.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        radioBtnCartaoDebito.setText("Cartão de Débito");
-        radioBtnCartaoDebito.setEnabled(false);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radioBtnDinheiro)
-                    .addComponent(radioBtnCartaoCredito)
-                    .addComponent(radioBtnCartaoDebito))
-                .addContainerGap(98, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(radioBtnDinheiro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(radioBtnCartaoCredito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(radioBtnCartaoDebito)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
 
         btnFinalizarCompra.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnFinalizarCompra.setText("Finalizar Compra");
@@ -346,20 +303,8 @@ public class FrmCaixa extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCpfPesquisa, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCodProduto, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPesoProduto)))
                     .addComponent(btnPesquisarCpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtValorCompra)
-                    .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(17, 23, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTotalCompra, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -382,8 +327,18 @@ public class FrmCaixa extends javax.swing.JFrame {
                                 .addComponent(lblPeso)
                                 .addGap(30, 30, 30)
                                 .addComponent(chkKg)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 30, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCodProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtPesoProduto)
+                            .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblTotalCompra)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -412,16 +367,15 @@ public class FrmCaixa extends javax.swing.JFrame {
                 .addComponent(btnAddProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRemoveProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
                 .addComponent(lblTotalCompra)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -431,9 +385,9 @@ public class FrmCaixa extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 516, Short.MAX_VALUE)
@@ -443,16 +397,15 @@ public class FrmCaixa extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 416, Short.MAX_VALUE)
+                    .addGap(0, 363, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 415, Short.MAX_VALUE)))
+                    .addGap(0, 364, Short.MAX_VALUE)))
         );
 
         pack();
@@ -500,7 +453,7 @@ public class FrmCaixa extends javax.swing.JFrame {
             for (int i = 0; i < dtm.getRowCount(); i++) {
                 Caixa caixa = new Caixa();
                 caixa.setIdCliente(cliente.getId());
-                
+
                 if (dtm.getValueAt(i, 6).toString().equalsIgnoreCase("SIM")) {
                     caixa.setKg(Double.parseDouble(dtm.getValueAt(i, 4).toString()));
                     caixa.setValorTotal(Double.parseDouble(txtValorCompra.getText()));
@@ -517,7 +470,17 @@ public class FrmCaixa extends javax.swing.JFrame {
                 produto.setValidade(Date.valueOf(dtm.getValueAt(i, 2).toString()));
                 produto.setValorProduto(Double.parseDouble(dtm.getValueAt(i, 3).toString()));
 
-                CaixaController.registrarVenda(caixa, produto);
+                if (CaixaController.registrarVenda(caixa, produto)) {
+                    JOptionPane.showMessageDialog(this, "Venda realizada com sucesso! ", "Produto vendido com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    while (tblListaProduto.getRowCount() > 0) {
+                        dtm.removeRow(0);
+                    }
+                    
+                    txtValorCompra.setText("");
+                    
+                    JOptionPane.showMessageDialog(this, "Nota fiscal gerada, N°: " + NotaFiscalController.findByCliente(cliente), "Nota fiscal!", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
 
         } catch (NumberFormatException ex) {
@@ -538,9 +501,6 @@ public class FrmCaixa extends javax.swing.JFrame {
                 txtQuantidadeProduto.setEnabled(true);
                 txtPesoProduto.setEnabled(false);
                 txtValorCompra.setEnabled(true);
-                radioBtnCartaoCredito.setEnabled(true);
-                radioBtnCartaoDebito.setEnabled(true);
-                radioBtnDinheiro.setEnabled(true);
                 btnAddProd.setEnabled(true);
                 btnRemoveProduto.setEnabled(true);
                 btnFinalizarCompra.setEnabled(true);
@@ -569,7 +529,7 @@ public class FrmCaixa extends javax.swing.JFrame {
             // Valida se produto existe na base, e retorna o produto pesquisado
             Produto produto = ProdutoController.findById(Integer.parseInt(txtCodProduto.getText()));
 
-            if (produto != null && chkKg.isSelected()) { // Valida se foi retornado o produto e se é quilo
+            if (produto != null && chkKg.isSelected() && produto.getQtdePorKg() >= Double.parseDouble(txtPesoProduto.getText())) { // Valida se foi retornado o produto e se é quilo
                 novoProduto.addRow(new Object[]{
                     produto.getCodProduto(),
                     produto.getNomeProduto(),
@@ -585,7 +545,7 @@ public class FrmCaixa extends javax.swing.JFrame {
                                 txtValorCompra.getText(),
                                 produto.somaValorProduto(chkKg.isSelected(), txtPesoProduto.getText())
                         ));
-            } else if (produto != null && !chkKg.isSelected()) {
+            } else if (produto != null && !chkKg.isSelected() && produto.getQtdeProduto() >= Integer.parseInt(txtQuantidadeProduto.getText())) {
                 novoProduto.addRow(new Object[]{
                     produto.getCodProduto(),
                     produto.getNomeProduto(),
@@ -604,7 +564,10 @@ public class FrmCaixa extends javax.swing.JFrame {
                         ));
             } else {
                 JOptionPane
-                        .showMessageDialog(this, "Erro ao adicionar produto a lista, verifique o código utilizado", "Erro ao adicionar produto", JOptionPane.ERROR_MESSAGE);
+                        .showMessageDialog(
+                                this,
+                                "Erro ao adicionar produto a lista, verifique o código utilizado ou a quantidade solicitada",
+                                "Erro ao adicionar produto", JOptionPane.ERROR_MESSAGE);
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Falha na conversão", JOptionPane.WARNING_MESSAGE);
@@ -687,7 +650,6 @@ public class FrmCaixa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -696,9 +658,6 @@ public class FrmCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTotalCompra;
     private javax.swing.JLabel ldlCpfCliente;
-    private javax.swing.JRadioButton radioBtnCartaoCredito;
-    private javax.swing.JRadioButton radioBtnCartaoDebito;
-    private javax.swing.JRadioButton radioBtnDinheiro;
     private javax.swing.JTable tblListaProduto;
     private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextField txtCpfPesquisa;
