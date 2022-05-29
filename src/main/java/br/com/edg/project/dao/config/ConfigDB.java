@@ -19,9 +19,9 @@ public class ConfigDB {
     private static final String USER = "root";
     private static final String PASSWD = "";
 
-    public static void abrirConexao(Connection connection) throws ClassNotFoundException, SQLException {
+    public static Connection abrirConexao(Connection connection) throws ClassNotFoundException, SQLException {
         Class.forName(DRIVER);
-        connection = DriverManager.getConnection(URL, USER, PASSWD);
+        return DriverManager.getConnection(URL, USER, PASSWD);
     }
 
 }

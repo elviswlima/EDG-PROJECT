@@ -5,14 +5,15 @@
 package br.com.edg.project.views;
 
 import br.com.edg.project.controller.ClienteController;
-import br.com.edg.project.dao.ClienteDAO;
 import br.com.edg.project.model.Cep;
 import br.com.edg.project.model.Cliente;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import br.com.edg.project.service.Validador;
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -80,6 +81,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JFormattedTextField();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
+        lblIdCliente = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
         btnInserir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
@@ -328,11 +331,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNome.setEnabled(false);
         txtNome.setName("Nome"); // NOI18N
-        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNomeKeyTyped(evt);
-            }
-        });
 
         cboSexo.setEditable(true);
         cboSexo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -371,18 +369,26 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
         txtEmail.setEnabled(false);
 
+        lblIdCliente.setText("(ID do cliente)");
+
+        jLabel2.setText("ID Cliente:");
+
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
         pnlDadosPessoaisLayout.setHorizontalGroup(
             pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblEmail)
                     .addComponent(lblNomeCliente)
                     .addComponent(jLabel1)
-                    .addComponent(lblRg))
+                    .addComponent(lblRg)
+                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                        .addComponent(lblEmail)
+                        .addGap(17, 17, 17))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIdCliente)
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,7 +415,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         pnlDadosPessoaisLayout.setVerticalGroup(
             pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addComponent(lblNomeCliente)
@@ -434,7 +440,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                .addGap(14, 14, 14)
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIdCliente)
+                    .addComponent(jLabel2)))
         );
 
         btnExcluir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -455,6 +464,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         lblTitulo.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         lblTitulo.setText("Cadastro de cliente");
@@ -565,7 +579,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                         .addComponent(pnlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlListaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -583,7 +597,13 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarAoMenuActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-        Cliente cliente = new Cliente();
+        Cliente iCliente = new Cliente();
+
+        DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
+
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            dtm.removeRow(0);
+        }
 
         try {
             List<JTextField> fields = new ArrayList<>();
@@ -602,28 +622,54 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                     && cboSexo.getSelectedItem().toString() != null
                     && cboxEstado.getSelectedItem().toString() != null) {
 
-                cliente.setNome(txtNome.getText());
-                cliente.setRg(txtRg.getText());
-                cliente.setCpf(txtCpf.getText());
-                cliente.setDataNascimento(Date.valueOf(txtDataNasc.getText()));
-                cliente.setSexo(cboSexo.getSelectedItem().toString());
-                cliente.setTelefone(txtTelefone.getText());
+                iCliente.setNome(txtNome.getText());
+                iCliente.setRg(txtRg.getText());
+                iCliente.setCpf(txtCpf.getText());
+                iCliente.setDataNascimento(Date.valueOf(txtDataNasc.getText()));
+                iCliente.setSexo(cboSexo.getSelectedItem().toString());
+                iCliente.setTelefone(txtTelefone.getText());
+                iCliente.setCep(txtCepCliente.getText());
+                iCliente.setBairro(txtBairro.getText());
+                iCliente.setEstado(cboxEstado.getSelectedItem().toString());
+                iCliente.setCidade(txtCidadeCliente.getText());
+                iCliente.setComplemento(txtComplementoCliente.getText());
+                iCliente.setNumEndereco(txtNumeroCasaCliente.getText());
+                iCliente.setRua(txtLogradouro.getText());
+                iCliente.setEmail(txtEmail.getText());
 
-                cliente.setCep(txtCepCliente.getText());
-                cliente.setBairro(txtBairro.getText());
-                cliente.setEstado(cboxEstado.getSelectedItem().toString());
-                cliente.setComplemento(txtComplementoCliente.getText());
-                cliente.setNumEndereco(txtNumeroCasaCliente.getText());
-                cliente.setRua(txtLogradouro.getText());
-
+                boolean cadastro = ClienteController.inserirCliente(iCliente);
                 /* Insere no banco de dados */
-                ClienteController.inserirCliente(cliente);
+                if (cadastro) {
+                    lblIdCliente.setText("");
+                    txtNome.setText("");
+                    txtCpf.setText("");
+                    txtTelefone.setText("");
+//            txtDataNasc.setText(c.getDataNascimento());
+                    txtLogradouro.setText("");
+                    cboSexo.setSelectedIndex(0);
+                    txtRg.setText("");
+                    txtEmail.setText("");
+                    txtCepCliente.setText("");
+                    txtCidadeCliente.setText("");
+                    txtBairro.setText("");
+                    txtNumeroCasaCliente.setText("");
+                    txtComplementoCliente.setText("");
+                    cboxEstado.setSelectedIndex(0);
+                    txtCidadeCliente.setText("");
+                    JOptionPane.showMessageDialog(this, "Cliente " + txtNome.getText() + " cadastrado com sucesso!", "Cadastro realizado com sucesso", JOptionPane.OK_OPTION);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cliente erro ao cadastrar cliente!", "Falha ao cadastrar", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } catch (NullPointerException ex) {
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Existem campos nulos, favor ajustar", "Campos nulos", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Erro ao inserir no banco de dados" + ex.getMessage(), "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao inserir no banco de dados, causa: " + ex.getMessage(), "Erro na gravação", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnInserirActionPerformed
 
@@ -632,13 +678,18 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int indiceLinha = tabelaCliente.getSelectedRow();
-        DefaultTableModel usuario = (DefaultTableModel) tabelaCliente.getModel();
+        Cliente c = new Cliente();
+        c.setId(Integer.parseInt(lblIdCliente.getText()));
 
-        if (indiceLinha >= 0) {
-            usuario.removeRow(indiceLinha);
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione uma linha", "Linha não selecionada", 3);
+        try {
+            if (ClienteController.excluirCliente(c)) {
+                JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir cliente!", "Error na exclusão", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (HeadlessException | SQLException e) {
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Erro ao deletar cliente no banco de dados, causa: " + e.getMessage(), "Erro na exclusão", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -648,7 +699,12 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         try {
-            ArrayList<Cliente> clientes = new ArrayList<>();
+
+            DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
+
+            for (int i = 0; i < dtm.getRowCount(); i++) {
+                dtm.removeRow(0);
+            }
 
             if (chkCpf.isSelected() && Validador.validaString(txtCpfPesquisa)) {
                 txtCpf.setText(txtCpfPesquisa.getText());
@@ -665,10 +721,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 txtEmail.setEnabled(true);
 
                 try {
-                    clientes = ClienteController.consultarBy(this.cliente, chkCpf.isSelected());
-                    DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
-
-                    for (Cliente c : clientes) {
+                    this.clientes = ClienteController.consultarBy(this.cliente, chkCpf.isSelected());
+                    for (Cliente c : this.clientes) {
                         dtm.addRow(new Object[]{
                             c.getId(),
                             c.getNome(),
@@ -678,7 +732,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                         });
                     }
                 } catch (IllegalArgumentException e) {
+                    Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, e);
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Cliente não encontrado", JOptionPane.INFORMATION_MESSAGE);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Cliente não encontrado, causa: " + ex.getMessage(), JOptionPane.INFORMATION_MESSAGE);
                 }
 
             }
@@ -688,7 +746,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 txtNomePesquisa.setText(null);
 
                 this.cliente.setNome(txtNomePesquisa.getText());
-                
+
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
                 txtRg.setEnabled(true);
@@ -696,12 +754,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 cboSexo.setEnabled(true);
                 txtTelefone.setEnabled(true);
                 txtEmail.setEnabled(true);
-                
+
                 try {
-                    clientes = ClienteController.consultarBy(this.cliente, chkCpf.isSelected());
-                    DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
-                    
-                    for (Cliente c : clientes) {
+                    this.clientes = ClienteController.consultarBy(this.cliente, chkCpf.isSelected());
+                    for (Cliente c : this.clientes) {
                         dtm.addRow(new Object[]{
                             c.getId(),
                             c.getNome(),
@@ -710,7 +766,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                             c.getCidade()
                         });
                     }
-                } catch (Exception e) {
+                } catch (SQLException e) {
+                    Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, e);
                     JOptionPane.showMessageDialog(this, "Cliente não encontrado", "Cliente não encontrado", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -768,8 +825,118 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_chkCpfItemStateChanged
 
     private void tabelaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClienteMouseClicked
-        // TODO add your handling code here:
+        for (Cliente c : clientes) {
+            lblIdCliente.setText(String.valueOf(c.getId()));
+            txtNome.setText(c.getNome());
+            txtCpf.setText(c.getCpf());
+            txtTelefone.setText(c.getTelefone());
+//            txtDataNasc.setText(c.getDataNascimento());
+            txtLogradouro.setText(c.getRua());
+            int indexSexo = 0;
+            for (int i = 0; i < cboSexo.getItemCount(); i++) {
+                if (cboSexo.getItemAt(i).equals(c.getSexo())) {
+                    indexSexo = i;
+                }
+            }
+            cboSexo.setSelectedIndex(indexSexo);
+            txtRg.setText(c.getRg());
+            txtEmail.setText(c.getEmail());
+            txtCepCliente.setText(c.getCep());
+            txtCidadeCliente.setText(c.getCidade());
+            txtBairro.setText(c.getBairro());
+            txtNumeroCasaCliente.setText(c.getNumEndereco());
+            txtComplementoCliente.setText(c.getComplemento());
+            int indexUf = 0;
+            for (int i = 0; i < cboxEstado.getItemCount(); i++) {
+                if (cboxEstado.getItemAt(i).equals(c.getSexo())) {
+                    indexUf = i;
+                }
+            }
+
+            cboxEstado.setSelectedIndex(indexUf);
+
+            txtCidadeCliente.setText(c.getCidade());
+        }
     }//GEN-LAST:event_tabelaClienteMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        Cliente iCliente = new Cliente();
+
+        DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
+
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            dtm.removeRow(0);
+        }
+
+        try {
+            List<JTextField> fields = new ArrayList<>();
+            fields.add(txtRg);
+            fields.add(txtNome);
+            fields.add(txtCpf);
+            fields.add(txtDataNasc);
+            fields.add(txtTelefone);
+            fields.add(txtCepCliente);
+            fields.add(txtBairro);
+            fields.add(txtNumeroCasaCliente);
+            fields.add(txtLogradouro);
+            fields.add(txtEmail);
+
+            if (Validador.validaMultCampos(fields)
+                    && cboSexo.getSelectedItem().toString() != null
+                    && cboxEstado.getSelectedItem().toString() != null) {
+
+                iCliente.setNome(txtNome.getText());
+                iCliente.setRg(txtRg.getText());
+                iCliente.setCpf(txtCpf.getText());
+                iCliente.setDataNascimento(Date.valueOf(txtDataNasc.getText()));
+                iCliente.setSexo(cboSexo.getSelectedItem().toString());
+                iCliente.setTelefone(txtTelefone.getText());
+                iCliente.setCep(txtCepCliente.getText());
+                iCliente.setBairro(txtBairro.getText());
+                iCliente.setEstado(cboxEstado.getSelectedItem().toString());
+                iCliente.setCidade(txtCidadeCliente.getText());
+                iCliente.setComplemento(txtComplementoCliente.getText());
+                iCliente.setNumEndereco(txtNumeroCasaCliente.getText());
+                iCliente.setRua(txtLogradouro.getText());
+                iCliente.setEmail(txtEmail.getText());
+                iCliente.setId(Integer.parseInt(lblIdCliente.getText()));
+
+                boolean cadastro = ClienteController.alterarCliente(iCliente);
+                /* Insere no banco de dados */
+                if (cadastro) {
+                    lblIdCliente.setText("");
+                    txtNome.setText("");
+                    txtCpf.setText("");
+                    txtTelefone.setText("");
+//            txtDataNasc.setText(c.getDataNascimento());
+                    txtLogradouro.setText("");
+                    cboSexo.setSelectedIndex(0);
+                    txtRg.setText("");
+                    txtEmail.setText("");
+                    txtCepCliente.setText("");
+                    txtCidadeCliente.setText("");
+                    txtBairro.setText("");
+                    txtNumeroCasaCliente.setText("");
+                    txtComplementoCliente.setText("");
+                    cboxEstado.setSelectedIndex(0);
+                    txtCidadeCliente.setText("");
+                    lblIdCliente.setText("(ID do cliente)");
+                    JOptionPane.showMessageDialog(this, "Cliente " + txtNome.getText() + " alterado com sucesso!", "Alteração realizada com sucesso", JOptionPane.OK_OPTION);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cliente erro ao alterar cliente!", "Falha ao alterar", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Existem campos nulos, favor ajustar", "Campos nulos", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao inserir no banco de dados" + ex.getMessage(), "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao alterar no banco de dados, causa: " + ex.getMessage(), "Erro na gravação", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -806,7 +973,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         });
     }
 
-    private static Cliente cliente = new Cliente();
+    private Cliente cliente = new Cliente();
+    private List<Cliente> clientes = new ArrayList<>();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -819,6 +987,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboxEstado;
     private javax.swing.JCheckBox chkCpf;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCPF;
@@ -828,6 +997,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblDataNascCliente;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblIdCliente;
     private javax.swing.JLabel lblLogoCliente;
     private javax.swing.JLabel lblLogradouro;
     private javax.swing.JLabel lblNomeCliente;
