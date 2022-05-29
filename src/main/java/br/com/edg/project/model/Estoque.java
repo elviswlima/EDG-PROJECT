@@ -5,18 +5,28 @@
 package br.com.edg.project.model;
 
 /**
- *
+ * Classe a ser instanciada para receber e retornar valores
  * @author Danilo
  */
 public class Estoque {
+    /**
+     * @Attributes Atributos criados para armazenar valores
+     */
     private int codProduto;
     private String nomeProduto;
     private int qtdeProduto;
     private String validade;
     
+    /**
+     * @Constructor Construtor da classe Estoque (cria o objeto)
+     */
     public Estoque() {
     }
-
+    
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public int getCodProduto() {
         return codProduto;
     }

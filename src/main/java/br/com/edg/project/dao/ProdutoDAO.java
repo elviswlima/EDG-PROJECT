@@ -10,6 +10,7 @@ import java.sql.Connection;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,11 +32,12 @@ public class ProdutoDAO {
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL, USER, PASSWD);
             PreparedStatement stmt = connection
-                    .prepareStatement("INSERT INTO PRODUTOS (NOME_PRODUTO, VALOR, KG, QUANTIDADE) VALUES (?,?,?,?);");
+                    .prepareStatement("INSERT INTO PRODUTOS (NOME_PRODUTO, VALOR, KG, QUANTIDADE, VALIDADE) VALUES (?,?,?,?,?);");
             stmt.setString(1, produto.getNomeProduto());
             stmt.setDouble(2, produto.getValorProduto());
             stmt.setDouble(3, produto.getQtdePorKg());
             stmt.setDouble(4, produto.getQtdeProduto());
+            stmt.setDate(5, produto.getValidade());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -63,4 +65,60 @@ public class ProdutoDAO {
         return false;
     }
 
+    public static Produto findById(int id) {
+        Produto produto = new Produto();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM PRODUTOS WHERE ID_PRODUTO = ?";
+
+        try {
+            Class.forName(Driver);
+            connection = DriverManager.getConnection(url, "root", "");
+            stmt = connection.prepareStatement(query);
+
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    double kg = rs.getDouble("KG");
+                    int qtde = rs.getInt("QUANTIDADE");
+
+                    if (kg > 0 || qtde > 0) {
+                        produto.setCodProduto(rs.getInt("ID_PRODUTO"));
+                        produto.setNomeProduto(rs.getString("NOME_PRODUTO"));
+                        produto.setValorProduto(rs.getDouble("VALOR"));
+                        produto.setQtdeProduto(rs.getInt("QUANTIDADE"));
+                        produto.setQtdePorKg(rs.getDouble("KG"));
+                        produto.setValidade(rs.getDate("VALIDADE"));
+
+                        return produto;
+                    } else {
+                        throw new RuntimeException("Produto esgotado!");
+                    }
+                }
+
+            } else {
+                throw new SQLException("Código do produto não existe ou banco de dados vazio.");
+            }
+        } catch (SQLException | ClassNotFoundException | NullPointerException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                throw new IllegalArgumentException("Erro ao fechar conexão");
+            }
+        }
+        return null;
+    }
 }

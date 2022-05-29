@@ -1,13 +1,30 @@
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmLogin.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\model\Caixa.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmTelaInicial.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmEstoque.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\model\Produto.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmCadastroCliente.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\Application.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\service\Validador.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmRelatorioDeVendas.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\model\Cliente.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\model\Estoque.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmCaixa.java
-C:\Users\Dell\Desktop\SENAC\2 SEMESTRE\PROJETO INTEGRADOR - DESENVOLVIMENTO ESTRUTURADO DE SISTEMAS\PROJETO-EDGMarket\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmCadastroProduto.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmRelatorioDeVendas.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\Login.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\controller\CaixaController.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\service\Validador.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\Estoque.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\dao\LoginDAO.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmLogin.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmCaixa.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\controller\ProdutoController.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\dao\NotaFiscalDAO.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\VendaProduto.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\controller\NotaFiscalController.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\Application.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\dao\EstoqueDAO.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\Produto.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmCadastroCliente.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\dao\ProdutoDAO.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\Caixa.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\Relatorio.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\controller\EstoqueController.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\controller\LoginController.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\Cliente.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\controller\RelatorioController.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmTelaInicial.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\dao\CaixaDAO.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\model\Funcionario.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\dao\RelatorioDAO.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\utils\SomaTotalUtils.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmCadastroProduto.java
+D:\Repositories\Eclipse\EDG-PROJECT\src\main\java\br\com\edg\project\views\FrmEstoque.java
