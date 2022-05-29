@@ -1,5 +1,7 @@
 package br.com.edg.project.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Danilo
@@ -11,17 +13,35 @@ public class Produto {
     private double valorProduto;
     private int qtdeProduto;
     private double qtdePorKg;
+    private Date validade;
     
     public Produto() {
     }
     
-    public Produto(String nomeProduto, double valor, int qtdeProduto, double qtdePorKg) {
+    /**
+     *
+     * @param nomeProduto
+     * @param valor
+     * @param qtdeProduto
+     * @param qtdePorKg
+     * @param validade
+     */
+    public Produto(String nomeProduto, double valor, int qtdeProduto, double qtdePorKg, Date validade) {
         this.nomeProduto = nomeProduto;
         this.valorProduto =  valor;
         this.qtdeProduto = qtdeProduto;
         this.qtdePorKg = qtdePorKg;
+        this.validade = validade;
     }
 
+    public Date getValidade() {
+        return validade;
+    }
+
+    public void setValidade(Date validade) {
+        this.validade = validade;
+    }
+    
     public String getNomeProduto() {
         return nomeProduto;
     }

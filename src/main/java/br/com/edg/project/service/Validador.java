@@ -1,5 +1,9 @@
 package br.com.edg.project.service;
 
+
+import com.toedter.calendar.JDateChooser;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
@@ -60,8 +64,23 @@ public class Validador {
     public static boolean validaFormatedText(JFormattedTextField campo, int tamanho) {
         if (campo.getText().trim().length() < tamanho || campo.getText() == null) {
             throw new IllegalArgumentException("Favor preencher campo obrigatório: " + campo.getName());
+        }  
+        
+        return true;
+    }
+    public static boolean validaDate(JDateChooser jDateValProduto){
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate validade = jDateValProduto
+                .getDate()
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+                
+        if(dataAtual.isAfter(validade)){
+            throw new IllegalArgumentException("A validade tem que ser maior a data atual!!");
         }
         
         return true;
     }
+  
 }

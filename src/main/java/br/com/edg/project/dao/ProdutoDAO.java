@@ -28,12 +28,12 @@ public class ProdutoDAO {
             Class.forName(Driver);
             connection = DriverManager.getConnection(url, "root", "");
             PreparedStatement stmt = connection
-                    .prepareStatement("INSERT INTO PRODUTOS (NOME_PRODUTO, VALOR, KG, QUANTIDADE) VALUES (?,?,?,?);");
+                    .prepareStatement("INSERT INTO PRODUTOS (NOME_PRODUTO, VALOR, KG, QUANTIDADE, VALIDADE) VALUES (?,?,?,?,?);");
             stmt.setString(1, produto.getNomeProduto());
             stmt.setDouble(2, produto.getValorProduto());
             stmt.setDouble(3, produto.getQtdePorKg());
             stmt.setDouble(4, produto.getQtdeProduto());
-            
+            stmt.setDate(5, produto.getValidade());
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected > 0) {
