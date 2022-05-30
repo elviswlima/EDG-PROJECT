@@ -3,7 +3,8 @@ package br.com.edg.project.model;
 import java.sql.Date;
 
 /**
- *
+ * Model Produto
+ * 
  * @author Danilo
  */
 public class Produto {
@@ -15,11 +16,15 @@ public class Produto {
     private double qtdePorKg;
     private Date validade;
 
+    /**
+     * @Constructor Construtor vazio da classe Produto (cria o objeto)
+     */
     public Produto() {
+        // Empty Constructor
     }
 
     /**
-     *
+     * Construtor com parâmetros
      * @param nomeProduto
      * @param valor
      * @param qtdeProduto
@@ -34,6 +39,10 @@ public class Produto {
         this.validade = validade;
     }
 
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public Date getValidade() {
         return validade;
     }

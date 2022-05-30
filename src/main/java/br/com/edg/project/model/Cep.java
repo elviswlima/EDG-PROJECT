@@ -5,7 +5,8 @@
 package br.com.edg.project.model;
 
 /**
- *
+ * Model Cep
+ * 
  * @author Danilo
  */
 public class Cep {
@@ -21,10 +22,17 @@ public class Cep {
     private String ddd;
     private String siafi;
     
+    /**
+     * @Constructor Construtor vazio da classe Cep (cria o objeto)
+     */
     public Cep() {
         // Empty Constructor
     }
 
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public String getComplemento() {
         return complemento;
     }

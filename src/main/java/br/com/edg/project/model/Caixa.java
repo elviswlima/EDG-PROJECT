@@ -4,7 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- *
+ * Model Caixa
+ * 
  * @author Danilo
  */
 public class Caixa {
@@ -19,9 +20,17 @@ public class Caixa {
     private Date data_venda;
     private ArrayList<VendaProduto> vendaProduto;
 
+    /**
+     * @Constructor Construtor vazio da classe Caixa (cria o objeto)
+     */
     public Caixa() {
+        // Empty Constructor
     }
 
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public int getId() {
         return id;
     }

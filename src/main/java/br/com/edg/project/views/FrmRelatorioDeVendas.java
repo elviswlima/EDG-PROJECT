@@ -74,15 +74,30 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
         grpTipoRelatorio.add(rdnAnalitico);
         rdnAnalitico.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rdnAnalitico.setText("Análitico");
+        rdnAnalitico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdnAnaliticoActionPerformed(evt);
+            }
+        });
 
         grpTipoRelatorio.add(rdnSintetico);
         rdnSintetico.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rdnSintetico.setSelected(true);
         rdnSintetico.setText("Sintético");
+        rdnSintetico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdnSinteticoActionPerformed(evt);
+            }
+        });
 
         btnDownload.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnDownload.setText("Baixar Relatório");
         btnDownload.setEnabled(false);
+        btnDownload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadActionPerformed(evt);
+            }
+        });
 
         btnPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnPesquisa.setText("Pesquisar");
@@ -217,6 +232,10 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão para pesquisar vendas e realizar consulta sintética ou analítica
+     * @param evt 
+     */
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
         try {
 
@@ -313,6 +332,10 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
+    /**
+     * Botão para voltar à tela inicial
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         FrmTelaInicial menu = new FrmTelaInicial();
 
@@ -320,6 +343,30 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
         menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    /**
+     * Botão para realizar o download do relatório (Incluir API)
+     * @param evt 
+     */
+    private void btnDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDownloadActionPerformed
+
+    /**
+     * Botão radio para selecionar consulta sintética
+     * @param evt 
+     */
+    private void rdnSinteticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnSinteticoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdnSinteticoActionPerformed
+
+    /**
+     * Botão radio para selecionar consulta analítica
+     * @param evt 
+     */
+    private void rdnAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnAnaliticoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdnAnaliticoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,7 +7,7 @@ package br.com.edg.project.model;
 import java.sql.Date;
 
 /**
- *Model de relatórios
+ * Model de relatórios
  * 
  * @author Danilo
  */
@@ -22,9 +22,17 @@ public class Relatorio {
     private String cliente;
     private Date dataCompra;
 
+    /**
+     * @Constructor Construtor vazio da classe Relatorio (cria o objeto)
+     */
     public Relatorio() {
+        // Empty Constructor
     }
 
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public double getKg() {
         return kg;
     }

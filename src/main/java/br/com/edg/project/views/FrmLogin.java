@@ -158,6 +158,10 @@ public class FrmLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão para acessar o sistema
+     * @param evt 
+     */
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
          
         Login user = new Login();
@@ -183,6 +187,7 @@ public class FrmLogin extends javax.swing.JFrame {
         }          
     }//GEN-LAST:event_btnAcessarActionPerformed
 
+    /*                          text fields                             */
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
@@ -203,6 +208,8 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtSenhaKeyTyped
 
+    /*                          fim das text fields                         */
+    
     /**
      * @param args the command line arguments
      */

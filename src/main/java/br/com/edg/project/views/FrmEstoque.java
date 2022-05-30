@@ -200,6 +200,10 @@ public class FrmEstoque extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão para consultar produto no estoque
+     * @param evt 
+     */
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
         Produto prod = new Produto();
@@ -237,6 +241,10 @@ public class FrmEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
+    /**
+     * Botão para voltar à tela inicial
+     * @param evt 
+     */
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         FrmTelaInicial menu = new FrmTelaInicial();
         /* criamos objeto da tela inicial */
@@ -249,6 +257,10 @@ public class FrmEstoque extends javax.swing.JFrame {
         /* Fechamos a tela estoque */
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    /**
+     * Botão para remover o produto do estoque
+     * @param evt 
+     */
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         int indiceLinha = tblEstoque.getSelectedRow();
         /* Variável do tipo int para armazenar linha selecionada na tabela */
@@ -280,6 +292,10 @@ public class FrmEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCodProdutoKeyTyped
 
+    /**
+     * Botão para editar o produto do estoque
+     * @param evt 
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int indiceLinha = tblEstoque.getSelectedRow();
         /* Variável do tipo int para armazenar linha selecionada na tabela */

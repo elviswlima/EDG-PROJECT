@@ -5,7 +5,8 @@
 package br.com.edg.project.model;
 
 /**
- *
+ * Model Funcionario
+ * 
  * @author Danilo
  */
 public class Funcionario {
@@ -25,9 +26,17 @@ public class Funcionario {
     private String cargo;
     private String setor;
 
+    /**
+     * @Constructor Construtor vazio da classe Funcionario (cria o objeto)
+     */
     public Funcionario() {
+        // Empty Constructor
     }
 
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public String getNome() {
         return nome;
     }

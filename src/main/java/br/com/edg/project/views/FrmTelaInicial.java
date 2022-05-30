@@ -96,6 +96,11 @@ public class FrmTelaInicial extends javax.swing.JFrame {
 
         btnConfiguracoes.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         btnConfiguracoes.setText("Configurações");
+        btnConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfiguracoesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,35 +158,63 @@ public class FrmTelaInicial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão para ir para tela do caixa
+     * @param evt 
+     */
     private void btnCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaixaActionPerformed
         FrmCaixa caixa = new FrmCaixa();
         caixa.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCaixaActionPerformed
 
+    /**
+     * Botão para ir para tela de estoque
+     * @param evt 
+     */
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
         FrmEstoque estoque = new FrmEstoque();
         estoque.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
+    /**
+     * Botão para ir para tela de cadastro do cliente
+     * @param evt 
+     */
     private void btnCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroClienteActionPerformed
         FrmCadastroCliente registroCliente = new FrmCadastroCliente();
         registroCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCadastroClienteActionPerformed
 
+    /**
+     * Botão para ir para tela de cadastro de produto
+     * @param evt 
+     */
     private void btnCadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroProdutosActionPerformed
         FrmCadastroProduto registroProduto = new FrmCadastroProduto();
         registroProduto.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCadastroProdutosActionPerformed
 
+    /**
+     * Botão para ir para tela de relatórios
+     * @param evt 
+     */
     private void btnRelatorioVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioVendasActionPerformed
         FrmRelatorioDeVendas relatorioVendas = new FrmRelatorioDeVendas();
         relatorioVendas.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRelatorioVendasActionPerformed
+
+    /**
+     * Botão para ir para tela de configurações (Ainda não implementada)
+     * @param evt 
+     */
+    private void btnConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConfiguracoesActionPerformed
 
     /**
      * @param args the command line arguments

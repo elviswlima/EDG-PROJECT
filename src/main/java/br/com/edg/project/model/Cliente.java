@@ -8,7 +8,8 @@ package br.com.edg.project.model;
 import java.sql.Date;
 
 /**
- *
+ * Model Cliente 
+ * 
  * @author elvis.wlima
  */
 public class Cliente {
@@ -29,9 +30,17 @@ public class Cliente {
     private String estado;
     private String rua;
 
+    /**
+     * @Constructor Construtor vazio da classe Cliente (cria o objeto)
+     */
     public Cliente() {
+        // Empty Constructor
     }
     
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public int getId() {
         return id;
     }

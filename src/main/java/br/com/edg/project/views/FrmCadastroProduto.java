@@ -284,6 +284,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_chkUnidadeMedidaActionPerformed
 
+    /**
+     * Botão para adicionar produtos
+     * @param evt 
+     */
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdActionPerformed
         DefaultTableModel novoProduto = (DefaultTableModel) tblListProd.getModel();
         SimpleDateFormat formataDatas = new SimpleDateFormat("yyyy-MM-dd");
@@ -324,6 +328,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddProdActionPerformed
 
+    /**
+     * Botão para deletar produtos
+     * @param evt 
+     */
     private void btnDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteItemActionPerformed
         int indiceLinha = tblListProd.getSelectedRow();
         DefaultTableModel produto = (DefaultTableModel) tblListProd.getModel();
@@ -335,6 +343,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteItemActionPerformed
 
+    /**
+     * Botão para Registrar produtos
+     * @param evt 
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         ArrayList<Produto> produtos = new ArrayList<>();
@@ -364,6 +376,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    /**
+     * Botão para voltar à tela inicial
+     * @param evt 
+     */
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         FrmTelaInicial menu = new FrmTelaInicial();
 
@@ -399,6 +415,10 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
         /* Validação de quantidade de caracteres */
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
+    /**
+     * Botão para consultar produtos
+     * @param evt 
+     */
     private void btnConsultaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaProdutoActionPerformed
         FrmEstoque estoque = new FrmEstoque();
         estoque.setVisible(true);

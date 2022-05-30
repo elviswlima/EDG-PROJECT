@@ -5,7 +5,8 @@
 package br.com.edg.project.model;
 
 /**
- * Classe a ser instanciada para receber e retornar valores
+ * Model Estoque
+ * 
  * @author Danilo
  */
 public class Estoque {
@@ -18,9 +19,10 @@ public class Estoque {
     private String validade;
     
     /**
-     * @Constructor Construtor da classe Estoque (cria o objeto)
+     * @Constructor Construtor vazio da classe Estoque (cria o objeto)
      */
     public Estoque() {
+        // Empty Constructor
     }
     
     /**

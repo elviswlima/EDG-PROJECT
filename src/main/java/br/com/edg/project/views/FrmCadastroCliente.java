@@ -668,12 +668,20 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão para voltar à tela inicial
+     * @param evt 
+     */
     private void btnVoltarAoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarAoMenuActionPerformed
         FrmTelaInicial telaPrincipal = new FrmTelaInicial();
         telaPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarAoMenuActionPerformed
-
+    
+    /**
+     * Botão para inserir informações do cliente
+     * @param evt 
+     */
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         Cliente iCliente = new Cliente();
 
@@ -762,6 +770,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNomeKeyTyped
 
+    /**
+     * Botão para excluir informações do cliente
+     * @param evt 
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         Cliente c = new Cliente();
         c.setId(Integer.parseInt(lblIdCliente.getText()));
@@ -782,6 +794,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLogradouroActionPerformed
 
+    /**
+     * Botão para consulta de informações do cliente
+     * @param evt 
+     */
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         try {
 
@@ -866,6 +882,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
+    /**
+     * Botão para pesquisa do cep
+     * @param evt 
+     */
     private void btnPesquisaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaCepActionPerformed
         try {
             if (Validador.validaString(txtCepCliente)) {
@@ -903,6 +923,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisaCepActionPerformed
 
+    /**
+     * Checkbox para selecionar se a consulta será pelo CPF
+     * @param evt 
+     */
     private void chkCpfItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkCpfItemStateChanged
         if (chkCpf.isSelected()) {
             txtNomePesquisa.setEnabled(false);
@@ -912,7 +936,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             txtCpfPesquisa.setEnabled(false);
         }
     }//GEN-LAST:event_chkCpfItemStateChanged
-
+    
+    /**
+     * tabela do cliente, onde será visualizado as informações
+     * @param evt 
+     */
     private void tabelaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClienteMouseClicked
         for (Cliente c : clientes) {
             lblIdCliente.setText(String.valueOf(c.getId()));
@@ -948,6 +976,10 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaClienteMouseClicked
 
+    /**
+     * Botão para alterar informações do cliente
+     * @param evt 
+     */
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         Cliente iCliente = new Cliente();
 
@@ -1032,6 +1064,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    /*                        TEXTFIELDS                         */
     private void txtNomePesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomePesquisaKeyTyped
         if (txtNomePesquisa.getText().length() >= 35) {
             evt.consume();
@@ -1112,6 +1145,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtComplementoClienteKeyTyped
 
+    /*                         FIM TEXT FIELDS                         */
+    
     /**
      * @param args the command line arguments
      */

@@ -412,6 +412,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão para voltar à tela inicial
+     * @param evt 
+     */
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         FrmTelaInicial frmTelaInicial = new FrmTelaInicial();
         frmTelaInicial.setLocationRelativeTo(null);
@@ -419,6 +423,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    /**
+     * Botão para remover produto da compra
+     * @param evt 
+     */
     private void btnRemoveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRemoveProdutoActionPerformed
@@ -447,6 +455,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_txtCodProdutoKeyTyped
 
+    /**
+     * Botão para finalizar compra
+     * @param evt 
+     */
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFinalizarCompraActionPerformed
         try {
             DefaultTableModel dtm = (DefaultTableModel) tblListaProduto.getModel();
@@ -496,6 +508,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_btnFinalizarCompraActionPerformed
 
+    /**
+     * Botão para pesquisar o cliente que está comprando ou se ele tem cadastro para realizar a compra
+     * @param evt 
+     */
     private void btnPesquisarCpfActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             cliente.setId(CaixaController.consultaCliente(txtCpfPesquisa.getText()));
@@ -528,6 +544,10 @@ public class FrmCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_txtCpfPesquisaActionPerformed
 
+    /**
+     * Botão para adicionar produto na compra
+     * @param evt 
+     */
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddProdActionPerformed
         DefaultTableModel novoProduto = (DefaultTableModel) tblListaProduto.getModel();
         try {

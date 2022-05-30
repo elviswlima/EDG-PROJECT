@@ -13,9 +13,10 @@ public class Login {
     private String senha;
     
     /**
-     * @Constructor Construtor da classe Login (cria o objeto)
+     * @Constructor Construtor vazio da classe Login (cria o objeto)
      */
     public Login() {
+        // Empty Constructor
     }
     
     /**

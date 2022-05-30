@@ -6,7 +6,8 @@
 package br.com.edg.project.model;
 
 /**
- *
+ * Model VendaProduto
+ * 
  * @author guilherme.mlsilva1
  */
 public class VendaProduto {
@@ -18,9 +19,21 @@ public class VendaProduto {
     private Double kg;
     private Double valorUni;
 
+    /**
+     * @Constructor Construtor vazio da classe VendaProduto (cria o objeto)
+     */
     public VendaProduto() {
+        // Empty Constructor
     }
-
+    
+    /**
+     * Construtor com parâmetros
+     * @param idCaixa - Id do caixa
+     * @param idProduto - id do produto que sera vendido
+     * @param qtde - Quantidade que será vendido, caso não seja por kilo
+     * @param kg - Peso do produto que será vendido, caso não seja por quantidade
+     * @param valorUni - Valor da venda
+     */
     public VendaProduto(int idCaixa, int idProduto, int qtde, Double kg, Double valorUni) {
         this.idCaixa = idCaixa;
         this.idProduto = idProduto;
@@ -29,6 +42,10 @@ public class VendaProduto {
         this.valorUni = valorUni;
     }
 
+    /**
+     * Métodos Getters e Setters para receber e retornar valores
+     * @return valor
+     */
     public int getIdVendaProduto() {
         return idVendaProduto;
     }
