@@ -25,12 +25,12 @@ public class RelatorioController {
      * @throws java.sql.SQLException
      */
     public static List<Relatorio> consultaSintetica(Date dataInicio, Date dataFim) throws SQLException {
-//        LocalDate dateFinal = dataFim.toLocalDate();
-//        dateFinal.plusDays(1);
-//        
-//        if (dateFinal.isAfter(dataInicio.toLocalDate())) {
-//            throw new IllegalArgumentException("A data de inicio tem que ser maior que a data fim!!");
-//        }
+        LocalDate dateFinal = dataFim.toLocalDate();
+        dateFinal.plusDays(1);
+
+        if (!dateFinal.isAfter(dataInicio.toLocalDate())) {
+            throw new IllegalArgumentException("A data de inicio tem que ser maior que a data fim!!");
+        }
 
         Relatorio obj = new Relatorio();
         obj.setDataInicio(dataInicio);
@@ -46,11 +46,17 @@ public class RelatorioController {
      * @param dataFim - Nome da variável como referência para consulta
      * @return - ArrayList das informações consultadas no banco
      */
-    public static ArrayList<Produto> consultaAnalitica(String dataInicio, String dataFim) {
+    public static ArrayList<Relatorio> consultaAnalitica(Date dataInicio, Date dataFim) throws SQLException {
+        LocalDate dateFinal = dataFim.toLocalDate();
+        dateFinal.plusDays(1);
 
-        Produto obj = new Produto();
-//        obj./*setDataInicio*/(dataInicio);
-//        obj./*setDataFim*/(dataFim);
+        if (!dateFinal.isAfter(dataInicio.toLocalDate())) {
+            throw new IllegalArgumentException("A data de inicio tem que ser maior que a data fim!!");
+        }
+
+        Relatorio obj = new Relatorio();
+        obj.setDataInicio(dataInicio);
+        obj.setDataFim(dataFim);
 
         return RelatorioDAO.consultaAnalitica(obj);
     }

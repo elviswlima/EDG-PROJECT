@@ -30,11 +30,11 @@ public class RelatorioDAO {
 
     public static List<Relatorio> consultaSintetica(Relatorio relatorio) throws SQLException {
         List<Relatorio> listaRetorno = new ArrayList<>();
-        
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        String query = "SELECT CLI.NOME CLIENTE, CA.DATA_VENDA VENDA, CA.VALOR_TOTAL VALOR FROM CAIXA CA JOIN CLIENTES CLI ON CA.ID_CLIENTE = CLI.ID_CLIENTE WHERE CA.DATA_VENDA  >= DATE(?) and CA.DATA_VENDA <=  DATE(?)";
+        String query = "SELECT CLI.NOME CLIENTE, CA.DATA_VENDA VENDA, CA.VALOR_TOTAL VALOR FROM CAIXA CA JOIN CLIENTES CLI ON CA.ID_CLIENTE = CLI.ID_CLIENTE WHERE CA.DATA_VENDA  >= ? and CA.DATA_VENDA <=  ?";
 
         try {
             Class.forName(Driver);
@@ -42,10 +42,10 @@ public class RelatorioDAO {
             stmt = conexao
                     .prepareStatement(query);
             stmt.setString(1, relatorio.getDataInicio().toString());
-            stmt.setString(2, relatorio.getDataFim().toString());
+            stmt.setString(2, relatorio.getDataFim().toString() + " 11:59:59");
 
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 Relatorio retorno = new Relatorio();
                 retorno.setCliente(rs.getString("CLIENTE"));
@@ -54,7 +54,7 @@ public class RelatorioDAO {
 
                 listaRetorno.add(retorno);
             }
-            
+
             return listaRetorno;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RelatorioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,37 +76,38 @@ public class RelatorioDAO {
         return null;
     }
 
-    public static ArrayList<Produto> consultaAnalitica(Produto venda) {
-        ArrayList<Produto> listaRetorno = new ArrayList<>();
+    public static ArrayList<Relatorio> consultaAnalitica(Relatorio relatorio) throws SQLException {
+        ArrayList<Relatorio> listaRetorno = new ArrayList<>();
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        String query = "SELECT * FROM tabela WHERE SELECT * FROM tabela WHERE Data_Venda BETWEEN ? and ?";
+        String query = "SELECT CLI.NOME CLIENTE, CA.DATA_VENDA VENDA, CA.VALOR_TOTAL VALOR, P.NOME_PRODUTO PRODUTO, VP.QTDE QUANTIDADE, VP.KG KG FROM CAIXA CA JOIN CLIENTES CLI ON CA.ID_CLIENTE = CLI.ID_CLIENTE JOIN VENDA_PRODUTO VP ON VP.ID_CAIXA = CA.ID JOIN PRODUTOS P ON P.ID_PRODUTO = VP.ID_PRODUTO WHERE CA.DATA_VENDA  >= ? and CA.DATA_VENDA <=  ?";
 
         try {
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
-//            stmt.setDate(1, venda./*getDataInicio()*/);
-//            stmt.setDate(2, venda./*getDataFim()*/);
+            stmt = conexao
+                    .prepareStatement(query);
+            stmt.setString(1, relatorio.getDataInicio().toString());
+            stmt.setString(2, relatorio.getDataFim().toString() + " 11:59:59");
 
             rs = stmt.executeQuery();
 
-            if (rs != null) {
-                while (rs.next()) {
-                    Produto relatorio = new Produto();
-//                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
-//                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
-//                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
-//                    relatorio./*setProduto*/(rs.getInt("PRODUTO_VENDA"));
-//                    relatorio./*setQuantidade*/(rs.getInt("QTDE_PRODUTO"));
-//                    
-//                    listaRetorno.Add(relatorio);
-                }
-            } else {
-                throw new IllegalArgumentException("Data não existe ou banco de dados vazio.");
+            while (rs.next()) {
+                Relatorio retorno = new Relatorio();
+                retorno.setCliente(rs.getString("CLIENTE"));
+                retorno.setValorTotal(rs.getDouble("VALOR"));
+                retorno.setDataCompra(rs.getDate("VENDA"));
+                retorno.setQuantidade(rs.getInt("QUANTIDADE"));
+                retorno.setKg(rs.getDouble("KG"));
+                retorno.setProduto(rs.getString("PRODUTO"));
+
+                listaRetorno.add(retorno);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+
+            return listaRetorno;
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(RelatorioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -119,8 +120,8 @@ public class RelatorioDAO {
                 if (conexao != null) {
                     conexao.close();
                 }
-            } catch (SQLException sQLException) {
-                throw new IllegalArgumentException("Erro ao fechar conexão.");
+            } catch (SQLException e) {
+                throw new IllegalArgumentException("Erro ao fechar conexão");
             }
         }
         return null;

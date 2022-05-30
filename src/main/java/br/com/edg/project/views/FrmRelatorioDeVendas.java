@@ -219,81 +219,91 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
         try {
-//            if (Validador.validaDateRelatorio(dtDataIni)
-//                    && Validador.validaDateRelatorio(dtDataFim)) {
 
-            DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
-            boolean isAnalitico = true;
+            if (Validador.validaDateRelatorio(dtDataIni)
+                    && Validador.validaDateRelatorio(dtDataFim)) {
 
-            LocalDate dataFim = dtDataFim
-                    .getDate()
-                    .toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate();
+                DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
+                boolean isAnalitico = true;
 
-            LocalDate dataIni = dtDataIni
-                    .getDate()
-                    .toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate();
-
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                if (model.getColumnName(i).equalsIgnoreCase("Produto")
-                        || model.getColumnName(i).equalsIgnoreCase("Quantidade")) {
-                    isAnalitico = false;
+                if (model.getRowCount() > 0) {
+                    for (int i = 0; i <= model.getRowCount(); i++) {
+                        model.removeRow(0);
+                    }
                 }
+
+                LocalDate dataFim = dtDataFim
+                        .getDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+
+                LocalDate dataIni = dtDataIni
+                        .getDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    if (model.getColumnName(i).equalsIgnoreCase("Produto")
+                            || model.getColumnName(i).equalsIgnoreCase("Quantidade")
+                            || model.getColumnName(i).equalsIgnoreCase("Kg")) {
+                        isAnalitico = false;
+                    }
+                }
+
+                if (rdnAnalitico.isSelected()) {
+                    if (isAnalitico) {
+                        model.addColumn("Produto");
+                        model.addColumn("Quantidade");
+                        model.addColumn("Kg");
+                    }
+
+                    List<Relatorio> relatorios = RelatorioController
+                            .consultaAnalitica(Date.valueOf(dataIni), Date.valueOf(dataFim));
+
+                    double valorTotal = 0;
+                    for (Relatorio r : relatorios) {
+                        model.addRow(new Object[]{
+                            r.getCliente(),
+                            r.getDataCompra(),
+                            r.getValorTotal(),
+                            r.getProduto(),
+                            r.getQuantidade(),
+                            r.getKg()
+                        });
+
+                        valorTotal += r.getValorTotal();
+                    }
+
+                    txtValorTotal.setText(String.valueOf(valorTotal));
+                }
+
+                if (rdnSintetico.isSelected()) {
+                    if (model.getColumnCount() > 3) {
+                        TableColumnModel columnModel = tblRelatorio.getColumnModel();
+                        columnModel.removeColumn(columnModel.getColumn(3));
+                        columnModel.removeColumn(columnModel.getColumn(3));
+                    }
+                    List<Relatorio> relatorios = RelatorioController
+                            .consultaSintetica(Date.valueOf(dataIni), Date.valueOf(dataFim));
+
+                    double valorTotal = 0;
+                    for (Relatorio r : relatorios) {
+                        model.addRow(new Object[]{
+                            r.getCliente(),
+                            r.getDataCompra(),
+                            r.getValorTotal()
+                        });
+
+                        valorTotal += r.getValorTotal();
+                    }
+
+                    txtValorTotal.setText(String.valueOf(valorTotal));
+                }
+
+                btnDownload.setEnabled(true);
             }
-
-            if (rdnAnalitico.isSelected()) {
-                if (isAnalitico) {
-                    model.addColumn("Produto");
-                    model.addColumn("Quantidade");
-                }
-
-//                ArrayList<Relatorio> relatorios = new ArrayList<>();
-//                relatorios = RelatorioController
-//                        .consultaSintetica(Date.valueOf(dtDataIni.getDateFormatString()), Date.valueOf(dtDataFim.getDateFormatString()));
-//
-//                double valorTotal = 0;
-//                for (Relatorio r : relatorios) {
-//                    model.addRow(new Object[]{
-//                        r.getCliente(),
-//                        r.getDataCompra(),
-//                        r.getValorTotal()
-//                    });
-//
-//                    valorTotal += r.getValorTotal();
-//                }
-//
-//                txtValorTotal.setText(String.valueOf(valorTotal));
-            }
-
-            if (rdnSintetico.isSelected()) {
-                if (model.getColumnCount() > 3) {
-                    TableColumnModel columnModel = tblRelatorio.getColumnModel();
-                    columnModel.removeColumn(columnModel.getColumn(3));
-                    columnModel.removeColumn(columnModel.getColumn(3));
-                }
-                List<Relatorio> relatorios = RelatorioController
-                        .consultaSintetica(Date.valueOf(dataIni), Date.valueOf(dataFim));
-
-                double valorTotal = 0;
-                for (Relatorio r : relatorios) {
-                    model.addRow(new Object[]{
-                        r.getCliente(),
-                        r.getDataCompra(),
-                        r.getValorTotal()
-                    });
-
-                    valorTotal += r.getValorTotal();
-                }
-                
-                 txtValorTotal.setText(String.valueOf(valorTotal));
-            }
-            
-           
-            btnDownload.setEnabled(true);
-//            }
         } catch (IllegalArgumentException e) {
             Logger.getLogger(FrmRelatorioDeVendas.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(this, e.getMessage(), "Campo Obrigatórios", JOptionPane.WARNING_MESSAGE);

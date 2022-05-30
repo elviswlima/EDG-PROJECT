@@ -13,8 +13,9 @@ import java.sql.Date;
  */
 public class Relatorio {
 
-    private int produto;
+    private String produto;
     private int quantidade;
+    private double kg;
     private double valorTotal;
     private Date dataInicio;
     private Date dataFim;
@@ -22,6 +23,14 @@ public class Relatorio {
     private Date dataCompra;
 
     public Relatorio() {
+    }
+
+    public double getKg() {
+        return kg;
+    }
+
+    public void setKg(double kg) {
+        this.kg = kg;
     }
 
     public Date getDataCompra() {
@@ -48,11 +57,11 @@ public class Relatorio {
         this.dataFim = dataFim;
     }
     
-    public int getProduto() {
+    public String getProduto() {
         return produto;
     }
 
-    public void setProduto(int produto) {
+    public void setProduto(String produto) {
         this.produto = produto;
     }
 

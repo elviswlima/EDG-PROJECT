@@ -450,18 +450,23 @@ public class FrmCaixa extends javax.swing.JFrame {
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFinalizarCompraActionPerformed
         try {
             DefaultTableModel dtm = (DefaultTableModel) tblListaProduto.getModel();
+            Caixa caixa = new Caixa();
+            caixa.setIdCliente(cliente.getId());
+            caixa.setValorTotal(Double.parseDouble(txtValorCompra.getText()));
+            caixa.setKg(0.0);
+            caixa.setQtde(0);
+
             for (int i = 0; i < dtm.getRowCount(); i++) {
-                Caixa caixa = new Caixa();
-                caixa.setIdCliente(cliente.getId());
-
                 if (dtm.getValueAt(i, 6).toString().equalsIgnoreCase("SIM")) {
-                    caixa.setKg(Double.parseDouble(dtm.getValueAt(i, 4).toString()));
-                    caixa.setValorTotal(Double.parseDouble(txtValorCompra.getText()));
+                    caixa.setKg(Double.parseDouble(dtm.getValueAt(i, 4).toString()) + caixa.getKg());
                 } else {
-                    caixa.setQtde(Integer.parseInt(dtm.getValueAt(i, 4).toString()));
-                    caixa.setValorTotal(Double.parseDouble(txtValorCompra.getText()));
+                    caixa.setQtde(Integer.parseInt(dtm.getValueAt(i, 4).toString()) + caixa.getQtde());
                 }
-
+            }
+            
+            ArrayList<Produto> list = new ArrayList<>();
+            
+            for (int i = 0; i < dtm.getRowCount(); i++) {
                 Produto produto = new Produto();
                 produto.setCodProduto(Integer.parseInt(dtm.getValueAt(i, 0).toString()));
                 produto.setNomeProduto(dtm.getValueAt(i, 1).toString());
@@ -470,17 +475,19 @@ public class FrmCaixa extends javax.swing.JFrame {
                 produto.setValidade(Date.valueOf(dtm.getValueAt(i, 2).toString()));
                 produto.setValorProduto(Double.parseDouble(dtm.getValueAt(i, 3).toString()));
 
-                if (CaixaController.registrarVenda(caixa, produto)) {
-                    JOptionPane.showMessageDialog(this, "Venda realizada com sucesso! ", "Produto vendido com sucesso!", JOptionPane.INFORMATION_MESSAGE);
-                    
-                    while (tblListaProduto.getRowCount() > 0) {
-                        dtm.removeRow(0);
-                    }
-                    
-                    txtValorCompra.setText("");
-                    
-                    JOptionPane.showMessageDialog(this, "Nota fiscal gerada, N°: " + NotaFiscalController.findByCliente(cliente), "Nota fiscal!", JOptionPane.INFORMATION_MESSAGE);
+                list.add(produto);
+            }
+
+            if (CaixaController.registrarVenda(caixa, list)) {
+                JOptionPane.showMessageDialog(this, "Venda realizada com sucesso! ", "Produto vendido com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+
+                while (tblListaProduto.getRowCount() > 0) {
+                    dtm.removeRow(0);
                 }
+
+                txtValorCompra.setText("");
+
+                JOptionPane.showMessageDialog(this, "Nota fiscal gerada, N°: " + NotaFiscalController.findByCliente(cliente), "Nota fiscal!", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (NumberFormatException ex) {
@@ -621,7 +628,7 @@ public class FrmCaixa extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmCaixa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         // </editor-fold>
-        
+
         // </editor-fold>
 
         /* Create and display the form */

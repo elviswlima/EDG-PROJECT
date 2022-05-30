@@ -84,14 +84,14 @@ public class Validador {
     }
   
     public static boolean validaDateRelatorio(JDateChooser jDateValProduto){
-       LocalDate dataAtual = LocalDate.now();
+       LocalDate dataAtual = LocalDate.now().plusDays(1);
         LocalDate dataRela = jDateValProduto
                 .getDate()
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
                 
-        if(dataAtual.isAfter(dataRela)) {
+        if(!dataAtual.isAfter(dataRela)) {
             throw new IllegalArgumentException("A data fim tem que ser maior a data atual!!");
         }
         

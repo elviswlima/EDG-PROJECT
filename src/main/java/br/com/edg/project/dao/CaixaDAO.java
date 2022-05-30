@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -101,11 +102,12 @@ public class CaixaDAO {
      * Registra venda no banco de dados
      *
      * @param caixa - Objeto caixa com as registrar a venda no banco de dados
-     * @param produto - Objeto com a indentificação do produto que será
-     * realizada a venda
+     * @param produtos Objeto com a indentificação do produto que será realizada
+     * a venda
+     * @param isSelected
      * @return
      */
-    public static boolean registrarVenda(Caixa caixa, Produto produto) {
+    public static boolean registrarVenda(Caixa caixa, ArrayList<Produto> produtos) {
         try {
             PreparedStatement stmt;
             Class.forName(Driver);
@@ -116,39 +118,45 @@ public class CaixaDAO {
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, caixa.getIdCliente());
             stmt.setInt(2, caixa.getQtde());
-            stmt.setDouble(3, 0);
+            stmt.setDouble(3, caixa.getKg());
             stmt.setDouble(4, caixa.getValorTotal());
 
             if (stmt.executeUpdate() > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
 
                 if (rs.next()) {
-                    VendaProduto vp = new VendaProduto(
-                            rs.getInt(1),
-                            produto.getCodProduto(),
-                            produto.getQtdeProduto(),
-                            produto.getQtdePorKg(),
-                            produto.getValorProduto()
-                    );
+
+                    for (Produto p : produtos) {
+                        if (p.getQtdePorKg() > 0) {
+                            stmt = connection.prepareStatement(
+                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?);");
+                            stmt.setInt(1, rs.getInt(1));
+                            stmt.setInt(2, p.getCodProduto());
+                            stmt.setDouble(3, p.getQtdePorKg());
+                            stmt.setDouble(4, p.getValorProduto());
+                            if (stmt.executeUpdate() == 0) {
+                                return false;
+                            }
+                        } else {
+                            stmt = connection.prepareStatement(
+                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, VALOR_TOTAL) VALUES (?, ?, ?, ?);");
+                            stmt.setInt(1, rs.getInt(1));
+                            stmt.setInt(2, p.getCodProduto());
+                            stmt.setDouble(3, p.getQtdeProduto());
+                            stmt.setDouble(4, p.getValorProduto());
+                            if (stmt.executeUpdate() == 0) {
+                                return false;
+                            }
+                        }
+                    }
 
                     stmt = connection.prepareStatement(
-                            "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?, ?);");
-                    stmt.setInt(1, vp.getIdCaixa());
-                    stmt.setInt(2, vp.getIdProduto());
-                    stmt.setInt(3, vp.getQtde());
-                    stmt.setDouble(4, vp.getKg());
-                    stmt.setDouble(5, vp.getValorUni());
+                            "INSERT INTO NOTA_FISCAL(ID_CAIXA_NF, ID_CLIENTE_NF, VALOR_TOTAL) VALUES (?, ?, ?);");
+                    stmt.setInt(1, rs.getInt(1));
+                    stmt.setInt(2, caixa.getIdCliente());
+                    stmt.setDouble(3, caixa.getValorTotal());
 
-                    if (stmt.executeUpdate() > 0) {
-                        stmt = connection.prepareStatement(
-                                "INSERT INTO NOTA_FISCAL(ID_CAIXA_NF, ID_CLIENTE_NF, VALOR_TOTAL) VALUES (?, ?, ?);");
-                        stmt.setInt(1, vp.getIdCaixa());
-                        stmt.setInt(2, vp.getIdProduto());
-                        stmt.setDouble(3, caixa.getValorTotal());
-
-                        return stmt.executeUpdate() > 0;
-                    }
-                    return false;
+                    return stmt.executeUpdate() > 0;
                 }
             }
 

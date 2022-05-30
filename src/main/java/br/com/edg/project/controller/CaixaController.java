@@ -56,7 +56,7 @@ public class CaixaController {
         return p;
     }
     
-    public static boolean registrarVenda(Caixa caixa, Produto produto) {
+    public static boolean registrarVenda(Caixa caixa, ArrayList<Produto> produto) {
            return CaixaDAO.registrarVenda(caixa, produto);
     }
 
