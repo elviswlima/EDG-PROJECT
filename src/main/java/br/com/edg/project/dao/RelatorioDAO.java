@@ -24,7 +24,7 @@ public class RelatorioDAO {
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
     private static final String user = "root";
     private static final String senha = "";
-    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
 
     private static Connection conexao;
 
@@ -82,7 +82,7 @@ public class RelatorioDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        String query = "SELECT CLI.NOME CLIENTE, CA.DATA_VENDA VENDA, CA.VALOR_TOTAL VALOR, P.NOME_PRODUTO PRODUTO, VP.QTDE QUANTIDADE, VP.KG KG FROM CAIXA CA JOIN CLIENTES CLI ON CA.ID_CLIENTE = CLI.ID_CLIENTE JOIN VENDA_PRODUTO VP ON VP.ID_CAIXA = CA.ID JOIN PRODUTOS P ON P.ID_PRODUTO = VP.ID_PRODUTO WHERE CA.DATA_VENDA  >= ? and CA.DATA_VENDA <=  ?";
+        String query = "SELECT CLI.NOME CLIENTE, CA.DATA_VENDA VENDA, CA.VALOR_TOTAL VALOR, P.NOME_PRODUTO PRODUTO, VP.QTDE QUANTIDADE, VP.KG KG FROM CAIXA CA JOIN CLIENTES CLI ON CA.ID_CLIENTE = CLI.ID_CLIENTE JOIN VENDA_PRODUTO VP ON VP.ID_CAIXA = CA.ID JOIN PRODUTOS P ON P.ID_PRODUTO = VP.ID_PRODUTO WHERE CA.DATA_VENDA  >= ? and CA.DATA_VENDA <=  ? ORDER BY CA.DATA_VENDA ASC";
 
         try {
             Class.forName(Driver);

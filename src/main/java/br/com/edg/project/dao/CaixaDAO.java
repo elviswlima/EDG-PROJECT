@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class CaixaDAO {
 
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
     private static Connection connection;
 
     /**
@@ -129,24 +129,22 @@ public class CaixaDAO {
                     for (Produto p : produtos) {
                         if (p.getQtdePorKg() > 0) {
                             stmt = connection.prepareStatement(
-                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, KG, VALOR_TOTAL) VALUES (?, ?, ?, ?);");
+                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, KG, VALOR_TOTAL, QTDE) VALUES (?, ?, ?, ?, ?);");
                             stmt.setInt(1, rs.getInt(1));
                             stmt.setInt(2, p.getCodProduto());
                             stmt.setDouble(3, p.getQtdePorKg());
                             stmt.setDouble(4, p.getValorProduto());
-                            if (stmt.executeUpdate() == 0) {
-                                return false;
-                            }
+                            stmt.setInt(5, 0);
+                            stmt.executeUpdate();
                         } else {
                             stmt = connection.prepareStatement(
-                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, VALOR_TOTAL) VALUES (?, ?, ?, ?);");
+                                    "INSERT INTO VENDA_PRODUTO (ID_CAIXA, ID_PRODUTO, QTDE, VALOR_TOTAL, KG) VALUES (?, ?, ?, ?, ?);");
                             stmt.setInt(1, rs.getInt(1));
                             stmt.setInt(2, p.getCodProduto());
-                            stmt.setDouble(3, p.getQtdeProduto());
+                            stmt.setInt(3, p.getQtdeProduto());
                             stmt.setDouble(4, p.getValorProduto());
-                            if (stmt.executeUpdate() == 0) {
-                                return false;
-                            }
+                            stmt.setDouble(5, 0);
+                            stmt.executeUpdate();
                         }
                     }
 

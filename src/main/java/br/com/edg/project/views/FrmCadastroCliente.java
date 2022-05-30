@@ -114,10 +114,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        try {
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
         txtCpfPesquisa.setEnabled(false);
         txtCpfPesquisa.setName("CPF"); // NOI18N
         txtCpfPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -393,10 +390,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         cboSexo.setEnabled(false);
         cboSexo.setName("Sexo"); // NOI18N
 
-        try {
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
         txtCpf.setEnabled(false);
         txtCpf.setName("CPF"); // NOI18N
         txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -428,10 +422,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("* Telefone:");
 
-        try {
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
         txtTelefone.setToolTipText("");
         txtTelefone.setEnabled(false);
         txtTelefone.setName("Telefone"); // NOI18N

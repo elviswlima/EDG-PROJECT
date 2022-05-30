@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class ProdutoDAO {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWD = "";
     private static Connection connection;
@@ -87,8 +87,8 @@ public class ProdutoDAO {
                         produto.setCodProduto(rs.getInt("ID_PRODUTO"));
                         produto.setNomeProduto(rs.getString("NOME_PRODUTO"));
                         produto.setValorProduto(rs.getDouble("VALOR"));
-                        produto.setQtdeProduto(rs.getInt("QUANTIDADE"));
-                        produto.setQtdePorKg(rs.getDouble("KG"));
+                        produto.setQtdeProduto(qtde);
+                        produto.setQtdePorKg(kg);
                         produto.setValidade(rs.getDate("VALIDADE"));
 
                         return produto;

@@ -455,28 +455,38 @@ public class FrmCaixa extends javax.swing.JFrame {
             caixa.setValorTotal(Double.parseDouble(txtValorCompra.getText()));
             caixa.setKg(0.0);
             caixa.setQtde(0);
-
-            for (int i = 0; i < dtm.getRowCount(); i++) {
-                if (dtm.getValueAt(i, 6).toString().equalsIgnoreCase("SIM")) {
-                    caixa.setKg(Double.parseDouble(dtm.getValueAt(i, 4).toString()) + caixa.getKg());
-                } else {
-                    caixa.setQtde(Integer.parseInt(dtm.getValueAt(i, 4).toString()) + caixa.getQtde());
-                }
-            }
             
             ArrayList<Produto> list = new ArrayList<>();
-            
+
             for (int i = 0; i < dtm.getRowCount(); i++) {
                 Produto produto = new Produto();
                 produto.setCodProduto(Integer.parseInt(dtm.getValueAt(i, 0).toString()));
                 produto.setNomeProduto(dtm.getValueAt(i, 1).toString());
-                produto.setQtdePorKg(caixa.getKg() == null ? 0 : caixa.getKg());
-                produto.setQtdeProduto(caixa.getQtde());
                 produto.setValidade(Date.valueOf(dtm.getValueAt(i, 2).toString()));
                 produto.setValorProduto(Double.parseDouble(dtm.getValueAt(i, 3).toString()));
-
+                
+                if (dtm.getValueAt(i, 6).toString().equalsIgnoreCase("SIM")) {
+                    caixa.setKg(Double.parseDouble(dtm.getValueAt(i, 4).toString()) + caixa.getKg());
+                    produto.setQtdePorKg(Double.parseDouble(dtm.getValueAt(i, 4).toString()));
+                } else {
+                    caixa.setQtde(Integer.parseInt(dtm.getValueAt(i, 4).toString()) + caixa.getQtde());
+                    produto.setQtdeProduto(Integer.parseInt(dtm.getValueAt(i, 4).toString()));
+                }
+                
                 list.add(produto);
             }
+            
+//            for (int i = 0; i < dtm.getRowCount(); i++) {
+//                Produto produto = new Produto();
+//                produto.setCodProduto(Integer.parseInt(dtm.getValueAt(i, 0).toString()));
+//                produto.setNomeProduto(dtm.getValueAt(i, 1).toString());
+//                produto.setQtdePorKg(caixa.getKg());
+//                produto.setQtdeProduto(caixa.getQtde());
+//                produto.setValidade(Date.valueOf(dtm.getValueAt(i, 2).toString()));
+//                produto.setValorProduto(Double.parseDouble(dtm.getValueAt(i, 3).toString()));
+//
+//                list.add(produto);
+//            }
 
             if (CaixaController.registrarVenda(caixa, list)) {
                 JOptionPane.showMessageDialog(this, "Venda realizada com sucesso! ", "Produto vendido com sucesso!", JOptionPane.INFORMATION_MESSAGE);
