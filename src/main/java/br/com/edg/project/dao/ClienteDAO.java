@@ -17,7 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe para fazer consultas, alterações e cadastro de clientes
+ * 
  * @author Danilo
  */
 public class ClienteDAO {
@@ -28,6 +29,12 @@ public class ClienteDAO {
     private static final String PASSWD = "";
     private static Connection connection;
 
+    /**
+     * Método para consultar cliente cadastrado através do ID
+     * @param cliente - Objeto instanciado para referenciar e setar informações
+     * @return Informações gravadas do cliente
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static Cliente consultarById(Cliente cliente) throws SQLException {
         try {
             Cliente rCliente = new Cliente();
@@ -105,6 +112,13 @@ public class ClienteDAO {
         return null;
     }
 
+    /**
+     * Método para consulta do cliente através do nome ou CPF
+     * @param cliente - Objeto instanciado para referenciar e setar informações
+     * @param isCpf Variável booleana para referênciar se a pesquisa do cliente será por CPF (isCPF == True) ou Nome (isCPF == !true)
+     * @return ArrayList das informações do cliente consultadas no banco de dados
+     * @throws SQLException - Detecção de erros na conexão
+     */
     public static ArrayList<Cliente> consultarBy(Cliente cliente, boolean isCpf) throws SQLException {
         try {
             ArrayList<Cliente> clientes = new ArrayList<>();
@@ -153,6 +167,12 @@ public class ClienteDAO {
         return null;
     }
 
+    /**
+     * Método para registro de cliente
+     * @param cliente - Objeto instanciado para referenciar e setar informações
+     * @return True se for registrado e False se não for registrado
+     * @throws SQLException - Detecção de erros na conexão
+     */
     public static boolean inserirCliente(Cliente cliente) throws SQLException {
         try {
             Class.forName(DRIVER);
@@ -183,6 +203,12 @@ public class ClienteDAO {
         }
     }
 
+    /**
+     * Método para alterar informações do cliente
+     * @param cliente - Objeto instanciado para referenciar e setar informações
+     * @return True se for alterado e False se não for alterado
+     * @throws SQLException - Detecção de erros na conexão
+     */
     public static boolean alterarCliente(Cliente cliente) throws SQLException {
         try {
             Class.forName(DRIVER);
@@ -214,6 +240,12 @@ public class ClienteDAO {
         }
     }
 
+    /**
+     * Método para excluir cliente e informações do mesmo
+     * @param cliente - Objeto instanciado para referenciar o ID
+     * @return True se for excluído e False se não for excluído
+     * @throws SQLException - Detecção de erros na conexão
+     */
     public static boolean excluirCliente(Cliente cliente) throws SQLException {
          try {
             Class.forName(DRIVER);

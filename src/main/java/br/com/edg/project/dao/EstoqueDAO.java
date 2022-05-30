@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Classe para abrir conexão com a base de dados 'edg'
+ * Classe para consultar, excluir ou alterar produtos no estoque
  *
  * @author Elvis - PC
  */
@@ -90,8 +90,7 @@ public class EstoqueDAO {
     /**
      * Método para deletar um produto através do Id do produto
      *
-     * @param prod - objeto a ser recebido como referência para exclusão
-     * (prod.getCodProduto();)
+     * @param prod - Objeto instanciado para referenciar o ID do produto a ser excluído
      * @return - true se os dados forem excluídos / false se não forem excluídos
      * @throws ClassNotFoundException - Não achou o driver
      * @throws SQLException - Erro ao tentar conectar-se à base de dados

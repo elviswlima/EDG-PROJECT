@@ -13,6 +13,11 @@ import br.com.edg.project.model.Cliente;
  */
 public class NotaFiscalController {
     
+    /**
+     * Método findByCliente vai buscar o cliente que está comprando para gerar a nota fiscal
+     * @param cliente - Objeto que irá referenciar o Id do cliente para gerar a nota
+     * @return Variável Int como Id da nota fiscal
+     */
     public static int findByCliente(Cliente cliente) {
         return NotaFiscalDAO.findByCliente(cliente.getId());
     }

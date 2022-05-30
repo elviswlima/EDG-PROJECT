@@ -6,10 +6,11 @@ package br.com.edg.project;
 
 import br.com.edg.project.views.FrmLogin;
 /**
- *
  * @author Elvis
+ * @application - Iniciar sistema
  */
 public class Application {
+
     public static void main(String[] args) {
         FrmLogin login = new FrmLogin();
         login.setLocationRelativeTo(null);

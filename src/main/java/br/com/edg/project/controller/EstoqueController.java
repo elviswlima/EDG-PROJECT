@@ -2,7 +2,6 @@ package br.com.edg.project.controller;
 
 import br.com.edg.project.dao.EstoqueDAO;
 import br.com.edg.project.model.Produto;
-import java.util.ArrayList;
 
 /**
  * Classe para conexão de informações com a DAO
@@ -11,9 +10,9 @@ import java.util.ArrayList;
 public class EstoqueController {
     
     /**
-     * Método consultarEstoque para retornar um ArrayList dos dados
-     * @param codProduto - nome da variável como referência para consulta
-     * @return - ArrayList das informações consultadas no banco
+     * Método para consultar informações no banco de dados e retornar as informações que foram gravadas
+     * @param codProduto - Código do produto como referência para consulta
+     * @return - Informações do produto gravados no banco de dados
      */
     public static Produto consultarEstoque(int codProduto) {
                 
@@ -25,7 +24,7 @@ public class EstoqueController {
     
     /**
      * Método excluirProduto para excluir dados
-     * @param codProduto - nome da variável como referência para excluir informações
+     * @param codProduto - Código do produto como referência para excluir informações
      * @return true para excluído e false para não excluído
      */
     public static boolean excluirProduto(int codProduto) {
@@ -48,7 +47,7 @@ public class EstoqueController {
     
     /**
      * Método alterarProduto para alterar dados
-     * @param prod - objeto a ser recebido para alteração
+     * @param prod - Objeto a ser recebido para alteração
      * @return true para alterado e false para não alterado
      */
     public static boolean alterarProduto(Produto prod) {

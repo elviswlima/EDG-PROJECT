@@ -13,7 +13,12 @@ import javax.swing.JTextField;
  * @author Danilo
  */
 public class Validador {
-    
+    /**
+     * Método para validação de String
+     * @param field - Dados da JTextField que será validado
+     * @return True para String e False caso esteja nulo, vazio, ou com "spaces"
+     * @throws IllegalArgumentException - Detecção de erros
+     */
     public static boolean validaString(JTextField field) throws IllegalArgumentException {
          if (field.getText() != null && !field.getText().trim().isEmpty()) {
              return true;
@@ -22,6 +27,11 @@ public class Validador {
          throw new IllegalArgumentException("Favor preencher campo obrigat�rio: " + field.getName());
     }
     
+    /**
+     * Método para validação de Integer
+     * @param field  Dados da JTextField que será validado e transformado para inteiros
+     * @throws NumberFormatException - Detecta se os dados não forem números Inteiros
+     */
     public static void validaInteger(JTextField field) {
         try {
             if (field.toString() != null && !field.toString().trim().isEmpty()) {
@@ -37,6 +47,11 @@ public class Validador {
                     
     }
     
+    /**
+     * Método para validação de Double
+     * @param field Dados da JTextField que será validado e transformado para decimais
+     * @throws NumberFormatException - Detecta se os dados não forem números Decimais
+     */
     public static void validaDouble(JTextField field) {
         try {
             if (field.toString() != null && !field.toString().trim().isEmpty()) {
@@ -68,6 +83,12 @@ public class Validador {
         
         return true;
     }
+    
+    /**
+     * Método para validação de Date
+     * @param jDateValProduto - Dados da JDate que será validado
+     * @return True para modelo Date correto e False para não correto
+     */
     public static boolean validaDate(JDateChooser jDateValProduto){
         LocalDate dataAtual = LocalDate.now();
         LocalDate validade = jDateValProduto

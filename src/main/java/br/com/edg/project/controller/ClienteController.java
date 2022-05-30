@@ -19,6 +19,12 @@ import java.util.List;
  */
 public class ClienteController {
     
+    /**
+     * Método para gravar informações do cliente no banco de dados
+     * @param cliente - Objeto Cliente a ser recebido para inserção de dados
+     * @return true para inserido e false para não inserido
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static boolean inserirCliente(Cliente cliente) throws SQLException {
         /* Valida se gravou corretamente no banco de dados */
         if (ClienteDAO.inserirCliente(cliente)) {
@@ -28,16 +34,35 @@ public class ClienteController {
         throw new RuntimeException("Erro ao cadastrar cliente");
     }
     
+    /**
+     * Método para consultar clientes
+     * @param cliente - Objeto instanciado para referenciar busca
+     * @return Informações do cliente gravadas no banco de dados para inserção na FrmCadastroCliente
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static Cliente consultaClientes(Cliente cliente) throws SQLException {
         return ClienteDAO.consultarById(cliente);
     }
     
+    /**
+     * Método para receber o CEP e retornar o endereço através de uma API
+     * @param cep - Variável do tipo string com o CEP como referência
+     * @return Informações do CEP consultado em "https://viacep.com.br/ws/" + cep + "/json/"
+     * @throws IOException 
+     */
     public static Cep consultarCep(String cep) throws IOException {
         CepService cepService = new CepService();
         
         return cepService.consultaCep(cep);
     }
     
+    /**
+     * Método para consultar informações no banco de dados e retornar os dados gravados
+     * @param cliente - Objeto para passar nome como referência, caso usuário pesquise por nome
+     * @param isCpf - Variável booleana para referênciar se a pesquisa do cliente será por CPF (isCPF == True) ou Nome (isCPF == !true)
+     * @return ArrayList de informações do cliente consultadas no banco dados
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static ArrayList<Cliente> consultarBy(Cliente cliente, boolean isCpf) throws SQLException {
         ArrayList<Cliente> clientes = ClienteDAO.consultarBy(cliente, isCpf);
         
@@ -48,6 +73,12 @@ public class ClienteController {
         return clientes;
     }
 
+    /**
+     * Método para alterar dados do cliente
+     * @param cliente - Objeto para passar atributos a serem alterados
+     * @return True para alterado e False para não alterado
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static boolean alterarCliente(Cliente cliente) throws SQLException {
          /* Valida se gravou corretamente no banco de dados */
         if (ClienteDAO.alterarCliente(cliente)) {
@@ -57,6 +88,12 @@ public class ClienteController {
         throw new RuntimeException("Erro ao alterar cliente");
     }
     
+    /**
+     * Método para excluir cliente e suas informações do banco de dados
+     * @param cliente - Objeto que irá referenciar um Id do cliente que será excluído
+     * @return True para excluído e False para não excluído
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static boolean excluirCliente(Cliente cliente) throws SQLException {
         /* Valida se gravou corretamente no banco de dados */
         if (ClienteDAO.excluirCliente(cliente)) {

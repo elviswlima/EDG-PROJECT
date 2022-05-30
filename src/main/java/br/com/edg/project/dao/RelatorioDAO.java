@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe para abrir conexão com a base de dados 'edg'
+ * Classe para consulta sintética e analítica
  *
  * @author elvis.wlima
  */
@@ -28,6 +28,12 @@ public class RelatorioDAO {
 
     private static Connection conexao;
 
+    /**
+     * Método para realizar uma consulta sintética
+     * @param relatorio - Objeto instanciado para referenciar a busca e setar informações
+     * @return ArrayList de informações de venda consultada no banco
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static List<Relatorio> consultaSintetica(Relatorio relatorio) throws SQLException {
         List<Relatorio> listaRetorno = new ArrayList<>();
 
@@ -76,6 +82,12 @@ public class RelatorioDAO {
         return null;
     }
 
+    /**
+     * Método para realizar uma consulta analítica
+     * @param relatorio - Objeto instanciado para referenciar a busca e setar informações
+     * @return ArrayList de informações de venda consultada no banco
+     * @throws SQLException - Detecção de erro na conexão
+     */
     public static ArrayList<Relatorio> consultaAnalitica(Relatorio relatorio) throws SQLException {
         ArrayList<Relatorio> listaRetorno = new ArrayList<>();
 

@@ -11,8 +11,8 @@ public class LoginController {
     
     /**
      * Método que controla acesso ao sistema
-     * @param login - nome do usuário registrado
-     * @param senha - senha do usuário registrado
+     * @param login - Email do funcionário registrado
+     * @param senha - Eenha do funcionário registrado
      * @return true - libera acesso / false - não libera o acesso
      */
     public static boolean acessarLogin(String login, String senha) {

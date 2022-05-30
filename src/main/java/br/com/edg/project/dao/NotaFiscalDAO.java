@@ -14,7 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe para consultar nota fiscal
+ * 
  * @author Danilo
  */
 public class NotaFiscalDAO {
@@ -23,6 +24,11 @@ public class NotaFiscalDAO {
     private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
     private static Connection connection;
 
+    /**
+     * Método para consultar nota fiscal de determinado cliente
+     * @param id - Id do cliente para referenciar busca
+     * @return Int - ID da nota fiscal
+     */
     public static int findByCliente(int id) {
         try {
             Class.forName(Driver);

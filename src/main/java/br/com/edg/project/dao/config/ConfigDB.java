@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class ConfigDB {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWD = "";
 

@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 
 /**
  *
+ * Classe para registro e consulta do produtos no banco de dados
+ * 
  * @author Danilo
  */
 public class ProdutoDAO {
@@ -25,6 +27,11 @@ public class ProdutoDAO {
     private static final String PASSWD = "";
     private static Connection connection;
 
+    /**
+     * Método para registrar um produto
+     * @param produto - Objeto instanciado para referenciar e setar informações
+     * @return True se for registrado e False se não for registrado
+     */
     public static boolean registrar(Produto produto) {
         try {
             Class.forName(DRIVER);
@@ -63,6 +70,11 @@ public class ProdutoDAO {
         return false;
     }
 
+    /**
+     * Método para consulta do produto
+     * @param id - Parâmetro para referenciar o id do produto que será consultado
+     * @return Informações do produto gravado no banco
+     */
     public static Produto findById(int id) {
         Produto produto = new Produto();
         PreparedStatement stmt = null;
