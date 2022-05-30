@@ -24,7 +24,7 @@ public class RelatorioDAO {
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
     private static final String user = "root";
     private static final String senha = "";
-    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
 
     private static Connection conexao;
 

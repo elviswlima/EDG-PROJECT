@@ -476,18 +476,6 @@ public class FrmCaixa extends javax.swing.JFrame {
                 list.add(produto);
             }
             
-//            for (int i = 0; i < dtm.getRowCount(); i++) {
-//                Produto produto = new Produto();
-//                produto.setCodProduto(Integer.parseInt(dtm.getValueAt(i, 0).toString()));
-//                produto.setNomeProduto(dtm.getValueAt(i, 1).toString());
-//                produto.setQtdePorKg(caixa.getKg());
-//                produto.setQtdeProduto(caixa.getQtde());
-//                produto.setValidade(Date.valueOf(dtm.getValueAt(i, 2).toString()));
-//                produto.setValorProduto(Double.parseDouble(dtm.getValueAt(i, 3).toString()));
-//
-//                list.add(produto);
-//            }
-
             if (CaixaController.registrarVenda(caixa, list)) {
                 JOptionPane.showMessageDialog(this, "Venda realizada com sucesso! ", "Produto vendido com sucesso!", JOptionPane.INFORMATION_MESSAGE);
 
