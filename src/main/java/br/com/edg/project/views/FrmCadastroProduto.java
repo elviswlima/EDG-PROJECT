@@ -402,6 +402,7 @@ public class FrmCadastroProduto extends javax.swing.JFrame {
     private void btnConsultaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaProdutoActionPerformed
         FrmEstoque estoque = new FrmEstoque();
         estoque.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnConsultaProdutoActionPerformed
 
     /**

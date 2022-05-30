@@ -108,10 +108,23 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         pnlCodCliente.setText("* Nome do Cliente:");
 
         txtNomePesquisa.setName("Nome"); // NOI18N
+        txtNomePesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomePesquisaKeyTyped(evt);
+            }
+        });
 
-        
+        try {
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCpfPesquisa.setEnabled(false);
         txtCpfPesquisa.setName("CPF"); // NOI18N
+        txtCpfPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfPesquisaKeyTyped(evt);
+            }
+        });
 
         lblDataCadaCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataCadaCliente.setText("* CPF do Cliente:");
@@ -195,6 +208,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtCidadeCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCidadeCliente.setEnabled(false);
         txtCidadeCliente.setName("Cidade"); // NOI18N
+        txtCidadeCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCidadeClienteKeyTyped(evt);
+            }
+        });
 
         lblBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblBairro.setText("* Logradouro:");
@@ -205,6 +223,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtLogradouro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLogradouroActionPerformed(evt);
+            }
+        });
+        txtLogradouro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLogradouroKeyTyped(evt);
             }
         });
 
@@ -220,13 +243,33 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtNumeroCasaCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNumeroCasaCliente.setEnabled(false);
         txtNumeroCasaCliente.setName("Número"); // NOI18N
+        txtNumeroCasaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroCasaClienteKeyTyped(evt);
+            }
+        });
 
         txtComplementoCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtComplementoCliente.setEnabled(false);
         txtComplementoCliente.setName("Complemento"); // NOI18N
+        txtComplementoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtComplementoClienteKeyTyped(evt);
+            }
+        });
 
         txtCepCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCepCliente.setName("CEP"); // NOI18N
+        txtCepCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCepClienteActionPerformed(evt);
+            }
+        });
+        txtCepCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCepClienteKeyTyped(evt);
+            }
+        });
 
         lblCEP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblCEP.setText("* CEP:");
@@ -241,6 +284,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtBairro.setEnabled(false);
         txtBairro.setName("Bairro"); // NOI18N
+        txtBairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBairroKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlEnderecoLayout = new javax.swing.GroupLayout(pnlEndereco);
         pnlEndereco.setLayout(pnlEnderecoLayout);
@@ -333,6 +381,11 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNome.setEnabled(false);
         txtNome.setName("Nome"); // NOI18N
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomeKeyTyped(evt);
+            }
+        });
 
         cboSexo.setEditable(true);
         cboSexo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -340,9 +393,17 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         cboSexo.setEnabled(false);
         cboSexo.setName("Sexo"); // NOI18N
 
-        
+        try {
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCpf.setEnabled(false);
         txtCpf.setName("CPF"); // NOI18N
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfKeyTyped(evt);
+            }
+        });
 
         lblDataNascCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataNascCliente.setText("* Data de Nascimento:");
@@ -353,19 +414,42 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtRg.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtRg.setEnabled(false);
         txtRg.setName("RG"); // NOI18N
+        txtRg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRgActionPerformed(evt);
+            }
+        });
+        txtRg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRgKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("* Telefone:");
 
-        
+        try {
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtTelefone.setToolTipText("");
         txtTelefone.setEnabled(false);
         txtTelefone.setName("Telefone"); // NOI18N
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyTyped(evt);
+            }
+        });
 
         lblEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblEmail.setText("* E-Mail:");
 
         txtEmail.setEnabled(false);
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmailKeyTyped(evt);
+            }
+        });
 
         lblIdCliente.setText("(ID do cliente)");
 
@@ -682,7 +766,9 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
-
+        if (txtNome.getText().length() >= 60) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -954,6 +1040,86 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao alterar no banco de dados, causa: " + ex.getMessage(), "Erro na gravação", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void txtNomePesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomePesquisaKeyTyped
+        if (txtNomePesquisa.getText().length() >= 35) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNomePesquisaKeyTyped
+
+    private void txtCpfPesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfPesquisaKeyTyped
+        if (txtCpfPesquisa.getText().length() >= 11) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCpfPesquisaKeyTyped
+
+    private void txtTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefoneKeyTyped
+        if (txtTelefone.getText().length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefoneKeyTyped
+
+    private void txtRgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRgActionPerformed
+
+    private void txtRgKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRgKeyTyped
+        if (txtRg.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRgKeyTyped
+
+    private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
+        if (txtCpf.getText().length() >= 11) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCpfKeyTyped
+
+    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+        if (txtEmail.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmailKeyTyped
+
+    private void txtCepClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCepClienteActionPerformed
+
+    private void txtCepClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepClienteKeyTyped
+        if (txtCepCliente.getText().length() >= 9) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCepClienteKeyTyped
+
+    private void txtCidadeClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeClienteKeyTyped
+        if (txtCidadeCliente.getText().length() >= 35) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCidadeClienteKeyTyped
+
+    private void txtLogradouroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLogradouroKeyTyped
+        if (txtLogradouro.getText().length() >= 60) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLogradouroKeyTyped
+
+    private void txtNumeroCasaClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCasaClienteKeyTyped
+        if (txtNumeroCasaCliente.getText().length() >= 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroCasaClienteKeyTyped
+
+    private void txtBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairroKeyTyped
+        if (txtBairro.getText().length() >= 35) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBairroKeyTyped
+
+    private void txtComplementoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComplementoClienteKeyTyped
+        if (txtComplementoCliente.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtComplementoClienteKeyTyped
 
     /**
      * @param args the command line arguments

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Classe para abrir conexão com a base de dados 'edg'
+ *
  * @author Elvis - PC
  */
 public class EstoqueDAO {
@@ -24,86 +25,93 @@ public class EstoqueDAO {
     private static final String url = "jdbc:mysql://localhost:3306/" + base + "?useTimezone=true&serverTimezone=UTC";
 
     private static Connection conexao;
-    
+
     /**
      * Método para consultar um produto através do Id do produto
-     * @param prod - objeto a ser recebido como referência para consulta (prod.getCodProduto();)
-     * @return - ArrayList (Caso exista) dos dados obtidos no banco (id, nome, qtde...)
+     *
+     * @param prod - objeto a ser recebido como referência para consulta
+     * (prod.getCodProduto();)
+     * @return - ArrayList (Caso exista) dos dados obtidos no banco (id, nome,
+     * qtde...)
      * @throws ClassNotFoundException - Não achou o driver
      * @throws SQLException - Erro ao tentar conectar-se à base de dados
-     */ 
-    public static ArrayList<Produto> consultar(Produto prod) {
-        ArrayList<Produto> listaRetorno = new ArrayList<>();
-        
+     */
+    public static Produto consultar(Produto prod) {
+        Produto est = new Produto();
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM PRODUTO WHERE ID_PRODUTO = ?";
-        
+        String query = "SELECT * FROM PRODUTOS WHERE ID_PRODUTO = ?";
+
         try {
-            
+
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
             stmt = conexao.prepareStatement(query);
-            
+
             stmt.setInt(1, prod.getCodProduto());
             rs = stmt.executeQuery();
-            
+
             if (rs != null) {
                 while (rs.next()) {
-                    Produto est = new Produto();
                     est.setCodProduto(rs.getInt("ID_PRODUTO"));
-                    est.setNomeProduto(rs.getString("NOME_PRODUTO"));                    
-                    est.setQtdeProduto(rs.getInt("QUANTIDADE"));
+                    est.setNomeProduto(rs.getString("NOME_PRODUTO"));
+                    est.setValorProduto(rs.getDouble("VALOR"));
                     est.setQtdePorKg(rs.getDouble("KG"));
-                    //est.setValidade(rs.getString("VALIDADE"));
-                    
-                    listaRetorno.add(est);
+                    est.setQtdeProduto(rs.getInt("QUANTIDADE"));
+                    est.setValidade(rs.getDate("VALIDADE"));
                 }
+                return est;
             } else {
                 throw new SQLException("Código do produto não existe ou banco de dados vazio.");
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            listaRetorno = null;
+            Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if(rs != null)
+                if (rs != null) {
                     rs.close();
-                if(stmt != null)
+                }
+                if (stmt != null) {
                     stmt.close();
-                if(conexao != null)
+                }
+                if (conexao != null) {
                     conexao.close();
+                }
             } catch (SQLException e) {
                 throw new IllegalArgumentException("Erro ao fechar conexão");
             }
         }
-        
-    return listaRetorno;
-    
+
+        return null;
+
     }
-    
+
     /**
      * Método para deletar um produto através do Id do produto
-     * @param prod - objeto a ser recebido como referência para exclusão (prod.getCodProduto();)
+     *
+     * @param prod - objeto a ser recebido como referência para exclusão
+     * (prod.getCodProduto();)
      * @return - true se os dados forem excluídos / false se não forem excluídos
      * @throws ClassNotFoundException - Não achou o driver
      * @throws SQLException - Erro ao tentar conectar-se à base de dados
      */
     public static boolean excluir(Produto prod) {
-       
-        String query = "DELETE FROM ESTOQUE WHERE ID_PRODUTO = ?";
-        
+
+        String query = "DELETE FROM PRODUTOS WHERE ID_PRODUTO = ?";
+
         PreparedStatement stmt = null;
-        
+
         try {
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
             stmt = conexao.prepareStatement(query);
-            
+
             stmt.setInt(1, prod.getCodProduto());
-            
+
             int linhasAfetadas = stmt.executeUpdate();
-            
-            if(linhasAfetadas > 0) {
+
+            if (linhasAfetadas > 0) {
                 return true;
             } else {
                 return false;
@@ -114,64 +122,70 @@ public class EstoqueDAO {
             Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if(stmt != null)
+                if (stmt != null) {
                     stmt.close();
-                if(conexao != null)
+                }
+                if (conexao != null) {
                     conexao.close();
+                }
             } catch (SQLException ex) {
                 throw new IllegalArgumentException("Erro ao fechar conexão");
             }
         }
         return false;
     }
-    
+
     /**
-     * Método para alterar um produto, recebe objeto Id como referência e os demais objetos para alteração
+     * Método para alterar um produto, recebe objeto Id como referência e os
+     * demais objetos para alteração
+     *
      * @param prod - objeto para referenciar produtos que serão alterados
      * @return - true para alterado e false para não alterado
      * @throws ClassNotFoundException - Não achou o driver
      * @throws SQLException - Erro ao tentar conectar-se à base de dados
      */
-    public static boolean alterar(Produto prod){
-        
-        String query = "UPDATE PRODUTO SET NOME_PRODUTO = ?, VALOR = ?, KG = ?, QUANTIDADE = ? WHERE ID_PRODUTO = ?";
-        
+    public static boolean alterar(Produto prod) {
+
+        String query = "UPDATE PRODUTOS SET NOME_PRODUTO = ?, VALOR = ?, QUANTIDADE = ?, KG = ?, VALIDADE = ? WHERE ID_PRODUTO = ?";
+
         PreparedStatement stmt = null;
-        
+
         try {
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
             stmt = conexao.prepareStatement(query);
-            
+
             stmt.setString(1, prod.getNomeProduto());
             stmt.setDouble(2, prod.getValorProduto());
-            stmt.setDouble(3, prod.getQtdePorKg());
-            stmt.setInt(4, prod.getQtdeProduto());
-            stmt.setInt(5, prod.getCodProduto());
-            
+            stmt.setInt(3, prod.getQtdeProduto());
+            stmt.setDouble(4, prod.getQtdePorKg());
+            stmt.setDate(5, prod.getValidade());
+            stmt.setInt(6, prod.getCodProduto());
+
             int linhasAfetadas = stmt.executeUpdate();
-            
-            if(linhasAfetadas > 0) {
+
+            if (linhasAfetadas > 0) {
                 return true;
             } else {
                 return false;
             }
         } catch (SQLException ex) {
-                Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if(stmt != null)
+                if (stmt != null) {
                     stmt.close();
-                if(conexao != null)
+                }
+                if (conexao != null) {
                     conexao.close();
+                }
             } catch (SQLException ex) {
                 throw new IllegalArgumentException("Erro ao fechar conexão");
             }
-        
-        return false;
         }
+        return false;
     }
-    
+
 }

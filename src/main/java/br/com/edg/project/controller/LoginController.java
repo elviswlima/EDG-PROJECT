@@ -17,19 +17,12 @@ public class LoginController {
      */
     public static boolean acessarLogin(String login, String senha) {
         
-        boolean retorno = false;
-        
         Login usuario = new Login();
         
         usuario.setUsuario(login);
         usuario.setSenha(senha);
 
-        if(!LoginDAO.login(usuario)) {
-            retorno = false;
-        }
-        
-        return retorno;
-        
+        return LoginDAO.login(usuario); 
     }
     
 }

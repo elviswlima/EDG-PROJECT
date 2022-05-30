@@ -5,6 +5,7 @@
 package br.com.edg.project.views;
 
 import br.com.edg.project.controller.LoginController;
+import br.com.edg.project.model.Login;
 import br.com.edg.project.service.Validador;
 import javax.swing.JOptionPane;
 
@@ -56,10 +57,25 @@ public class FrmLogin extends javax.swing.JFrame {
                 txtUsuarioActionPerformed(evt);
             }
         });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
 
         lblLogoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
 
         txtSenha.setName("Senha"); // NOI18N
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyTyped(evt);
+            }
+        });
 
         lblLogoSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/password.png"))); // NOI18N
 
@@ -143,9 +159,15 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-         try {
+         
+        Login user = new Login();
+        
+        try {
              if(Validador.validaString(txtUsuario) && Validador.validaString(txtSenha)){
                 
+                 user.setUsuario(txtUsuario.getText());
+                 user.setSenha(txtSenha.getText());
+                 
                  if(LoginController.acessarLogin(txtUsuario.getText(), txtSenha.getText())) {
                      JOptionPane.showMessageDialog(this,"Bem-Vindo!!");
                      FrmTelaInicial telaPrincipal = new FrmTelaInicial();
@@ -164,6 +186,22 @@ public class FrmLogin extends javax.swing.JFrame {
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        if (txtUsuario.getText().length() >= 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyTyped
+        if (txtSenha.getText().length() >= 16) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSenhaKeyTyped
 
     /**
      * @param args the command line arguments

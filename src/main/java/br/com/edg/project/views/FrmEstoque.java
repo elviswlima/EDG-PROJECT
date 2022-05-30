@@ -7,8 +7,7 @@ package br.com.edg.project.views;
 import br.com.edg.project.controller.EstoqueController;
 import br.com.edg.project.model.Produto;
 import br.com.edg.project.service.Validador;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,12 +39,6 @@ public class FrmEstoque extends javax.swing.JFrame {
         pnlInfo = new javax.swing.JPanel();
         lblCod = new javax.swing.JLabel();
         txtCodProduto = new javax.swing.JTextField();
-        lblNome = new javax.swing.JLabel();
-        txtNomeProduto = new javax.swing.JTextField();
-        lblQuant = new javax.swing.JLabel();
-        txtQuantidade = new javax.swing.JTextField();
-        lblVal = new javax.swing.JLabel();
-        txtValidade = new javax.swing.JFormattedTextField();
         btnDeletar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
@@ -61,19 +54,12 @@ public class FrmEstoque extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código do Produto", "Nome ", "Quantidade", "Validade"
+                "Código do Produto", "Nome ", "Valor", "Qtde", "Kg", "Validade"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, true, true, true, true, true
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -103,6 +89,7 @@ public class FrmEstoque extends javax.swing.JFrame {
         lblCod.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         lblCod.setText("Código do produto:");
 
+        txtCodProduto.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         txtCodProduto.setName("Código do Produto"); // NOI18N
         txtCodProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,51 +99,6 @@ public class FrmEstoque extends javax.swing.JFrame {
         txtCodProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodProdutoKeyTyped(evt);
-            }
-        });
-
-        lblNome.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
-        lblNome.setText("Nome do produto:");
-
-        txtNomeProduto.setName("Nome do Produto"); // NOI18N
-        txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeProdutoActionPerformed(evt);
-            }
-        });
-        txtNomeProduto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNomeProdutoKeyTyped(evt);
-            }
-        });
-
-        lblQuant.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
-        lblQuant.setText("Quantidade:");
-
-        txtQuantidade.setName("Quantidade"); // NOI18N
-        txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantidadeActionPerformed(evt);
-            }
-        });
-        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtQuantidadeKeyTyped(evt);
-            }
-        });
-
-        lblVal.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
-        lblVal.setText("Validade:");
-
-        try {
-            txtValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("Fab: ##/#### - Venc: ##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtValidade.setName("Validade"); // NOI18N
-        txtValidade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtValidadeKeyTyped(evt);
             }
         });
 
@@ -202,45 +144,26 @@ public class FrmEstoque extends javax.swing.JFrame {
         pnlInfo.setLayout(pnlInfoLayout);
         pnlInfoLayout.setHorizontalGroup(
             pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoLayout.createSequentialGroup()
+            .addGroup(pnlInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConsultar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(txtCodProduto, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlInfoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblVal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCod, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodProduto)
-                            .addComponent(txtValidade, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtQuantidade)
-                            .addComponent(lblQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(lblCod, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnDeletar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlInfoLayout.setVerticalGroup(
             pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInfoLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(83, 83, 83)
                 .addComponent(lblCod, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblQuant)
-                .addGap(4, 4, 4)
-                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(lblVal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -277,19 +200,17 @@ public class FrmEstoque extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeProdutoActionPerformed
-
-    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantidadeActionPerformed
-
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
-        List<Produto> prod = new ArrayList<>();
+        Produto prod = new Produto();
         /* ArrayList para receber valores */
-
+        
+        if (modelo.getRowCount() > 0) {
+            for (int i = 0; i <= modelo.getRowCount(); i++) {
+                modelo.removeRow(0);
+            }
+        }
+        
         try {
             /* Try catch para validar que, o que está dentro do try vai ser executado com sucesso, se não, entra no catch.*/
 
@@ -298,16 +219,17 @@ public class FrmEstoque extends javax.swing.JFrame {
             prod = EstoqueController.consultarEstoque(Integer.parseInt(txtCodProduto.getText()));
             /* prod recebe valores da controller para exibição */
 
-            if (!prod.isEmpty()) {
+            if (prod.getNomeProduto() != null) {
                 /* Se os dados existirem, os botões "deletar" e "editar" sãoa ativados */
                 btnDeletar.setEnabled(true);
                 btnEditar.setEnabled(true);
 
-                for (Produto p : prod) {
-                    /* Laço para adicionar dados na tabela */
-                    Object[] at = {p.getCodProduto(), p.getNomeProduto(), p.getQtdeProduto()};
-                    modelo.addRow(at);
-                }
+                Object[] at = {prod.getCodProduto(), prod.getNomeProduto(), prod.getValorProduto(),
+                    prod.getQtdeProduto(), prod.getQtdePorKg(), prod.getValidade()};
+
+                modelo.addRow(at);
+            } else {
+                JOptionPane.showMessageDialog(this, "Não existe produto para consulta.");
             }
 
         } catch (NumberFormatException ex) {
@@ -358,27 +280,6 @@ public class FrmEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCodProdutoKeyTyped
 
-    private void txtNomeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeProdutoKeyTyped
-        /* Validação de quantidade de caracteres */
-        if (txtNomeProduto.getText().length() >= 120) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtNomeProdutoKeyTyped
-
-    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
-        /* Validação de quantidade de caracteres */
-        if (txtQuantidade.getText().length() >= 10) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtQuantidadeKeyTyped
-
-    private void txtValidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValidadeKeyTyped
-        /* Validação de quantidade de caracteres */
-        if (txtValidade.getText().length() >= 8) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtValidadeKeyTyped
-
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int indiceLinha = tblEstoque.getSelectedRow();
         /* Variável do tipo int para armazenar linha selecionada na tabela */
@@ -388,8 +289,12 @@ public class FrmEstoque extends javax.swing.JFrame {
         /* Objeto da classe Produto instanciado */
 
         produto.setCodProduto(Integer.parseInt(linha.getValueAt(indiceLinha, 0).toString()));
-        produto.setNomeProduto(linha.getValueAt(indiceLinha, 2).toString());
+        produto.setNomeProduto(linha.getValueAt(indiceLinha, 1).toString());
+        produto.setValorProduto(Double.parseDouble(linha.getValueAt(indiceLinha, 2).toString()));
         produto.setQtdeProduto(Integer.parseInt(linha.getValueAt(indiceLinha, 3).toString()));
+        produto.setQtdePorKg(Double.parseDouble(linha.getValueAt(indiceLinha, 4).toString()));
+        produto.setValidade(Date.valueOf(linha.getValueAt(indiceLinha, 5).toString()));
+        
         if (indiceLinha >= 0) {
             boolean validate = EstoqueController.alterarProduto(produto);
 
@@ -449,15 +354,9 @@ public class FrmEstoque extends javax.swing.JFrame {
     private javax.swing.JButton btnMenu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCod;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblQuant;
-    private javax.swing.JLabel lblVal;
     private javax.swing.JPanel pblEstoque;
     private javax.swing.JPanel pnlInfo;
     private javax.swing.JTable tblEstoque;
     private javax.swing.JTextField txtCodProduto;
-    private javax.swing.JTextField txtNomeProduto;
-    private javax.swing.JTextField txtQuantidade;
-    private javax.swing.JFormattedTextField txtValidade;
     // End of variables declaration//GEN-END:variables
 }

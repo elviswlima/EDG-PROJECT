@@ -89,11 +89,13 @@
             <Component class="javax.swing.JTable" name="tblEstoque">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="0">
+                  <Table columnCount="6" rowCount="0">
                     <Column editable="false" title="C&#xf3;digo do Produto" type="java.lang.Object"/>
-                    <Column editable="true" title="Nome " type="java.lang.String"/>
-                    <Column editable="true" title="Quantidade" type="java.lang.Integer"/>
-                    <Column editable="true" title="Validade" type="java.lang.String"/>
+                    <Column editable="true" title="Nome " type="java.lang.Object"/>
+                    <Column editable="true" title="Valor" type="java.lang.Object"/>
+                    <Column editable="true" title="Qtde" type="java.lang.Object"/>
+                    <Column editable="true" title="Kg" type="java.lang.Object"/>
+                    <Column editable="true" title="Validade" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -119,26 +121,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btnMenu" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnMenu" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnConsultar" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnEditar" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnEditar" alignment="1" pref="226" max="32767" attributes="0"/>
+                      <Component id="txtCodProduto" alignment="1" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblCod" min="-2" pref="137" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblNome" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                              <Component id="lblVal" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                              <Component id="lblCod" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                              <Component id="txtCodProduto" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtValidade" alignment="0" pref="226" max="32767" attributes="0"/>
-                              <Component id="txtNomeProduto" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtQuantidade" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblQuant" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                              <Component id="btnDeletar" alignment="0" max="32767" attributes="0"/>
-                          </Group>
                       </Group>
+                      <Component id="btnDeletar" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -147,22 +141,10 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                   <Component id="lblCod" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                  <Component id="txtCodProduto" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtNomeProduto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="lblQuant" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Component id="txtQuantidade" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Component id="lblVal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtValidade" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCodProduto" min="-2" pref="103" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnConsultar" min="-2" pref="48" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -187,64 +169,14 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodProduto">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="36" style="0"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="C&#xf3;digo do Produto" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodProdutoActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodProdutoKeyTyped"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblNome">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Bahnschrift" size="16" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Nome do produto:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNomeProduto">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="Nome do Produto" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeProdutoActionPerformed"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeProdutoKeyTyped"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblQuant">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Bahnschrift" size="16" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Quantidade:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtQuantidade">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="Quantidade" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuantidadeActionPerformed"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQuantidadeKeyTyped"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblVal">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Bahnschrift" size="16" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Validade:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtValidade">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="Fab: ##/#### - Venc: ##/####" subtype="-1" type="5"/>
-            </Property>
-            <Property name="name" type="java.lang.String" value="Validade" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValidadeKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDeletar">

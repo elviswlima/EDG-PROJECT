@@ -15,7 +15,7 @@ public class EstoqueController {
      * @param codProduto - nome da variável como referência para consulta
      * @return - ArrayList das informações consultadas no banco
      */
-    public static ArrayList<Produto> consultarEstoque(int codProduto) {
+    public static Produto consultarEstoque(int codProduto) {
                 
         Produto obj = new Produto();
         obj.setCodProduto(codProduto);
@@ -52,15 +52,13 @@ public class EstoqueController {
      * @return true para alterado e false para não alterado
      */
     public static boolean alterarProduto(Produto prod) {
-        boolean retorno = false;
         
         try {
-            retorno = EstoqueDAO.alterar(prod);
+            return EstoqueDAO.alterar(prod);
         } catch (Exception e) {
             throw new IllegalArgumentException("Não foi possível alterar dados.");
         }
-        
-        return retorno;
+
     }
     
 }

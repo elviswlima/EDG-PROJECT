@@ -27,14 +27,13 @@ public class LoginDAO {
      * @return true se os dados existirem no registro / false se os dados não existirem no registro
      */
     public static boolean login (Login login) {
-        boolean retorno = false;
-        
+
         try {
             Class.forName(Driver);
             
             connection = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = 
-                    connection.prepareStatement("SELECT * FROM login WHERE Usuario = ? AND Senha = ?");
+                    connection.prepareStatement("SELECT * FROM FUNCIONARIOS WHERE EMAIL = ? AND SENHA = ?");
             
             stmt.setString(1, login.getUsuario());
             stmt.setString(2, login.getSenha());
@@ -42,20 +41,17 @@ public class LoginDAO {
             ResultSet rs = stmt.executeQuery();
             
             if(rs.next()) {
-                retorno = true;
+                return true;
             } else {
-                retorno = false;
+                return false;
             }
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
-            retorno = false;
         } catch (SQLException ex) {
                 Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
-                retorno = false;
         }
-        
-        return retorno;
+        return false;
     }
         
     

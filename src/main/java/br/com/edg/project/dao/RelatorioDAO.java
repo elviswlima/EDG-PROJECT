@@ -24,7 +24,7 @@ public class RelatorioDAO {
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
     private static final String user = "root";
     private static final String senha = "";
-    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3306/EDG?useTimezone=true&serverTimezone=UTC";
 
     private static Connection conexao;
 
@@ -42,7 +42,7 @@ public class RelatorioDAO {
             stmt = conexao
                     .prepareStatement(query);
             stmt.setString(1, relatorio.getDataInicio().toString());
-            stmt.setString(2, relatorio.getDataFim().toString() + " 11:59:59");
+            stmt.setString(2, relatorio.getDataFim().toString() + " 23:59:59");
 
             rs = stmt.executeQuery();
 
@@ -90,7 +90,7 @@ public class RelatorioDAO {
             stmt = conexao
                     .prepareStatement(query);
             stmt.setString(1, relatorio.getDataInicio().toString());
-            stmt.setString(2, relatorio.getDataFim().toString() + " 11:59:59");
+            stmt.setString(2, relatorio.getDataFim().toString() + " 23:59:59");
 
             rs = stmt.executeQuery();
 
