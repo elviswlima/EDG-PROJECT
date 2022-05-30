@@ -9,7 +9,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 /**
- *Classe de valida��o de obrigatorieadade e tipos de entrada de dados
+ *Classe de validação de obrigatorieadade e tipos de entrada de dados
  * @author Danilo
  */
 public class Validador {

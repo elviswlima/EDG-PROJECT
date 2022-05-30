@@ -19,7 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 /**
- *
+ * Tela de Relatórios (Sintético/Analítico)
+ * 
  * @author Dell
  */
 public class FrmRelatorioDeVendas extends javax.swing.JFrame {

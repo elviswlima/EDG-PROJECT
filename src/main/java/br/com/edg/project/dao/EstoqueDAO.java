@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Classe para consultar, excluir ou alterar produtos no estoque
+ * Classe DAO para consultar, excluir ou alterar produtos no estoque
  *
  * @author Elvis - PC
  */

@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Tela de Estoque dos produtos
+ * 
  * @author Dell
  */
 public class FrmEstoque extends javax.swing.JFrame {

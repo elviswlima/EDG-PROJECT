@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe para fazer consultas, alterações e cadastro de clientes
+ * Classe DAO para fazer consultas, alterações e cadastro de clientes
  * 
  * @author Danilo
  */

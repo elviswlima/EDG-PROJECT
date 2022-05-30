@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * Classe para registro e consulta do produtos no banco de dados
+ * Classe DAO para registro e consulta do produtos no banco de dados
  * 
  * @author Danilo
  */

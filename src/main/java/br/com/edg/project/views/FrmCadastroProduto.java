@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Tela de cadastro do produto
+ * 
  * @author Elvis - PC
  */
 public class FrmCadastroProduto extends javax.swing.JFrame {

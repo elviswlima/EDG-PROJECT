@@ -5,7 +5,8 @@
 package br.com.edg.project.views;
 
 /**
- *
+ * Tela inicial (Menu)
+ * 
  * @author Elvis - PC
  */
 public class FrmTelaInicial extends javax.swing.JFrame {

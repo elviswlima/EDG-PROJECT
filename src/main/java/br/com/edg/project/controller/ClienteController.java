@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Classe CRUD para cadastro de clientes
+ * 
  * @author Danilo
  */
 public class ClienteController {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe para conexão de informações com a DAO
+ * Classe CRUD de relatório de vendas
  *
  * @author elvis.wlima
  */

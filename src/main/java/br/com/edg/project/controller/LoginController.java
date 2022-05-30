@@ -4,7 +4,8 @@ import br.com.edg.project.dao.LoginDAO;
 import br.com.edg.project.model.Login;
 
 /**
- * Classe para conexão de informações com a DAO
+ * Classe Login do sistema
+ * 
  * @author elvis.wlima
  */
 public class LoginController {

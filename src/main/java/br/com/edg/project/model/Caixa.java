@@ -21,16 +21,12 @@ public class Caixa {
     private ArrayList<VendaProduto> vendaProduto;
 
     /**
-     * @Constructor Construtor vazio da classe Caixa (cria o objeto)
+     * @Constructors Construtor vazio da classe Caixa (cria o objeto)
      */
     public Caixa() {
         // Empty Constructor
     }
 
-    /**
-     * Métodos Getters e Setters para receber e retornar valores
-     * @return valor
-     */
     public int getId() {
         return id;
     }

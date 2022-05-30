@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
+ * Tela de Login
+ * 
  * @author Elvis - PC
  */
 public class FrmLogin extends javax.swing.JFrame {

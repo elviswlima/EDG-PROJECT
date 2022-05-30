@@ -23,7 +23,8 @@ import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
- *
+ * Tela de Cadastro do cliente
+ * 
  * @author Elvis - PC
  */
 public class FrmCadastroCliente extends javax.swing.JFrame {

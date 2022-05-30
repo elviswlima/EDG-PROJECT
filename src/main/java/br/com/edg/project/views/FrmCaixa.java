@@ -20,7 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Tela de venda (Caixa)
+ * 
  * @author Dell
  */
 public class FrmCaixa extends javax.swing.JFrame {

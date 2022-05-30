@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe para fazer consultas e cadastros de vendas
+ * Classe DAO para fazer consultas e cadastros de vendas
  *
  * @author Danilo Almeida
  * @author guilherme.mlsilva1

@@ -1,7 +1,7 @@
 package br.com.edg.project.model;
 
 /**
- * Classe a ser instanciada para receber e retornar valores
+ * Model Login
  * @author elvis.wlima
  */
 public class Login {

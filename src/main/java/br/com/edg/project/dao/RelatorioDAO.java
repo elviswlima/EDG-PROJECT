@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe para consulta sintética e analítica
+ * Classe DAO para consulta sintética e analítica
  *
  * @author elvis.wlima
  */

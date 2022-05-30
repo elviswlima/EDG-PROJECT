@@ -10,7 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe DAO para realizar Login
+ * 
  * @author elvis.wlima
  */
 public class LoginDAO {

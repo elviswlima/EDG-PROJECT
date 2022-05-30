@@ -8,7 +8,8 @@ import br.com.edg.project.dao.NotaFiscalDAO;
 import br.com.edg.project.model.Cliente;
 
 /**
- *
+ * Classe Nota fiscal
+ * 
  * @author Danilo
  */
 public class NotaFiscalController {

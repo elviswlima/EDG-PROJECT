@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe para consultar nota fiscal
+ * Classe DAO para consultar nota fiscal
  * 
  * @author Danilo
  */

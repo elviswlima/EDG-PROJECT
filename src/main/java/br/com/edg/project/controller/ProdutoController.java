@@ -11,7 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe CRUD de produto
+ * 
+ * 
  * @author Danilo
  */
 public class ProdutoController {

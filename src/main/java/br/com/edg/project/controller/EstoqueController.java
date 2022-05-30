@@ -4,7 +4,8 @@ import br.com.edg.project.dao.EstoqueDAO;
 import br.com.edg.project.model.Produto;
 
 /**
- * Classe para conexão de informações com a DAO
+ * Classe CRUD do estoque de produtos
+ * 
  * @author Elvis - PC
  */
 public class EstoqueController {

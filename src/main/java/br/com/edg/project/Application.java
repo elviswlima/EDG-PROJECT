@@ -6,8 +6,9 @@ package br.com.edg.project;
 
 import br.com.edg.project.views.FrmLogin;
 /**
+ * Classe para iniciar o sistema
+ * 
  * @author Elvis
- * @application - Iniciar sistema
  */
 public class Application {
 
