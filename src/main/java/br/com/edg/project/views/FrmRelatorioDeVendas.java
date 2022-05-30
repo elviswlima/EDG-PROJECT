@@ -4,10 +4,18 @@
  */
 package br.com.edg.project.views;
 
+import br.com.edg.project.controller.RelatorioController;
+import br.com.edg.project.model.Relatorio;
 import javax.swing.JOptionPane;
 import br.com.edg.project.service.Validador;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -36,13 +44,13 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblDataInicio = new javax.swing.JLabel();
-        txtDataInicio = new javax.swing.JFormattedTextField();
         lblDataInicio1 = new javax.swing.JLabel();
-        txtDataFim = new javax.swing.JFormattedTextField();
         rdnAnalitico = new javax.swing.JRadioButton();
         rdnSintetico = new javax.swing.JRadioButton();
         btnDownload = new javax.swing.JButton();
         btnPesquisa = new javax.swing.JButton();
+        dtDataFim = new com.toedter.calendar.JDateChooser();
+        dtDataIni = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         txtValorTotal = new javax.swing.JTextField();
         lblValorTotal = new javax.swing.JLabel();
@@ -60,22 +68,8 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
         lblDataInicio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataInicio.setText("* Data inicio");
 
-        try {
-            txtDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtDataInicio.setName("Data inicio"); // NOI18N
-
         lblDataInicio1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataInicio1.setText("* Data fim");
-
-        try {
-            txtDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtDataFim.setName("Data fim"); // NOI18N
 
         grpTipoRelatorio.add(rdnAnalitico);
         rdnAnalitico.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -105,15 +99,19 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDataInicio)
-                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdnSintetico))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rdnAnalitico)
-                    .addComponent(txtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDataInicio1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDataInicio)
+                            .addComponent(rdnSintetico))
+                        .addGap(42, 42, 42)
+                        .addComponent(rdnAnalitico))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(dtDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDataInicio1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDownload, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                     .addComponent(btnPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -128,19 +126,18 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
                     .addComponent(rdnAnalitico))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDataInicio)
                             .addComponent(lblDataInicio1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(12, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
@@ -154,10 +151,7 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
 
         tblRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Cliente", "Data de compra", "Valor total"
@@ -182,8 +176,8 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 85, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -192,7 +186,7 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
                             .addComponent(lblValorTotal, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 64, Short.MAX_VALUE)
                         .addComponent(lblTitulo)
                         .addGap(377, 377, 377))
                     .addComponent(jScrollPane1))
@@ -225,44 +219,93 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
         try {
-            if (Validador.validaFormatedText(txtDataInicio, 10)
-                    && Validador.validaFormatedText(txtDataFim, 10)) {
+//            if (Validador.validaDateRelatorio(dtDataIni)
+//                    && Validador.validaDateRelatorio(dtDataFim)) {
 
-                DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
-                boolean isAnalitico = true;
-                
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    if (model.getColumnName(i).equalsIgnoreCase("Produto") 
-                            || model.getColumnName(i).equals("Quantidade")) {
-                        isAnalitico = false;
-                    }
+            DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
+            boolean isAnalitico = true;
+
+            LocalDate dataFim = dtDataFim
+                    .getDate()
+                    .toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+            LocalDate dataIni = dtDataIni
+                    .getDate()
+                    .toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                if (model.getColumnName(i).equalsIgnoreCase("Produto")
+                        || model.getColumnName(i).equalsIgnoreCase("Quantidade")) {
+                    isAnalitico = false;
                 }
-                
-                if (rdnAnalitico.isSelected()) {
-                    if (isAnalitico) {
-                        model.addColumn("Produto");
-                        model.addColumn("Quantidade");
-                    }
-                }
-                
-                if (rdnSintetico.isSelected()) {
-                    if (model.getColumnCount() > 3) {
-                        TableColumnModel columnModel = tblRelatorio.getColumnModel();
-                        columnModel.removeColumn(columnModel.getColumn(3));
-                        columnModel.removeColumn(columnModel.getColumn(3));
-                    }
-                }
-                
-                btnDownload.setEnabled(true);
             }
+
+            if (rdnAnalitico.isSelected()) {
+                if (isAnalitico) {
+                    model.addColumn("Produto");
+                    model.addColumn("Quantidade");
+                }
+
+//                ArrayList<Relatorio> relatorios = new ArrayList<>();
+//                relatorios = RelatorioController
+//                        .consultaSintetica(Date.valueOf(dtDataIni.getDateFormatString()), Date.valueOf(dtDataFim.getDateFormatString()));
+//
+//                double valorTotal = 0;
+//                for (Relatorio r : relatorios) {
+//                    model.addRow(new Object[]{
+//                        r.getCliente(),
+//                        r.getDataCompra(),
+//                        r.getValorTotal()
+//                    });
+//
+//                    valorTotal += r.getValorTotal();
+//                }
+//
+//                txtValorTotal.setText(String.valueOf(valorTotal));
+            }
+
+            if (rdnSintetico.isSelected()) {
+                if (model.getColumnCount() > 3) {
+                    TableColumnModel columnModel = tblRelatorio.getColumnModel();
+                    columnModel.removeColumn(columnModel.getColumn(3));
+                    columnModel.removeColumn(columnModel.getColumn(3));
+                }
+                List<Relatorio> relatorios = RelatorioController
+                        .consultaSintetica(Date.valueOf(dataIni), Date.valueOf(dataFim));
+
+                double valorTotal = 0;
+                for (Relatorio r : relatorios) {
+                    model.addRow(new Object[]{
+                        r.getCliente(),
+                        r.getDataCompra(),
+                        r.getValorTotal()
+                    });
+
+                    valorTotal += r.getValorTotal();
+                }
+                
+                 txtValorTotal.setText(String.valueOf(valorTotal));
+            }
+            
+           
+            btnDownload.setEnabled(true);
+//            }
         } catch (IllegalArgumentException e) {
+            Logger.getLogger(FrmRelatorioDeVendas.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(this, e.getMessage(), "Campo Obrigatórios", JOptionPane.WARNING_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmRelatorioDeVendas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao buscar o relatório, causa do erro: " + ex.getMessage(), "Erro ao consultar relatório", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         FrmTelaInicial menu = new FrmTelaInicial();
-        
+
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);
         dispose();
@@ -307,6 +350,8 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
     private javax.swing.JButton btnDownload;
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JButton btnVoltar;
+    private com.toedter.calendar.JDateChooser dtDataFim;
+    private com.toedter.calendar.JDateChooser dtDataIni;
     private javax.swing.ButtonGroup grpTipoRelatorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -318,8 +363,6 @@ public class FrmRelatorioDeVendas extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdnAnalitico;
     private javax.swing.JRadioButton rdnSintetico;
     private javax.swing.JTable tblRelatorio;
-    private javax.swing.JFormattedTextField txtDataFim;
-    private javax.swing.JFormattedTextField txtDataInicio;
     private javax.swing.JTextField txtValorTotal;
     // End of variables declaration//GEN-END:variables
 }

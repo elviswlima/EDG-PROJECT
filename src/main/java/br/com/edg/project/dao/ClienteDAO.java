@@ -115,8 +115,8 @@ public class ClienteDAO {
             PreparedStatement stmt;
 
             if (isCpf) {
-                stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE CPF LIKE ?");
-                stmt.setString(1, "%" + cliente.getCpf() + "%");
+                stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE CPF = ?");
+                stmt.setString(1, cliente.getCpf());
             } else {
                 stmt = connection.prepareStatement("SELECT * FROM CLIENTES WHERE NOME LIKE ?");
                 stmt.setString(1, "%" + cliente.getNome() + "%");

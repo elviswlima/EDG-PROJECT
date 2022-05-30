@@ -4,8 +4,11 @@
  */
 package br.com.edg.project.model;
 
+import java.sql.Date;
+
 /**
- *
+ *Model de relatórios
+ * 
  * @author Danilo
  */
 public class Relatorio {
@@ -13,12 +16,38 @@ public class Relatorio {
     private int produto;
     private int quantidade;
     private double valorTotal;
-    private String data;
-    private int cliente;
+    private Date dataInicio;
+    private Date dataFim;
+    private String cliente;
+    private Date dataCompra;
 
     public Relatorio() {
     }
 
+    public Date getDataCompra() {
+        return dataCompra;
+    }
+
+    public void setDataCompra(Date dataCompra) {
+        this.dataCompra = dataCompra;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+    
     public int getProduto() {
         return produto;
     }
@@ -43,19 +72,11 @@ public class Relatorio {
         this.valorTotal = valorTotal;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public int getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 

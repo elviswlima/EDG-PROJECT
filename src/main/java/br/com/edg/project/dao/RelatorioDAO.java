@@ -1,65 +1,62 @@
 package br.com.edg.project.dao;
 
+import br.com.edg.project.model.Caixa;
 import br.com.edg.project.model.Produto;
+import br.com.edg.project.model.Relatorio;
+import br.com.edg.project.model.VendaProduto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Classe para abrir conexão com a base de dados 'edg'
+ *
  * @author elvis.wlima
  */
 public class RelatorioDAO {
-    
-    private static final String base = "edg";
+
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
     private static final String user = "root";
     private static final String senha = "";
-    private static final String url = "jdbc:mysql://localhost:3306/" + base + "?useTimezone=true&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3307/EDG?useTimezone=true&serverTimezone=UTC";
 
     private static Connection conexao;
-    
-    /**
-     * Método consulta sintética para a entrega de um relatório simples
-     * @param venda - objeto a ser recebido como referência para consulta (venda.getDataInicio() e venda.getDataFim())
-     * @return - ArrayList (caso exista) dos dados obtidos no banco (Id Cliente, datacompra, valorTotal)
-     * @throws ClassNotFoundException - Não achou driver
-     * @throws SQLException - Erro ao tentar conectar-se à base de dados
-     */
-    public static ArrayList<Produto> consultaSintetica(Produto venda) {
-            ArrayList<Produto> listaRetorno = new ArrayList<>();
-            
-            PreparedStatement stmt = null;
-            ResultSet rs = null;
-            
-            String query = "SELECT * FROM CAIXA WHERE Data_Venda BETWEEN ? and ?";
-            
+
+    public static List<Relatorio> consultaSintetica(Relatorio relatorio) throws SQLException {
+        List<Relatorio> listaRetorno = new ArrayList<>();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        String query = "SELECT CLI.NOME CLIENTE, CA.DATA_VENDA VENDA, CA.VALOR_TOTAL VALOR FROM CAIXA CA JOIN CLIENTES CLI ON CA.ID_CLIENTE = CLI.ID_CLIENTE WHERE CA.DATA_VENDA  >= DATE(?) and CA.DATA_VENDA <=  DATE(?)";
+
         try {
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
-//            stmt.setDate(1, new java.sql.Date(/*venda.getDataInicio().getTime()*/));
-//            stmt.setDate(2, /*venda.getDataFim()*/);
-            
+            stmt = conexao
+                    .prepareStatement(query);
+            stmt.setString(1, relatorio.getDataInicio().toString());
+            stmt.setString(2, relatorio.getDataFim().toString());
+
             rs = stmt.executeQuery();
             
-            if (rs != null) {
-                while (rs.next()) {
-                    Produto relatorio = new Produto();
-//                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
-//                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
-//                    relatorio./*setValorTotal*/(rs.getDouble("VALOR_VENDA"));
-                    
-                    listaRetorno.add(relatorio);
-                }
-            } else {
-                throw new SQLException("Data não existe ou banco de dados vazio.");
+            while (rs.next()) {
+                Relatorio retorno = new Relatorio();
+                retorno.setCliente(rs.getString("CLIENTE"));
+                retorno.setValorTotal(rs.getDouble("VALOR"));
+                retorno.setDataCompra(rs.getDate("VENDA"));
+
+                listaRetorno.add(retorno);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+            
+            return listaRetorno;
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(RelatorioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -78,32 +75,25 @@ public class RelatorioDAO {
         }
         return null;
     }
-    
-    /**
-     * Método consulta analítica para a entrega de um relatório mais detalhado
-     * @param venda - objeto a ser recebido como referência para consulta (venda.getDataInicio() e venda.getDataFim())
-     * @return  - ArrayList (caso existe) dos dados obtidos no banco (Id cliente, datacompra, valorTotal)
-     * @throws ClassNotFoundException - Não achou driver
-     * @throws SQLException - Erro ao tentar conectar-se à base de dados
-     */
+
     public static ArrayList<Produto> consultaAnalitica(Produto venda) {
         ArrayList<Produto> listaRetorno = new ArrayList<>();
-        
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         String query = "SELECT * FROM tabela WHERE SELECT * FROM tabela WHERE Data_Venda BETWEEN ? and ?";
-        
-        try{
+
+        try {
             Class.forName(Driver);
             conexao = DriverManager.getConnection(url, user, senha);
 //            stmt.setDate(1, venda./*getDataInicio()*/);
 //            stmt.setDate(2, venda./*getDataFim()*/);
-            
+
             rs = stmt.executeQuery();
-            
-            if(rs != null) {
-                while(rs.next()) {
+
+            if (rs != null) {
+                while (rs.next()) {
                     Produto relatorio = new Produto();
 //                    relatorio./*setCliente*/(rs.getInt("ID_CLIENTE"));
 //                    relatorio./*setData*/(rs.getString("DATA_VENDA"));
@@ -134,7 +124,7 @@ public class RelatorioDAO {
             }
         }
         return null;
-        
+
     }
-    
+
 }

@@ -9,15 +9,26 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- *
+ * Classe de busca de CEP do cliente
  * @author Danilo
  */
 public class CepService {
 
+    /**
+     * Objeto para instaciação
+     */
     public CepService() {
         // Empty constructor
     }
 
+    /**
+     * Método que realiza consulta na Via cep e retorna CEP desejado
+     * 
+     * @param cep número do cep
+     * @return retorna o cep
+     * @throws IOException parâmetros de entrada e sáida incorretos
+     * @throws NullPointerException retorno ou variável nulas
+     */
     public Cep consultaCep(String cep) throws IOException, NullPointerException {
         Cep cepRetorno = new Cep();
         try {

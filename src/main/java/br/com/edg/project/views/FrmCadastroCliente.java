@@ -14,6 +14,8 @@ import java.awt.HeadlessException;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -74,7 +76,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         cboSexo = new javax.swing.JComboBox<>();
         txtCpf = new javax.swing.JFormattedTextField();
         lblDataNascCliente = new javax.swing.JLabel();
-        txtDataNasc = new javax.swing.JFormattedTextField();
         lblRg = new javax.swing.JLabel();
         txtRg = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -83,6 +84,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblIdCliente = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        dtDataNasc = new com.toedter.calendar.JDateChooser();
         btnExcluir = new javax.swing.JButton();
         btnInserir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
@@ -345,10 +347,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         lblDataNascCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDataNascCliente.setText("* Data de Nascimento:");
 
-        
-        txtDataNasc.setEnabled(false);
-        txtDataNasc.setName("Data de nascimento"); // NOI18N
-
         lblRg.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblRg.setText("* RG:");
 
@@ -373,6 +371,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
         jLabel2.setText("ID Cliente:");
 
+        dtDataNasc.setEnabled(false);
+
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
         pnlDadosPessoaisLayout.setHorizontalGroup(
@@ -393,16 +393,17 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblCPF)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
                                 .addComponent(lblDataNascCliente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(dtDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -410,25 +411,27 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlDadosPessoaisLayout.setVerticalGroup(
             pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addComponent(lblNomeCliente)
                         .addGap(19, 19, 19)
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDataNascCliente)
-                            .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblSexo)
-                        .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblDataNascCliente)))
+                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSexo)
+                            .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCPF)
@@ -610,7 +613,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             fields.add(txtRg);
             fields.add(txtNome);
             fields.add(txtCpf);
-            fields.add(txtDataNasc);
             fields.add(txtTelefone);
             fields.add(txtCepCliente);
             fields.add(txtBairro);
@@ -621,11 +623,17 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             if (Validador.validaMultCampos(fields)
                     && cboSexo.getSelectedItem().toString() != null
                     && cboxEstado.getSelectedItem().toString() != null) {
+                
+                LocalDate dtNasc = dtDataNasc
+                        .getDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
 
                 iCliente.setNome(txtNome.getText());
                 iCliente.setRg(txtRg.getText());
                 iCliente.setCpf(txtCpf.getText());
-                iCliente.setDataNascimento(Date.valueOf(txtDataNasc.getText()));
+                iCliente.setDataNascimento(Date.valueOf(dtNasc));
                 iCliente.setSexo(cboSexo.getSelectedItem().toString());
                 iCliente.setTelefone(txtTelefone.getText());
                 iCliente.setCep(txtCepCliente.getText());
@@ -644,7 +652,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                     txtNome.setText("");
                     txtCpf.setText("");
                     txtTelefone.setText("");
-//            txtDataNasc.setText(c.getDataNascimento());
+                    dtDataNasc.setDate(null);
                     txtLogradouro.setText("");
                     cboSexo.setSelectedIndex(0);
                     txtRg.setText("");
@@ -656,7 +664,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                     txtComplementoCliente.setText("");
                     cboxEstado.setSelectedIndex(0);
                     txtCidadeCliente.setText("");
-                    JOptionPane.showMessageDialog(this, "Cliente " + txtNome.getText() + " cadastrado com sucesso!", "Cadastro realizado com sucesso", JOptionPane.OK_OPTION);
+                    JOptionPane.showMessageDialog(this, "Cliente " + txtNome.getText() + " cadastrado com sucesso!", "Cadastro realizado com sucesso", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Cliente erro ao cadastrar cliente!", "Falha ao cadastrar", JOptionPane.ERROR_MESSAGE);
                 }
@@ -701,25 +709,28 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         try {
 
             DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
-
-            for (int i = 0; i < dtm.getRowCount(); i++) {
-                dtm.removeRow(0);
+            
+            if (dtm.getRowCount() > 0) {
+                for (int i = 0; i < dtm.getRowCount(); i++) {
+                    dtm.removeRow(0);
+                }
             }
-
+            
             if (chkCpf.isSelected() && Validador.validaString(txtCpfPesquisa)) {
                 txtCpf.setText(txtCpfPesquisa.getText());
-                txtCpfPesquisa.setText(null);
-
+                
                 this.cliente.setCpf(txtCpfPesquisa.getText());
+                
+                txtCpfPesquisa.setText(null);
 
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
                 txtRg.setEnabled(true);
-                txtDataNasc.setEnabled(true);
+                dtDataNasc.setEnabled(true);
                 cboSexo.setEnabled(true);
                 txtTelefone.setEnabled(true);
                 txtEmail.setEnabled(true);
-
+                
                 try {
                     this.clientes = ClienteController.consultarBy(this.cliente, chkCpf.isSelected());
                     for (Cliente c : this.clientes) {
@@ -731,6 +742,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                             c.getCidade()
                         });
                     }
+                    
                 } catch (IllegalArgumentException e) {
                     Logger.getLogger(FrmCadastroCliente.class.getName()).log(Level.SEVERE, null, e);
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Cliente não encontrado", JOptionPane.INFORMATION_MESSAGE);
@@ -743,14 +755,14 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
             if (!chkCpf.isSelected() && Validador.validaString(txtNomePesquisa)) {
                 txtNome.setText(txtNomePesquisa.getText());
-                txtNomePesquisa.setText(null);
-
                 this.cliente.setNome(txtNomePesquisa.getText());
+                
+                 txtNomePesquisa.setText(null);
 
                 txtNome.setEnabled(true);
                 txtCpf.setEnabled(true);
                 txtRg.setEnabled(true);
-                txtDataNasc.setEnabled(true);
+                dtDataNasc.setEnabled(true);
                 cboSexo.setEnabled(true);
                 txtTelefone.setEnabled(true);
                 txtEmail.setEnabled(true);
@@ -830,7 +842,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             txtNome.setText(c.getNome());
             txtCpf.setText(c.getCpf());
             txtTelefone.setText(c.getTelefone());
-//            txtDataNasc.setText(c.getDataNascimento());
+            dtDataNasc.setDate(c.getDataNascimento());
             txtLogradouro.setText(c.getRua());
             int indexSexo = 0;
             for (int i = 0; i < cboSexo.getItemCount(); i++) {
@@ -873,7 +885,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             fields.add(txtRg);
             fields.add(txtNome);
             fields.add(txtCpf);
-            fields.add(txtDataNasc);
             fields.add(txtTelefone);
             fields.add(txtCepCliente);
             fields.add(txtBairro);
@@ -885,10 +896,16 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                     && cboSexo.getSelectedItem().toString() != null
                     && cboxEstado.getSelectedItem().toString() != null) {
 
+                LocalDate dtNasc = dtDataNasc
+                        .getDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+
                 iCliente.setNome(txtNome.getText());
                 iCliente.setRg(txtRg.getText());
                 iCliente.setCpf(txtCpf.getText());
-                iCliente.setDataNascimento(Date.valueOf(txtDataNasc.getText()));
+                iCliente.setDataNascimento(Date.valueOf(dtNasc));
                 iCliente.setSexo(cboSexo.getSelectedItem().toString());
                 iCliente.setTelefone(txtTelefone.getText());
                 iCliente.setCep(txtCepCliente.getText());
@@ -908,7 +925,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                     txtNome.setText("");
                     txtCpf.setText("");
                     txtTelefone.setText("");
-//            txtDataNasc.setText(c.getDataNascimento());
+                    dtDataNasc.setDate(null);
                     txtLogradouro.setText("");
                     cboSexo.setSelectedIndex(0);
                     txtRg.setText("");
@@ -921,7 +938,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                     cboxEstado.setSelectedIndex(0);
                     txtCidadeCliente.setText("");
                     lblIdCliente.setText("(ID do cliente)");
-                    JOptionPane.showMessageDialog(this, "Cliente " + txtNome.getText() + " alterado com sucesso!", "Alteração realizada com sucesso", JOptionPane.OK_OPTION);
+                    JOptionPane.showMessageDialog(this, "Cliente " + txtNome.getText() + " alterado com sucesso!", "Alteração realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Cliente erro ao alterar cliente!", "Falha ao alterar", JOptionPane.ERROR_MESSAGE);
                 }
@@ -986,6 +1003,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboSexo;
     private javax.swing.JComboBox<String> cboxEstado;
     private javax.swing.JCheckBox chkCpf;
+    private com.toedter.calendar.JDateChooser dtDataNasc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBairro;
@@ -1018,7 +1036,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtComplementoCliente;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtCpfPesquisa;
-    private javax.swing.JFormattedTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;

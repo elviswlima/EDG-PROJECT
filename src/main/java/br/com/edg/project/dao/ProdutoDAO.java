@@ -4,10 +4,8 @@
  */
 package br.com.edg.project.dao;
 
-import br.com.edg.project.dao.config.ConfigDB;
 import br.com.edg.project.model.Produto;
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -72,8 +70,8 @@ public class ProdutoDAO {
         String query = "SELECT * FROM PRODUTOS WHERE ID_PRODUTO = ?";
 
         try {
-            Class.forName(Driver);
-            connection = DriverManager.getConnection(url, "root", "");
+            Class.forName(DRIVER);
+            connection = DriverManager.getConnection(URL, USER, PASSWD);
             stmt = connection.prepareStatement(query);
 
             stmt.setInt(1, id);
